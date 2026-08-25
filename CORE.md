@@ -308,9 +308,8 @@ Los Frameworks definen cómo resolver un tipo de problema.
 Los SOPs definen cómo ejecutar una tarea paso a paso.
 
 El agente debe:
-
-- utilizar un Framework existente antes de crear uno nuevo;
-- seguir un SOP aprobado cuando exista;
+- utilizar Frameworks cuando sean necesarios y aplicables;
+- ejecutar SOPs cuando exista un procedimiento relevante;
 - declarar cuando no existe una metodología validada;
 - proponer documentación nueva solo si aporta valor reutilizable.
 
