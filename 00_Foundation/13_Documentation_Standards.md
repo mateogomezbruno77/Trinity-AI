@@ -2,11 +2,11 @@
 id: TRI-FND-013
 title: Documentation Standards
 module: Foundation
-version: 1.2.0
+version: 1.3.0
 status: Draft
 owner: Trinity AI
 created:
-last_updated:
+last_updated: 2026-08-25
 reviewed_by:
 approved_by:
 next_review:
@@ -469,6 +469,111 @@ tags:
   - example
 ---
 ```
+
+Este formato representa la base común de metadata de Trinity AI.
+
+Los módulos pueden definir campos adicionales cuando exista una necesidad real de clasificación, recuperación, validación o mantenimiento.
+
+---
+
+## Metadata especializada por módulo
+
+Los estándares específicos de cada módulo pueden extender el Front Matter base con campos adicionales.
+
+Ejemplos:
+
+```yaml
+category:
+freshness:
+risk_level:
+integration:
+trigger:
+```
+
+Estos campos especializados son válidos cuando:
+
+1. tienen una responsabilidad clara;
+2. están definidos por el estándar oficial del módulo correspondiente;
+3. aportan valor para recuperación, validación, ejecución o mantenimiento;
+4. utilizan nomenclatura consistente;
+5. no contradicen campos globales existentes;
+6. no duplican información sin necesidad.
+
+Ejemplo válido para Knowledge:
+
+```yaml
+module: Knowledge
+category: Meta Ads
+freshness: Dynamic
+```
+
+En este caso:
+
+```text
+module
+→ identifica el módulo responsable
+
+category
+→ clasifica el dominio interno
+
+freshness
+→ identifica sensibilidad temporal
+```
+
+Los campos especializados no deben agregarse libremente documento por documento.
+
+Debe favorecerse:
+
+```text
+Necesidad del módulo
+      │
+      ▼
+Standard del módulo
+      │
+      ▼
+Campo especializado definido
+      │
+      ▼
+Uso consistente
+```
+
+Debe evitarse:
+
+```text
+Documento individual
+      │
+      ▼
+Campo nuevo improvisado
+      │
+      ▼
+Metadata inconsistente
+```
+
+El estándar global define la base común.
+
+Cada estándar modular puede extenderla sin reemplazarla.
+
+---
+
+## Jerarquía de Metadata
+
+La relación entre metadata global y metadata específica es:
+
+```text
+Documentation Standards
+        │
+        └── define metadata base
+
+Module Standard
+        │
+        └── puede definir extensiones autorizadas
+
+Document
+        │
+        └── utiliza únicamente campos válidos para su tipo
+```
+
+Cuando exista conflicto entre un campo especializado y una regla global, prevalece Documentation Standards salvo modificación aprobada.
 
 ---
 
