@@ -2,7 +2,7 @@
 id: TRI-CORE-001
 title: Trinity AI Core
 module: Core
-version: 0.4.0
+version: 0.4.1
 status: Draft
 owner: Trinity AI
 created:
@@ -17,7 +17,6 @@ tags:
   - execution
   - routing
   - validation
-content_type: knowledge
 ---
 
 # Trinity AI — CORE
