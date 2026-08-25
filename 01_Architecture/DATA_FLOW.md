@@ -1,29 +1,167 @@
-# Trinity AI - Data Flow
-
 ---
 id: TRI-ARCH-002
 title: Data Flow
-version: 1.1.0
+module: Architecture
+version: 1.2.0
 status: Draft
 owner: Trinity AI
-category: Architecture
+created:
+last_updated: 2026-08-25
+reviewed_by:
+approved_by:
+next_review:
+dependencies:
+  - CORE.md
+  - 01_Architecture/SYSTEM_ARCHITECTURE.md
+  - 00_Foundation/14_AI_Behavior.md
+  - 00_Foundation/15_Thinking_Framework.md
+  - 00_Foundation/16_Decision_Framework.md
+tags:
+  - architecture
+  - data-flow
+  - context
+  - routing
+  - retrieval
+  - execution
 ---
+
+# Trinity AI - Data Flow
 
 # Propósito
 
-Este documento define cómo circula la información dentro de Trinity AI desde que el usuario realiza una solicitud hasta que el sistema genera, valida y entrega un resultado.
+Este documento define cómo circula la información dentro de Trinity AI desde que una solicitud ingresa al sistema hasta que se genera, valida y entrega un resultado.
 
-Su objetivo es garantizar que Trinity AI utilice únicamente el contexto y las capacidades necesarias para cada tarea, evitando recorridos rígidos, duplicación de información y carga innecesaria de contexto.
+Su objetivo es garantizar que:
+
+- la información llegue únicamente a los componentes que la necesitan;
+- el contexto recuperado sea relevante;
+- no exista carga innecesaria de información;
+- las dependencias puedan transferir resultados correctamente;
+- los Agents puedan colaborar sin reconstruir contexto;
+- las acciones externas reciban únicamente los datos necesarios;
+- los resultados puedan validarse y reutilizarse cuando corresponda.
+
+Data Flow define circulación de información.
+
+No define:
+
+- comportamiento general de Trinity AI;
+- arquitectura completa del sistema;
+- estados de una solicitud;
+- coordinación completa entre Agents;
+- políticas completas de memoria;
+- procedimientos específicos de negocio.
+
+---
+
+# Objetivo
+
+El flujo de información debe ser:
+
+```text
+Selectivo
++
+Contextual
++
+Trazable cuando corresponda
++
+Seguro
++
+Proporcional
+```
+
+Trinity AI no debe mover toda la información disponible a través de todos sus componentes.
+
+Debe mover únicamente la información necesaria para resolver correctamente la solicitud.
 
 ---
 
 # Principio Fundamental
 
-Trinity AI utiliza un flujo dinámico y selectivo.
+> La información debe viajar únicamente hasta donde sea necesaria y durante el tiempo necesario.
 
-No todas las solicitudes deben atravesar todos los módulos.
+Debe evitarse:
 
-La complejidad del flujo debe adaptarse a la complejidad real de la solicitud.
+```text
+Solicitud
+   │
+   ▼
+Cargar todo
+   │
+   ▼
+Enviar todo a todos
+   │
+   ▼
+Filtrar después
+```
+
+Debe favorecerse:
+
+```text
+Solicitud
+   │
+   ▼
+Identificar necesidad
+   │
+   ▼
+Recuperar contexto relevante
+   │
+   ▼
+Entregar contexto mínimo suficiente
+   │
+   ▼
+Ejecutar
+```
+
+---
+
+# Flujo General
+
+El flujo conceptual de Trinity AI es:
+
+```text
+User / Trigger
+      │
+      ▼
+    Input
+      │
+      ▼
+     CORE
+      │
+      ▼
+Interpretación
+      │
+      ▼
+Context Need
+      │
+      ▼
+Selective Retrieval
+      │
+      ▼
+Capability Selection
+      │
+      ▼
+Execution
+      │
+      ▼
+Validation
+      │
+      ▼
+    Output
+      │
+      ▼
+     User
+```
+
+Este flujo es conceptual.
+
+No todas las solicitudes deben atravesar todas las etapas de forma explícita.
+
+---
+
+# Flujo Dinámico
+
+Trinity AI utiliza un flujo dinámico.
 
 ```text
 Solicitud simple
@@ -37,667 +175,1268 @@ Solicitud compleja
 Flujo compuesto
 ```
 
-El sistema debe recuperar y activar únicamente los componentes necesarios para resolver correctamente cada solicitud.
-
----
-
-# Flujo General
-
-El flujo conceptual es:
+Ejemplo simple:
 
 ```text
-Usuario
-    │
-    ▼
-INPUT
-    │
-    ▼
+User
+  │
+  ▼
 CORE
-    │
-    ▼
-Clasificación de solicitud
-    │
-    ▼
-Context Recovery
-    │
-    ▼
-Orchestrator
-    │
-    ▼
-Agent / Agents necesarios
-    │
-    ▼
-Capacidades necesarias
-    │
-    ├── Frameworks
-    ├── Knowledge
-    ├── SOPs
-    ├── Research
-    ├── Client Context
-    ├── Templates
-    └── Assets
-    │
-    ▼
+  │
+  ▼
 Execution
-    │
-    ├── Integrations
-    └── Automations
-    │
-    ▼
-Validation
-    │
-    ▼
-OUTPUT
-    │
-    ▼
-Learning Candidate
-    │
-    └── solo cuando corresponda
+  │
+  ▼
+Output
 ```
 
-Este flujo representa posibilidades del sistema.
+Ejemplo complejo:
 
-No constituye una secuencia obligatoria para todas las solicitudes.
+```text
+User
+  │
+  ▼
+CORE
+  │
+  ▼
+Context Retrieval
+  │
+  ▼
+Coordination
+  │
+  ├── Agent A
+  ├── Agent B
+  └── Agent C
+       │
+       ▼
+Integration
+       │
+       ▼
+Validation
+       │
+       ▼
+Output
+```
 
 ---
 
-# Etapa 1 — Input
+# Tipos de Información
 
-Trinity AI recibe una solicitud.
+Durante una solicitud pueden circular diferentes tipos de información.
 
-Debe identificar, cuando sea necesario:
+```text
+User Input
+System Rules
+Client Context
+Knowledge
+Frameworks
+SOPs
+Research
+Assets
+Templates
+Agent Outputs
+Decisions
+Permissions
+Integration Data
+Automation Results
+Validation Results
+```
 
-- intención;
+No todos deben estar presentes en todas las solicitudes.
+
+---
+
+# Input
+
+El flujo comienza con un input.
+
+Puede provenir de:
+
+- usuario;
+- Agent;
+- Automation;
+- Integration;
+- archivo;
+- evento;
+- trigger;
+- sistema externo autorizado.
+
+El input debe conservar su significado original.
+
+No debe reinterpretarse silenciosamente hasta alterar la intención.
+
+---
+
+# Interpretación
+
+CORE interpreta la solicitud para identificar:
+
 - objetivo;
+- intención;
 - contexto;
-- cliente o proyecto;
 - restricciones;
 - resultado esperado;
-- nivel de complejidad;
-- necesidad de ejecutar acciones externas.
+- cliente o proyecto cuando corresponda;
+- complejidad;
+- riesgo;
+- necesidad de capacidades adicionales.
 
-El sistema debe comprender la intención de la solicitud y no limitarse únicamente a interpretar literalmente las palabras utilizadas.
-
----
-
-# Etapa 2 — CORE
-
-CORE funciona como referencia operativa principal.
-
-Define:
-
-- reglas generales;
-- clasificación;
-- recuperación de contexto;
-- coordinación;
-- ejecución;
-- validación;
-- niveles de riesgo;
-- necesidad de aprobación humana.
-
-CORE no obliga a recorrer todos los módulos.
-
-Determina cómo debe operar Trinity AI frente a la solicitud.
+La interpretación determina qué información necesita recuperarse.
 
 ---
 
-# Etapa 3 — Foundation Protocols
+# Context Need
 
-Los protocolos de Foundation gobiernan el comportamiento general del sistema.
-
-Trinity AI debe aplicar únicamente los protocolos relevantes para la tarea.
-
-Pueden incluir:
-
-- Behavior Protocol;
-- Communication Protocol;
-- Thinking Protocol;
-- Decision Protocol;
-- Documentation Protocol;
-- otros protocolos globales aprobados.
-
-Foundation establece reglas y restricciones.
-
-No funciona como una etapa operativa que deba ejecutarse secuencialmente archivo por archivo.
-
----
-
-# Etapa 4 — Clasificación
-
-Trinity AI clasifica la solicitud para determinar qué tipo de trabajo requiere.
-
-Ejemplos:
+Antes de recuperar información debe identificarse qué contexto puede afectar materialmente la solución.
 
 ```text
-Consulta
-Investigación
-Planificación
-Creación
-Análisis
-Ejecución
-Modificación
-Automatización
-Documentación
-Decisión
+Request
+   │
+   ▼
+What do we need to know?
+   │
+   ▼
+Relevant Sources
 ```
 
-Una solicitud puede pertenecer a más de una categoría.
-
-La clasificación permite decidir qué capacidades son necesarias.
+No debe recuperarse información únicamente porque esté disponible.
 
 ---
 
-# Etapa 5 — Context Recovery
-
-Antes de generar información nueva, Trinity AI debe determinar qué contexto existente resulta relevante.
-
-Puede recuperar:
-
-- Knowledge global;
-- Client Context;
-- decisiones previas;
-- Research;
-- Frameworks;
-- SOPs;
-- Templates;
-- Assets;
-- Examples;
-- historial relevante.
+# Selective Retrieval
 
 La recuperación debe ser selectiva.
-
-```text
-Contexto disponible
-        │
-        ▼
-Evaluar relevancia
-        │
-        ├── Relevante → recuperar
-        │
-        └── No relevante → ignorar
-```
-
-Trinity AI no debe cargar información únicamente porque esté disponible.
-
----
-
-# Etapa 6 — Orchestrator
-
-Cuando la solicitud requiera coordinación, el Orchestrator determina cómo distribuir el trabajo.
-
-Puede:
-
-- identificar el Agent adecuado;
-- seleccionar múltiples Agents;
-- dividir una solicitud compleja;
-- establecer dependencias;
-- definir el orden de intervención;
-- coordinar resultados;
-- detectar necesidad de escalamiento.
-
-Para solicitudes simples, la coordinación debe mantenerse mínima.
-
-El Orchestrator no debe agregar complejidad innecesaria.
-
----
-
-# Etapa 7 — Agents
-
-Los Agents realizan trabajo especializado.
-
-El Agent seleccionado debe determinar qué capacidades necesita utilizar.
-
-Puede consultar:
-
-```text
-Agent
-  │
-  ├── Frameworks
-  ├── Knowledge
-  ├── SOPs
-  ├── Research
-  ├── Client Context
-  ├── Templates
-  ├── Assets
-  ├── Integrations
-  └── Automations
-```
-
-No todas las capacidades deben utilizarse en todas las tareas.
-
-El Agent debe recuperar únicamente las necesarias.
-
----
-
-# Etapa 8 — Frameworks
-
-Cuando la tarea requiera una metodología estructurada, el Agent debe buscar un Framework aplicable.
-
-```text
-¿Necesita metodología?
-        │
-        ├── No → continuar
-        │
-        └── Sí
-             │
-             ▼
-       Buscar Framework
-             │
-             ├── Existe → utilizar
-             │
-             └── No existe → resolver dentro
-                 de capacidades disponibles
-                 y evaluar documentación futura
-```
-
-La ausencia de un Framework no debe bloquear automáticamente una tarea.
-
-Un nuevo Framework solo debe proponerse cuando exista valor reutilizable.
-
----
-
-# Etapa 9 — Knowledge
-
-Cuando la tarea requiera conocimiento reutilizable, Trinity AI debe consultar `05_Knowledge`.
-
-Debe priorizar información:
-
-- relevante;
-- validada;
-- vigente;
-- aplicable al problema actual.
-
-Knowledge global no debe confundirse con Client Context.
-
-```text
-Knowledge
-└── conocimiento global reutilizable
-
-Client Context
-└── información específica del cliente
-```
-
----
-
-# Etapa 10 — Client Context
-
-Cuando una solicitud pertenezca a un cliente o proyecto específico, Trinity AI debe recuperar únicamente el contexto relevante desde:
-
-```text
-08_Clients/
-└── Cliente/
-```
 
 Puede incluir:
 
-- identidad;
-- objetivos;
-- audiencia;
-- productos;
-- decisiones;
-- estrategias;
-- Frameworks específicos;
-- Research;
-- Assets;
-- historial.
-
-El contexto de un cliente no debe modificar automáticamente el conocimiento global.
-
----
-
-# Etapa 11 — Research
-
-Research debe utilizarse cuando la información existente sea insuficiente, incierta o necesite actualización.
-
 ```text
-¿Información suficiente?
-        │
-        ├── Sí → continuar
-        │
-        └── No
-             │
-             ▼
-          Research
+Foundation
+Architecture
+Knowledge
+Frameworks
+SOPs
+Client Context
+Research
+Decisions
+Templates
+Examples
+Assets
 ```
 
-Research puede aportar:
-
-- evidencia;
-- tendencias;
-- referencias;
-- benchmarking;
-- información competitiva;
-- información actualizada.
-
-Los resultados de Research no se convierten automáticamente en Knowledge.
+La selección depende de la solicitud.
 
 ---
 
-# Etapa 12 — SOPs
+# Regla de Recuperación
 
-Cuando una tarea represente un proceso repetible y exista un SOP relevante, el Agent debe utilizarlo.
+Antes de recuperar una fuente debe evaluarse:
 
 ```text
-¿Existe proceso estandarizado aplicable?
-        │
-        ├── Sí → utilizar SOP
-        │
-        └── No → continuar
+¿Es relevante?
+      ↓
+¿Puede cambiar la respuesta?
+      ↓
+¿Es suficientemente autoritativa?
+      ↓
+¿Está vigente cuando importa?
+      ↓
+Recuperar
 ```
 
-La ausencia de un SOP no debe bloquear automáticamente una tarea.
-
-Si el proceso demuestra valor reutilizable, puede proponerse posteriormente su documentación.
+Si no aporta valor material, no debe cargarse.
 
 ---
 
-# Etapa 13 — Templates y Assets
+# Context Package
 
-Cuando la tarea requiera crear un documento o entregable estructurado, Trinity AI debe buscar una Template aplicable.
+Cuando la información debe transferirse a un Agent o componente puede utilizarse un Context Package.
 
-Cuando necesite recursos existentes, debe buscar Assets relevantes.
+Puede contener:
+
+```yaml
+request_id:
+client:
+project:
+objective:
+task:
+expected_output:
+constraints:
+relevant_context:
+sources:
+dependencies:
+permissions:
+risk_level:
+```
+
+No todos los campos son obligatorios.
+
+---
+
+# Principio de Context Package
+
+Debe contener:
 
 ```text
-Necesidad
+Mínimo contexto
++
+Información suficiente
+=
+Context Package correcto
+```
+
+Debe evitar:
+
+- conversaciones completas innecesarias;
+- información de otros clientes;
+- documentación irrelevante;
+- credenciales;
+- duplicación;
+- archivos completos cuando basta un fragmento.
+
+---
+
+# Flujo hacia Agents
+
+Cuando interviene un Agent:
+
+```text
+Request
    │
-   ├── estructura → Template
+   ▼
+Relevant Context
    │
-   └── recurso → Asset
+   ▼
+Agent
+   │
+   ▼
+Agent Output
 ```
 
-La recuperación debe ser selectiva.
+El Agent debe recibir únicamente la información necesaria para su responsabilidad.
 
 ---
 
-# Etapa 14 — Execution
+# Flujo Multi-Agent
 
-Cuando la solicitud requiera ejecutar una acción, Trinity AI debe determinar:
-
-- qué acción realizar;
-- qué herramienta necesita;
-- qué permisos existen;
-- qué nivel de riesgo posee;
-- si requiere aprobación humana.
-
-La ejecución puede utilizar:
+Cuando existen múltiples Agents:
 
 ```text
-Integrations
-      │
-      └── acceso a herramientas
-
-Automations
-      │
-      └── ejecución de procesos
+              ┌── Context A → Agent A
+              │
+Request ──────┼── Context B → Agent B
+              │
+              └── Context C → Agent C
 ```
+
+No todos los Agents necesitan recibir exactamente el mismo contexto.
 
 ---
 
-# Etapa 15 — Integrations
+# Flujo Secuencial
 
-Las Integrations se utilizan únicamente cuando la tarea requiere interactuar con herramientas externas.
+Cuando un Agent depende del resultado de otro:
 
-Ejemplos:
+```text
+Agent A
+   │
+   ▼
+Output A
+   │
+   ▼
+Handoff Package
+   │
+   ▼
+Agent B
+```
 
-- Notion;
-- GitHub;
-- Google Drive;
-- APIs;
-- otras plataformas autorizadas.
+El handoff debe contener únicamente lo necesario para continuar.
 
-Antes de utilizar una Integration debe verificarse:
+---
 
-- necesidad;
-- disponibilidad;
+# Flujo Paralelo
+
+Cuando las tareas son independientes:
+
+```text
+            ┌── Agent A ── Output A
+            │
+Request ────┼── Agent B ── Output B
+            │
+            └── Agent C ── Output C
+                         │
+                         ▼
+                    Integration
+```
+
+Debe evitarse paralelizar cuando exista una dependencia real entre outputs.
+
+---
+
+# Handoff
+
+Un handoff transfiere trabajo entre componentes.
+
+Puede incluir:
+
+```yaml
+task:
+result:
+sources:
+decisions:
+constraints:
+assumptions:
+risks:
+pending:
+next_objective:
+```
+
+El siguiente componente no debería necesitar reconstruir todo el historial anterior.
+
+---
+
+# Integración de Outputs
+
+Cuando existen múltiples resultados:
+
+```text
+Output A
+Output B
+Output C
+   │
+   ▼
+Integration
+   │
+   ▼
+Unified Result
+```
+
+La integración debe:
+
+- eliminar duplicación;
+- preservar evidencia;
+- resolver incompatibilidades cuando sea posible;
+- mantener restricciones;
+- conservar decisiones relevantes;
+- producir una salida coherente.
+
+Integrar no significa concatenar.
+
+---
+
+# Flujo de Knowledge
+
+Knowledge global puede entrar al flujo cuando sea relevante.
+
+```text
+05_Knowledge
+      │
+      ▼
+Relevant Knowledge
+      │
+      ▼
+Agent / Execution
+```
+
+Knowledge no debe copiarse permanentemente dentro del Agent.
+
+---
+
+# Flujo de Frameworks
+
+Cuando una tarea necesita metodología:
+
+```text
+04_Frameworks
+      │
+      ▼
+Applicable Framework
+      │
+      ▼
+Agent
+```
+
+El Framework guía el enfoque.
+
+No ejecuta la tarea.
+
+---
+
+# Flujo de SOPs
+
+Cuando existe un procedimiento aplicable:
+
+```text
+02_SOPs
+   │
+   ▼
+Applicable SOP
+   │
+   ▼
+Execution
+```
+
+El SOP define cómo ejecutar la tarea.
+
+---
+
+# Flujo de Client Context
+
+Cuando una solicitud pertenece a un cliente:
+
+```text
+Request
+   │
+   ▼
+Identify Client
+   │
+   ▼
+08_Clients/Client
+   │
+   ▼
+Relevant Client Context
+   │
+   ▼
+Execution
+```
+
+Solo debe recuperarse información del cliente correspondiente.
+
+---
+
+# Aislamiento entre Clientes
+
+Debe impedirse:
+
+```text
+Client A Context
+      │
+      ▼
+Task for Client B
+```
+
+La información específica de un cliente no debe circular hacia otro cliente.
+
+Solo puede reutilizarse globalmente cuando haya sido correctamente promovida a una fuente global.
+
+---
+
+# Flujo de Research
+
+Research puede entrar cuando:
+
+- falta información;
+- la información puede haber cambiado;
+- se necesita evidencia;
+- existe incertidumbre;
+- una decisión depende de información externa.
+
+```text
+Research Need
+      │
+      ▼
+12_Research / External Research
+      │
+      ▼
+Evidence
+      │
+      ▼
+Execution / Decision
+```
+
+Research no se convierte automáticamente en Knowledge.
+
+---
+
+# Flujo de Assets
+
+Assets pueden recuperarse cuando una tarea necesita recursos existentes.
+
+```text
+Assets
+  │
+  ▼
+Relevant Asset
+  │
+  ▼
+Execution
+```
+
+No deben cargarse Assets completos cuando no son necesarios.
+
+---
+
+# Flujo de Templates
+
+Templates pueden utilizarse cuando el output requiere una estructura conocida.
+
+```text
+Template
+   │
+   ▼
+Structure
+   │
+   ▼
+Output
+```
+
+Template define formato.
+
+No sustituye Knowledge, Framework ni SOP.
+
+---
+
+# Flujo de Decisions
+
+Una decisión previa puede entrar al flujo cuando afecta la solicitud actual.
+
+```text
+Relevant Decision
+       │
+       ▼
+Current Request
+```
+
+No debe cargarse historial completo de decisiones si solo una es relevante.
+
+---
+
+# Flujo de Integrations
+
+Una Integration permite intercambio de información con una herramienta externa.
+
+```text
+Trinity AI
+    │
+    ▼
+Authorized Integration
+    │
+    ▼
+External Service
+```
+
+El flujo debe respetar:
+
 - permisos;
 - alcance;
 - riesgo;
-- autorización.
-
-La existencia de una Integration no implica que deba utilizarse.
+- aprobación;
+- mínimo acceso necesario.
 
 ---
 
-# Etapa 16 — Automations
+# Lectura desde Integrations
 
-Una Automation debe ejecutarse únicamente cuando:
-
-- sea aplicable;
-- aporte valor;
-- existan los permisos necesarios;
-- las Integrations requeridas estén disponibles;
-- el nivel de riesgo lo permita;
-- exista aprobación humana cuando corresponda.
+Cuando Trinity AI necesita información externa:
 
 ```text
-Automation disponible
-        │
-        ▼
-¿Es necesaria?
-        │
-        ├── No → no ejecutar
-        │
-        └── Sí
-             │
-             ▼
-        Verificar permisos
-             │
-             ▼
-        Verificar riesgo
-             │
-             ▼
-        Verificar aprobación
-             │
-             ▼
-           Ejecutar
+Need
+  │
+  ▼
+Permission Check
+  │
+  ▼
+Integration
+  │
+  ▼
+External Data
+  │
+  ▼
+Relevant Data
+  │
+  ▼
+Execution
 ```
 
-Una Automation puede utilizar SOPs, Frameworks, Integrations u otras capacidades cuando sean necesarias.
-
-No existe obligación de utilizar todas ellas.
+Debe evitarse importar más información de la necesaria.
 
 ---
 
-# Etapa 17 — Validation
+# Escritura mediante Integrations
 
-Antes de entregar o confirmar un resultado, Trinity AI debe validar según corresponda:
+Antes de enviar información hacia un servicio externo:
 
-- cumplimiento del objetivo;
-- coherencia;
-- contexto;
+```text
+Proposed Write
+      │
+      ▼
+Permission Check
+      │
+      ▼
+Risk Check
+      │
+      ▼
+Approval
+when required
+      │
+      ▼
+Integration
+      │
+      ▼
+External Service
+```
+
+---
+
+# Credenciales
+
+Las credenciales no deben circular dentro de Context Packages normales.
+
+Incluye:
+
+- passwords;
+- API keys;
+- tokens;
+- private keys;
+- secrets.
+
+Deben administrarse mediante mecanismos seguros externos.
+
+---
+
+# Flujo de Automations
+
+Una Automation puede recibir información y producir resultados.
+
+```text
+Trigger
+   │
+   ▼
+Automation
+   │
+   ▼
+Execution
+   │
+   ▼
+Result
+```
+
+Cuando utiliza Integrations:
+
+```text
+Automation
+   │
+   ▼
+Authorized Integration
+   │
+   ▼
+External Service
+```
+
+La Automation debe recibir únicamente los datos necesarios para ejecutar su proceso.
+
+---
+
+# Flujo de Aprobación
+
+Cuando una acción necesita aprobación:
+
+```text
+Proposed Action
+      │
+      ▼
+Approval Request
+      │
+      ▼
+Human
+   │      │
+Approved Rejected
+   │      │
+   ▼      ▼
+Execute  Stop / Alternative
+```
+
+La aprobación debe transferirse con alcance explícito.
+
+---
+
+# Approval Data
+
+Cuando exista aprobación debe quedar claro:
+
+```yaml
+action:
+scope:
+approved_by:
+status:
+conditions:
+```
+
+cuando el nivel de riesgo o trazabilidad lo requiera.
+
+---
+
+# Validation Flow
+
+Los resultados pueden pasar por validación.
+
+```text
+Execution
+   │
+   ▼
+Result
+   │
+   ▼
+Validation
+   │
+   ├── Valid
+   │      │
+   │      ▼
+   │   Output
+   │
+   └── Invalid
+          │
+          ▼
+      Correction
+```
+
+La validación debe ser proporcional.
+
+---
+
+# Correction Flow
+
+Cuando se detecta un problema:
+
+```text
+Validation
+   │
+   ▼
+Issue
+   │
+   ▼
+Affected Component
+   │
+   ▼
+Correction
+   │
+   ▼
+Validation
+```
+
+No debe reiniciarse todo el flujo por defecto.
+
+---
+
+# Error Flow
+
+Cuando ocurre un error:
+
+```text
+Error
+  │
+  ▼
+Identify Cause
+  │
+  ▼
+Assess Impact
+  │
+  ├── Recoverable
+  │      │
+  │      ▼
+  │   Correction
+  │
+  └── Critical
+         │
+         ▼
+      Block / Fail
+```
+
+Los errores no deben ocultarse.
+
+---
+
+# Dependency Flow
+
+Cuando una tarea necesita otra salida:
+
+```text
+Task B
+  │
+  ▼
+Needs Output A
+  │
+  ▼
+Wait
+  │
+  ▼
+Output A Available
+  │
+  ▼
+Continue
+```
+
+La dependencia debe conservar únicamente el resultado necesario.
+
+---
+
+# Output
+
+El output representa la información que sale del proceso operativo.
+
+Puede ser:
+
+- respuesta;
+- documento;
+- archivo;
+- análisis;
+- recomendación;
+- plan;
+- acción ejecutada;
+- actualización externa;
+- resultado de Automation.
+
+---
+
+# Output al Usuario
+
+Antes de entregar información debe verificarse:
+
+- objetivo;
+- claridad;
+- completitud;
 - restricciones;
 - permisos;
-- calidad;
-- resultado de acciones ejecutadas;
-- necesidad de aprobación.
-
-Las validaciones deben ser proporcionales al riesgo y complejidad de la tarea.
+- información sensible;
+- resultado esperado.
 
 ---
 
-# Etapa 18 — Output
+# Output Interno
 
-El resultado debe:
+No todos los outputs deben llegar directamente al usuario.
 
-- resolver la solicitud;
-- utilizar el contexto correcto;
-- ser accionable;
-- evitar información innecesaria;
-- respetar Foundation;
-- respetar Governance;
-- mantener coherencia con documentación oficial;
-- indicar incertidumbre relevante cuando exista.
+Un output puede alimentar:
 
-La complejidad de la respuesta debe adaptarse a la solicitud.
+- otro Agent;
+- Validation;
+- Automation;
+- Integration;
+- Research;
+- Candidate;
+- Client Context.
 
 ---
 
-# Etapa 19 — Learning Candidate
+# Persistencia
 
-Después de una ejecución pueden aparecer aprendizajes potencialmente reutilizables.
-
-Ejemplos:
-
-- nuevo conocimiento;
-- mejora de Framework;
-- mejora de SOP;
-- nueva Template;
-- nuevo Example;
-- aprendizaje específico de cliente.
-
-Estos aprendizajes no deben incorporarse automáticamente.
+Que información circule por Trinity AI no significa que deba almacenarse permanentemente.
 
 ```text
-Resultado
+Data Flow
+≠
+Memory Persistence
+```
+
+La decisión de persistencia pertenece a Memory Architecture y Governance.
+
+---
+
+# Candidate Flow
+
+Un aprendizaje potencial puede salir de una ejecución como Candidate.
+
+```text
+Execution
+   │
+   ▼
+Learning
+   │
+   ▼
+Candidate
+   │
+   ▼
+Review
+```
+
+Candidate no debe volver automáticamente al sistema como fuente oficial.
+
+---
+
+# Research → Candidate
+
+```text
+Research
+   │
+   ▼
+Finding
+   │
+   ▼
+Candidate
+   │
+   ▼
+Review
+```
+
+---
+
+# Client Learning → Candidate
+
+```text
+Client Work
     │
     ▼
-¿Existe aprendizaje reutilizable?
+Learning
     │
-    ├── No → finalizar
+    ▼
+Candidate
     │
-    └── Sí
-         │
-         ▼
-   Learning Candidate
-         │
-         ▼
-      Governance
+    ▼
+Review
 ```
 
-Governance determina posteriormente si debe incorporarse al sistema.
+La información específica del cliente permanece aislada mientras no sea correctamente promovida.
 
 ---
 
-# Flujos Simplificados
+# Trazabilidad
 
-No todas las solicitudes requieren el flujo completo.
+Cuando el impacto lo requiera puede registrarse:
 
-## Consulta simple
-
-```text
-Usuario
-  │
-  ▼
-CORE
-  │
-  ▼
-Context Recovery
-  │
-  ▼
-Respuesta
+```yaml
+request_id:
+source:
+destination:
+data_type:
+responsible:
+timestamp:
+status:
 ```
 
-## Tarea especializada
+No todo flujo necesita trazabilidad completa.
+
+---
+
+# Mínimo Acceso
+
+Cada componente debe recibir únicamente los datos necesarios.
 
 ```text
-Usuario
-  │
-  ▼
-CORE
-  │
-  ▼
-Context Recovery
-  │
-  ▼
-Agent
-  │
-  ├── Knowledge
-  └── Framework, si corresponde
-  │
-  ▼
-Resultado
-```
-
-## Trabajo para cliente
-
-```text
-Usuario
-  │
-  ▼
-CORE
-  │
-  ▼
-Client Context
-  │
-  ▼
-Agent
-  │
-  ├── Knowledge global
-  ├── Framework
-  ├── SOP
-  └── Assets
-  │
-  ▼
-Resultado
-```
-
-## Ejecución externa
-
-```text
-Usuario
-  │
-  ▼
-CORE
-  │
-  ▼
-Agent
-  │
-  ▼
-Validación de riesgo
-  │
-  ▼
-Integration / Automation
-  │
-  ▼
-Validación
-  │
-  ▼
-Resultado
+Need to Know
++
+Least Privilege
+=
+Safe Data Flow
 ```
 
 ---
 
-# Reglas del Data Flow
+# Información Sensible
 
-Trinity AI debe:
+La información sensible debe circular únicamente cuando:
 
-- adaptar el flujo a la tarea;
-- recuperar contexto selectivamente;
-- reutilizar antes de crear;
-- utilizar únicamente las capacidades necesarias;
-- validar antes de acciones sensibles;
-- respetar permisos;
-- mantener trazabilidad cuando corresponda;
-- evitar duplicación;
-- escalar cuando una tarea exceda el alcance disponible.
+- sea necesaria;
+- exista autorización;
+- el componente tenga permisos;
+- el canal sea adecuado;
+- el riesgo sea aceptable.
+
+---
+
+# Redacción y Minimización
+
+Cuando un componente no necesite información sensible completa puede utilizarse:
+
+- redacción;
+- anonimización;
+- resumen;
+- referencia;
+- identificador.
+
+Debe preferirse la forma menos sensible que permita ejecutar correctamente la tarea.
+
+---
+
+# Flujo entre Sesiones
+
+Cuando una solicitud continúa en otra sesión:
+
+```text
+Previous Session
+      │
+      ▼
+Persistent Relevant Context
+      │
+      ▼
+New Session
+```
+
+No debe dependerse exclusivamente del historial completo de conversación.
+
+---
+
+# Recuperación entre Sesiones
+
+Debe recuperarse únicamente:
+
+- decisiones relevantes;
+- Client Context;
+- Knowledge;
+- Research necesario;
+- estado persistido cuando corresponda.
+
+---
+
+# Data Flow y Memory Architecture
+
+Data Flow define:
+
+> cómo circula la información.
+
+Memory Architecture define:
+
+> cómo se clasifica, conserva y recupera.
+
+```text
+Data Flow
+→ movement
+
+Memory Architecture
+→ persistence + retrieval
+```
+
+Data Flow puede referenciar Memory Architecture conceptualmente sin depender formalmente de ella.
+
+Esto evita dependencias circulares.
+
+---
+
+# Data Flow y Request Lifecycle
+
+Request Lifecycle define el estado de una solicitud.
+
+Data Flow define la información que circula durante ese estado.
+
+Ejemplo:
+
+```text
+State:
+Waiting for Dependency
+
+Data:
+required Agent output
+```
+
+Data Flow puede referenciar Request Lifecycle conceptualmente sin convertirlo en dependencia formal.
+
+---
+
+# Data Flow y Agent Interaction
+
+Agent Interaction define cómo colaboran los Agents.
+
+Data Flow define qué información se transfiere durante esa colaboración.
+
+```text
+Agent Interaction
+→ collaboration
+
+Data Flow
+→ information transfer
+```
+
+---
+
+# Data Flow y Orchestrator
+
+El Orchestrator puede decidir:
+
+- qué contexto recuperar;
+- qué Agent necesita qué información;
+- qué dependencias existen;
+- qué outputs deben integrarse.
+
+Data Flow define cómo debe circular esa información.
+
+Data Flow no depende formalmente de Orchestrator.
+
+Esto permite que Orchestrator dependa de Data Flow sin crear un ciclo.
+
+---
+
+# Data Flow y System Architecture
+
+System Architecture define dónde existen los componentes.
+
+Data Flow define cómo se mueve la información entre ellos.
+
+```text
+System Architecture
+→ components
+
+Data Flow
+→ connections
+```
+
+---
+
+# Data Flow y CORE
+
+CORE inicia la interpretación operativa de una solicitud.
+
+Data Flow utiliza esa interpretación para determinar qué información necesita circular.
+
+---
+
+# Data Flow y AI Behavior
+
+AI Behavior establece principios como:
+
+- proporcionalidad;
+- mínimo acceso;
+- autonomía controlada;
+- transparencia;
+- validación.
+
+Data Flow implementa esos principios en circulación de información.
+
+---
+
+# Data Flow y Thinking Framework
+
+Thinking Framework ayuda a determinar:
+
+- qué información falta;
+- qué contexto importa;
+- qué evidencia necesita verificarse.
+
+Data Flow permite recuperar y transferir esa información.
+
+---
+
+# Data Flow y Decision Framework
+
+Decision Framework puede determinar:
+
+- qué alternativa ejecutar;
+- qué riesgo aceptar;
+- cuándo solicitar aprobación.
+
+Data Flow transporta la información necesaria para esa decisión y su ejecución.
+
+---
+
+# Escalabilidad
+
+Agregar nuevos:
+
+- Agents;
+- Knowledge;
+- Frameworks;
+- SOPs;
+- Clients;
+- Integrations;
+- Automations;
+- storage systems;
+
+no debe requerir rediseñar todo Data Flow.
+
+Cada componente nuevo debe definir:
+
+```text
+Input
+Output
+Permissions
+Dependencies
+Context Requirements
+```
+
+---
+
+# Antipatrones
 
 Trinity AI no debe:
 
-- recorrer todos los módulos obligatoriamente;
-- cargar todo el repositorio para cada solicitud;
-- ejecutar una Automation únicamente porque exista;
-- utilizar una Integration innecesariamente;
-- crear un Framework porque no encuentre uno inmediatamente;
+- cargar todo el sistema para cada solicitud;
+- enviar todo el contexto a todos los Agents;
+- mezclar información entre clientes;
+- mover credenciales dentro de prompts normales;
+- duplicar información durante handoffs;
+- transferir conversaciones completas por defecto;
+- confundir flujo con persistencia;
 - convertir Research automáticamente en Knowledge;
-- convertir aprendizajes automáticamente en memoria permanente;
-- agregar complejidad sin beneficio.
+- convertir Candidates automáticamente en fuentes oficiales;
+- ejecutar escrituras externas sin verificar permisos;
+- mantener datos sensibles cuando no sean necesarios;
+- paralelizar tareas con dependencias ocultas;
+- reiniciar todo el flujo por un error local;
+- crear dependencias circulares entre documentos arquitectónicos.
+
+---
+
+# Criterios de Éxito
+
+Data Flow funciona correctamente cuando:
+
+- cada componente recibe información suficiente;
+- ningún componente recibe contexto innecesario de forma sistemática;
+- los Agents pueden continuar desde handoffs claros;
+- Client Context permanece aislado;
+- las acciones externas respetan permisos;
+- Research conserva su carácter de evidencia;
+- Candidates no se convierten automáticamente en verdad;
+- los errores pueden corregirse localmente;
+- la información sensible se minimiza;
+- el flujo puede crecer sin generar dependencias circulares;
+- la salida conserva contexto suficiente para validación y uso.
+
+---
+
+# Checklist de Data Flow
+
+Antes de transferir información debe evaluarse:
+
+```text
+¿Qué información necesita el destino?
+        ↓
+¿Es relevante?
+        ↓
+¿Es suficiente?
+        ↓
+¿Contiene información innecesaria?
+        ↓
+¿Contiene información sensible?
+        ↓
+¿Existe permiso?
+        ↓
+¿Debe resumirse o minimizarse?
+        ↓
+Transferir
+```
+
+Antes de persistir:
+
+```text
+¿Tiene valor futuro?
+        ↓
+¿Dónde pertenece?
+        ↓
+¿Es Candidate?
+        ↓
+¿Necesita validación?
+        ↓
+Memory / Governance
+```
 
 ---
 
 # Regla de Oro
 
-El Data Flow de Trinity AI debe utilizar el camino mínimo necesario para producir un resultado correcto, contextualizado y seguro.
+La eficiencia de Trinity AI no depende de mover más información.
+
+Depende de mover la información correcta.
 
 ```text
-Menor complejidad necesaria
-          +
-Contexto correcto
-          +
-Capacidades adecuadas
-          +
-Validación proporcional
-          =
-Resultado eficiente
+Contexto relevante
+       +
+Mínimo acceso
+       +
+Handoffs claros
+       +
+Aislamiento
+       +
+Validación
+       =
+Data Flow confiable
 ```
 
-El sistema debe ser suficientemente estructurado para mantener consistencia y suficientemente flexible para no convertir cada solicitud en un proceso burocrático.
+Cada dato debe llegar al componente correcto, en el momento correcto y con el nivel de contexto correcto.
