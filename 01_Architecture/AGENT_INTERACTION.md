@@ -29,7 +29,7 @@ tags:
 
 # Trinity AI - Agent Interaction
 
-# Propósito
+## Propósito
 
 Este documento define cómo interactúan, colaboran, delegan y transfieren trabajo los Agents dentro de Trinity AI.
 
@@ -54,7 +54,7 @@ No define procedimientos específicos de negocio.
 
 ---
 
-# Objetivo
+## Objetivo
 
 La interacción entre Agents debe permitir:
 
@@ -78,7 +78,7 @@ No agregar capas innecesarias.
 
 ---
 
-# Principio Fundamental
+## Principio Fundamental
 
 > Un Agent debe realizar únicamente el trabajo para el cual tiene responsabilidad y entregar un resultado que permita continuar sin reconstruir contexto innecesariamente.
 
@@ -88,7 +88,7 @@ No para multiplicar complejidad.
 
 ---
 
-# Principio de Especialización
+## Principio de Especialización
 
 Cada Agent representa una capacidad especializada.
 
@@ -108,7 +108,7 @@ Un Agent no debe absorber responsabilidades pertenecientes a otro cuando exista 
 
 ---
 
-# Principio de Mínimo Número de Agents
+## Principio de Mínimo Número de Agents
 
 Más Agents no significa automáticamente mayor calidad.
 
@@ -139,7 +139,7 @@ Más complejidad que valor
 
 ---
 
-# Principio de Responsable Claro
+## Principio de Responsable Claro
 
 Toda tarea debe tener un responsable principal.
 
@@ -169,7 +169,7 @@ Cuando varios Agents colaboren, debe quedar claro quién responde por cada etapa
 
 ---
 
-# Arquitectura General de Interacción
+## Arquitectura General de Interacción
 
 ```text
 Solicitud
@@ -224,7 +224,7 @@ No todas las solicitudes necesitan Orchestrator.
 
 ---
 
-# Relación con Orchestrator
+## Relación con Orchestrator
 
 `01_Architecture/ORCHESTRATOR.md` define cómo Trinity AI coordina solicitudes complejas.
 
@@ -248,7 +248,7 @@ Esto evita dependencias circulares innecesarias.
 
 ---
 
-# Agents Especialistas
+## Agents Especialistas
 
 Cada Agent debe poseer como mínimo:
 
@@ -283,7 +283,7 @@ No todas las capacidades deben utilizarse en todas las tareas.
 
 ---
 
-# Responsabilidad del Agent
+## Responsabilidad del Agent
 
 El Agent responsable debe:
 
@@ -299,7 +299,7 @@ El Agent responsable debe:
 
 ---
 
-# Lo que un Agent no debe hacer
+## Lo que un Agent no debe hacer
 
 Un Agent no debe:
 
@@ -315,7 +315,7 @@ Un Agent no debe:
 
 ---
 
-# Clasificación de Tareas
+## Clasificación de Tareas
 
 Antes de asignar trabajo puede clasificarse la tarea según especialidad.
 
@@ -343,7 +343,7 @@ No obliga a crear un Agent diferente para cada categoría.
 
 ---
 
-# Complejidad de Colaboración
+## Complejidad de Colaboración
 
 La colaboración puede clasificarse como:
 
@@ -356,7 +356,7 @@ Multi-Agent Mixed
 
 ---
 
-# Single Agent
+## Single Agent
 
 Debe utilizarse cuando una sola especialidad puede resolver correctamente la tarea.
 
@@ -377,7 +377,7 @@ Debe ser la opción preferida cuando sea suficiente.
 
 ---
 
-# Multi-Agent Sequential
+## Multi-Agent Sequential
 
 Debe utilizarse cuando una tarea depende del output anterior.
 
@@ -408,7 +408,7 @@ Content Planner
 
 ---
 
-# Multi-Agent Parallel
+## Multi-Agent Parallel
 
 Debe utilizarse cuando varias tareas pueden ejecutarse independientemente.
 
@@ -434,7 +434,7 @@ No debe utilizarse si crea:
 
 ---
 
-# Multi-Agent Mixed
+## Multi-Agent Mixed
 
 Puede combinar ejecución paralela y secuencial.
 
@@ -457,7 +457,7 @@ Inicio ───┼── Research B
 
 ---
 
-# Descomposición
+## Descomposición
 
 Las solicitudes complejas pueden dividirse en unidades de trabajo.
 
@@ -481,7 +481,7 @@ No debe fragmentar artificialmente trabajo simple.
 
 ---
 
-# Regla de Descomposición
+## Regla de Descomposición
 
 Antes de dividir una tarea debe preguntarse:
 
@@ -497,7 +497,7 @@ No
 
 ---
 
-# Context Package
+## Context Package
 
 Cuando una tarea se asigna a un Agent, debe recibir únicamente el contexto necesario.
 
@@ -523,7 +523,7 @@ No todos los campos son obligatorios.
 
 ---
 
-# Principios del Context Package
+## Principios del Context Package
 
 Debe ser:
 
@@ -544,7 +544,7 @@ Debe evitar:
 
 ---
 
-# Input Contract
+## Input Contract
 
 Antes de ejecutar una tarea, el Agent debe verificar:
 
@@ -559,7 +559,7 @@ Antes de ejecutar una tarea, el Agent debe verificar:
 
 ---
 
-# Input Incompleto
+## Input Incompleto
 
 Cuando falte información debe evaluar:
 
@@ -584,7 +584,7 @@ No debe preguntar automáticamente si puede recuperar la información por otra v
 
 ---
 
-# Supuestos
+## Supuestos
 
 Un Agent puede utilizar un supuesto cuando:
 
@@ -597,7 +597,7 @@ Debe declararlo cuando pueda afectar materialmente el resultado.
 
 ---
 
-# Output Contract
+## Output Contract
 
 Todo Agent debe producir un resultado comprensible y reutilizable.
 
@@ -619,7 +619,7 @@ No todos los campos deben aparecer siempre.
 
 ---
 
-# Requisitos del Output
+## Requisitos del Output
 
 El output debe permitir:
 
@@ -638,7 +638,7 @@ Debe evitar:
 
 ---
 
-# Handoff
+## Handoff
 
 Un handoff ocurre cuando el resultado de un Agent se convierte en input de otro.
 
@@ -660,7 +660,7 @@ next_objective:
 
 ---
 
-# Regla de Handoff
+## Regla de Handoff
 
 El siguiente Agent no debe tener que reconstruir todo lo que ya se hizo.
 
@@ -676,7 +676,7 @@ Debe poder responder:
 
 ---
 
-# Handoff Correcto
+## Handoff Correcto
 
 ```text
 Agent A
@@ -693,7 +693,7 @@ Agent B
 
 ---
 
-# Handoff Incorrecto
+## Handoff Incorrecto
 
 ```text
 Agent A
@@ -709,7 +709,7 @@ Debe evitarse trasladar el historial completo cuando no sea necesario.
 
 ---
 
-# Delegación
+## Delegación
 
 Un Agent puede identificar que una parte del trabajo necesita otra especialidad.
 
@@ -722,7 +722,7 @@ Debe delegarse cuando:
 
 ---
 
-# Delegación Directa
+## Delegación Directa
 
 Cuando la arquitectura permita delegación directa entre Agents, esta debe permanecer dentro del alcance definido.
 
@@ -738,7 +738,7 @@ debe informarse al Orchestrator cuando corresponda.
 
 ---
 
-# Escalamiento al Orchestrator
+## Escalamiento al Orchestrator
 
 Un Agent debe devolver control al Orchestrator cuando:
 
@@ -752,7 +752,7 @@ Un Agent debe devolver control al Orchestrator cuando:
 
 ---
 
-# Prevención de Delegación Infinita
+## Prevención de Delegación Infinita
 
 No debe ocurrir:
 
@@ -776,7 +776,7 @@ Cuando aparezca un ciclo debe:
 
 ---
 
-# Dependencias entre Agents
+## Dependencias entre Agents
 
 Una dependencia existe cuando un Agent necesita el output de otro para continuar.
 
@@ -798,7 +798,7 @@ No deben inventarse dependencias únicamente para justificar una arquitectura mu
 
 ---
 
-# Responsabilidad Final
+## Responsabilidad Final
 
 Cuando varios Agents colaboren debe existir un responsable del resultado integrado.
 
@@ -814,7 +814,7 @@ Debe evitarse una situación donde todos produjeron partes pero nadie responde p
 
 ---
 
-# Integración de Resultados
+## Integración de Resultados
 
 Cuando existan múltiples outputs deben integrarse.
 
@@ -832,7 +832,7 @@ Integrar no significa simplemente concatenar outputs.
 
 ---
 
-# Conflictos entre Agents
+## Conflictos entre Agents
 
 Puede existir conflicto cuando dos Agents producen:
 
@@ -864,7 +864,7 @@ Resolve / Escalate
 
 ---
 
-# Resolución de Conflictos
+## Resolución de Conflictos
 
 Cuando sea posible resolver el conflicto debe evaluarse:
 
@@ -880,7 +880,7 @@ Cuando no pueda resolverse con suficiente confianza debe escalarse.
 
 ---
 
-# Decision Framework
+## Decision Framework
 
 Cuando exista una decisión material debe utilizarse conceptualmente:
 
@@ -892,7 +892,7 @@ Los Agents no deben inventar sistemas de decisión paralelos.
 
 ---
 
-# Incertidumbre
+## Incertidumbre
 
 Los Agents deben distinguir:
 
@@ -907,13 +907,13 @@ La incertidumbre debe transferirse en un handoff cuando pueda afectar al siguien
 
 ---
 
-# Known
+## Known
 
 Información respaldada suficientemente.
 
 ---
 
-# Inferred
+## Inferred
 
 Conclusión razonable.
 
@@ -921,7 +921,7 @@ Debe identificarse cuando su carácter inferido pueda afectar decisiones posteri
 
 ---
 
-# Unknown
+## Unknown
 
 Información que falta.
 
@@ -929,7 +929,7 @@ Si es crítica debe bloquear o escalar.
 
 ---
 
-# Candidate
+## Candidate
 
 Aprendizaje potencialmente reutilizable.
 
@@ -937,7 +937,7 @@ No debe transformarse automáticamente en memoria permanente.
 
 ---
 
-# Frameworks
+## Frameworks
 
 Un Agent puede utilizar Frameworks cuando exista necesidad metodológica.
 
@@ -956,7 +956,7 @@ No debe utilizarse un Framework solo porque esté disponible.
 
 ---
 
-# SOPs
+## SOPs
 
 Un Agent puede utilizar SOPs cuando exista un procedimiento relevante.
 
@@ -966,7 +966,7 @@ Si un proceso repetido demuestra valor futuro puede proponerse como Candidate.
 
 ---
 
-# Knowledge
+## Knowledge
 
 Los Agents pueden consultar Knowledge cuando necesiten conocimiento global validado.
 
@@ -974,7 +974,7 @@ No deben copiar Knowledge permanente dentro de su definición.
 
 ---
 
-# Research
+## Research
 
 Research debe utilizarse cuando:
 
@@ -988,7 +988,7 @@ No debe investigarse nuevamente información suficientemente válida.
 
 ---
 
-# Client Context
+## Client Context
 
 Los Agents pueden consultar Client Context únicamente cuando sea relevante para la tarea.
 
@@ -1004,7 +1004,7 @@ Información específica no debe viajar a otro cliente salvo que haya sido promo
 
 ---
 
-# Templates
+## Templates
 
 Un Agent puede utilizar Templates cuando el output necesita una estructura reutilizable.
 
@@ -1014,7 +1014,7 @@ No sustituye metodología ni conocimiento.
 
 ---
 
-# Assets
+## Assets
 
 Un Agent puede utilizar Assets cuando necesite recursos existentes.
 
@@ -1022,7 +1022,7 @@ Debe recuperar únicamente los relevantes.
 
 ---
 
-# Integrations
+## Integrations
 
 Los Agents solo pueden utilizar Integrations cuando:
 
@@ -1041,7 +1041,7 @@ Agent authorized
 
 ---
 
-# Credenciales
+## Credenciales
 
 Los Agents nunca deben recibir como contexto normal:
 
@@ -1055,7 +1055,7 @@ Las credenciales deben gestionarse mediante mecanismos seguros externos.
 
 ---
 
-# Automations
+## Automations
 
 Una Automation puede utilizarse cuando:
 
@@ -1071,7 +1071,7 @@ La existencia de una Automation no implica ejecución automática.
 
 ---
 
-# Acciones Externas
+## Acciones Externas
 
 Antes de una acción externa debe evaluarse:
 
@@ -1097,7 +1097,7 @@ Execution
 
 ---
 
-# Aprobación Humana
+## Aprobación Humana
 
 Cuando una acción requiera aprobación, el Agent no debe ejecutarla anticipadamente.
 
@@ -1121,7 +1121,7 @@ El silencio nunca constituye aprobación.
 
 ---
 
-# Scope de Aprobación
+## Scope de Aprobación
 
 Una aprobación específica no constituye permiso general.
 
@@ -1133,7 +1133,7 @@ Una aprobación específica no constituye permiso general.
 
 ---
 
-# Validator
+## Validator
 
 La validación puede realizarla:
 
@@ -1152,7 +1152,7 @@ La selección depende de:
 
 ---
 
-# Validation Contract
+## Validation Contract
 
 Cuando corresponda debe verificar:
 
@@ -1170,7 +1170,7 @@ Cuando corresponda debe verificar:
 
 ---
 
-# Self-Validation
+## Self-Validation
 
 Un Agent debe validar su propio trabajo cuando esto sea suficiente.
 
@@ -1178,7 +1178,7 @@ No debe activarse otro Agent únicamente para revisar una tarea trivial.
 
 ---
 
-# Independent Validation
+## Independent Validation
 
 Puede utilizarse otro Agent cuando:
 
@@ -1191,7 +1191,7 @@ Puede utilizarse otro Agent cuando:
 
 ---
 
-# Error Handling
+## Error Handling
 
 Cuando un Agent detecte un error debe:
 
@@ -1207,7 +1207,7 @@ No debe ocultar el error.
 
 ---
 
-# Error en Handoff
+## Error en Handoff
 
 Si un Agent detecta que recibió un handoff incompleto o incorrecto debe:
 
@@ -1220,7 +1220,7 @@ No debe reconstruir silenciosamente información crítica mediante suposiciones.
 
 ---
 
-# Bloqueos
+## Bloqueos
 
 Un Agent puede quedar bloqueado por:
 
@@ -1244,7 +1244,7 @@ responsible:
 
 ---
 
-# Status de Tareas
+## Status de Tareas
 
 Estados operativos posibles pueden incluir:
 
@@ -1271,7 +1271,7 @@ Archived
 
 ---
 
-# Learning Candidates
+## Learning Candidates
 
 La colaboración puede producir aprendizaje reutilizable.
 
@@ -1304,7 +1304,7 @@ Nunca debe convertirse automáticamente en fuente oficial.
 
 ---
 
-# Memoria
+## Memoria
 
 Los Agents no deben almacenar automáticamente todo lo aprendido.
 
@@ -1326,7 +1326,7 @@ La arquitectura completa pertenece a:
 
 ---
 
-# Data Flow entre Agents
+## Data Flow entre Agents
 
 El intercambio de información debe respetar:
 
@@ -1340,7 +1340,7 @@ Data Flow define circulación de información.
 
 ---
 
-# Relación con System Architecture
+## Relación con System Architecture
 
 `SYSTEM_ARCHITECTURE.md` define dónde encajan Agents y Orchestrator dentro del sistema.
 
@@ -1348,7 +1348,7 @@ Agent Interaction define cómo colaboran los Agents.
 
 ---
 
-# Relación con Request Lifecycle
+## Relación con Request Lifecycle
 
 `REQUEST_LIFECYCLE.md` define estados generales de una solicitud.
 
@@ -1364,7 +1364,7 @@ No debe duplicar el lifecycle completo.
 
 ---
 
-# Relación con CORE
+## Relación con CORE
 
 CORE determina cuándo existe necesidad de especialización o coordinación.
 
@@ -1385,7 +1385,7 @@ Agent Interaction
 
 ---
 
-# Relación con AI Behavior
+## Relación con AI Behavior
 
 Todos los Agents deben respetar:
 
@@ -1397,7 +1397,7 @@ Agent Interaction no redefine comportamiento global.
 
 ---
 
-# Relación con Thinking Framework
+## Relación con Thinking Framework
 
 Todos los Agents deben utilizar razonamiento proporcional según:
 
@@ -1409,7 +1409,7 @@ No deben crear metodologías de razonamiento incompatibles.
 
 ---
 
-# Relación con Communication Guidelines
+## Relación con Communication Guidelines
 
 Los Agents deben mantener consistencia de comunicación según:
 
@@ -1421,7 +1421,7 @@ La especialización no debe generar voces contradictorias cuando el output se in
 
 ---
 
-# Trazabilidad
+## Trazabilidad
 
 Cuando la tarea lo requiera puede conservarse:
 
@@ -1441,7 +1441,7 @@ La trazabilidad debe ser proporcional al impacto.
 
 ---
 
-# Escalabilidad
+## Escalabilidad
 
 Agregar un Agent nuevo no debe requerir modificar todos los Agents existentes.
 
@@ -1463,7 +1463,7 @@ Escalation Rules
 
 ---
 
-# Creación de Nuevos Agents
+## Creación de Nuevos Agents
 
 Debe proponerse un Agent nuevo únicamente cuando exista:
 
@@ -1477,7 +1477,7 @@ No debe crearse un Agent nuevo para una tarea puntual.
 
 ---
 
-# Antipatrones
+## Antipatrones
 
 Trinity AI no debe:
 
@@ -1500,7 +1500,7 @@ Trinity AI no debe:
 
 ---
 
-# Criterios de Éxito
+## Criterios de Éxito
 
 Agent Interaction funciona correctamente cuando:
 
@@ -1519,7 +1519,7 @@ Agent Interaction funciona correctamente cuando:
 
 ---
 
-# Checklist de Interacción
+## Checklist de Interacción
 
 Cuando varios Agents colaboren debe poder responderse:
 
@@ -1553,7 +1553,7 @@ No todos los campos requieren formalización en tareas simples.
 
 ---
 
-# Regla de Oro
+## Regla de Oro
 
 Los Agents deben funcionar como un equipo especializado y coordinado, no como asistentes independientes que reconstruyen el mismo problema.
 

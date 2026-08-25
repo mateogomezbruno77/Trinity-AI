@@ -27,7 +27,7 @@ tags:
 
 # Trinity AI - Data Flow
 
-# Propósito
+## Propósito
 
 Este documento define cómo circula la información dentro de Trinity AI desde que una solicitud ingresa al sistema hasta que se genera, valida y entrega un resultado.
 
@@ -54,7 +54,7 @@ No define:
 
 ---
 
-# Objetivo
+## Objetivo
 
 El flujo de información debe ser:
 
@@ -76,7 +76,7 @@ Debe mover únicamente la información necesaria para resolver correctamente la 
 
 ---
 
-# Principio Fundamental
+## Principio Fundamental
 
 > La información debe viajar únicamente hasta donde sea necesaria y durante el tiempo necesario.
 
@@ -115,7 +115,7 @@ Ejecutar
 
 ---
 
-# Flujo General
+## Flujo General
 
 El flujo conceptual de Trinity AI es:
 
@@ -159,7 +159,7 @@ No todas las solicitudes deben atravesar todas las etapas de forma explícita.
 
 ---
 
-# Flujo Dinámico
+## Flujo Dinámico
 
 Trinity AI utiliza un flujo dinámico.
 
@@ -220,7 +220,7 @@ Output
 
 ---
 
-# Tipos de Información
+## Tipos de Información
 
 Durante una solicitud pueden circular diferentes tipos de información.
 
@@ -246,7 +246,7 @@ No todos deben estar presentes en todas las solicitudes.
 
 ---
 
-# Input
+## Input
 
 El flujo comienza con un input.
 
@@ -267,7 +267,7 @@ No debe reinterpretarse silenciosamente hasta alterar la intención.
 
 ---
 
-# Interpretación
+## Interpretación
 
 CORE interpreta la solicitud para identificar:
 
@@ -285,7 +285,7 @@ La interpretación determina qué información necesita recuperarse.
 
 ---
 
-# Context Need
+## Context Need
 
 Antes de recuperar información debe identificarse qué contexto puede afectar materialmente la solución.
 
@@ -303,7 +303,7 @@ No debe recuperarse información únicamente porque esté disponible.
 
 ---
 
-# Selective Retrieval
+## Selective Retrieval
 
 La recuperación debe ser selectiva.
 
@@ -327,7 +327,7 @@ La selección depende de la solicitud.
 
 ---
 
-# Regla de Recuperación
+## Regla de Recuperación
 
 Antes de recuperar una fuente debe evaluarse:
 
@@ -347,7 +347,7 @@ Si no aporta valor material, no debe cargarse.
 
 ---
 
-# Context Package
+## Context Package
 
 Cuando la información debe transferirse a un Agent o componente puede utilizarse un Context Package.
 
@@ -372,7 +372,7 @@ No todos los campos son obligatorios.
 
 ---
 
-# Principio de Context Package
+## Principio de Context Package
 
 Debe contener:
 
@@ -395,7 +395,7 @@ Debe evitar:
 
 ---
 
-# Flujo hacia Agents
+## Flujo hacia Agents
 
 Cuando interviene un Agent:
 
@@ -416,7 +416,7 @@ El Agent debe recibir únicamente la información necesaria para su responsabili
 
 ---
 
-# Flujo Multi-Agent
+## Flujo Multi-Agent
 
 Cuando existen múltiples Agents:
 
@@ -432,7 +432,7 @@ No todos los Agents necesitan recibir exactamente el mismo contexto.
 
 ---
 
-# Flujo Secuencial
+## Flujo Secuencial
 
 Cuando un Agent depende del resultado de otro:
 
@@ -453,7 +453,7 @@ El handoff debe contener únicamente lo necesario para continuar.
 
 ---
 
-# Flujo Paralelo
+## Flujo Paralelo
 
 Cuando las tareas son independientes:
 
@@ -472,7 +472,7 @@ Debe evitarse paralelizar cuando exista una dependencia real entre outputs.
 
 ---
 
-# Handoff
+## Handoff
 
 Un handoff transfiere trabajo entre componentes.
 
@@ -494,7 +494,7 @@ El siguiente componente no debería necesitar reconstruir todo el historial ante
 
 ---
 
-# Integración de Outputs
+## Integración de Outputs
 
 Cuando existen múltiples resultados:
 
@@ -523,7 +523,7 @@ Integrar no significa concatenar.
 
 ---
 
-# Flujo de Knowledge
+## Flujo de Knowledge
 
 Knowledge global puede entrar al flujo cuando sea relevante.
 
@@ -541,7 +541,7 @@ Knowledge no debe copiarse permanentemente dentro del Agent.
 
 ---
 
-# Flujo de Frameworks
+## Flujo de Frameworks
 
 Cuando una tarea necesita metodología:
 
@@ -561,7 +561,7 @@ No ejecuta la tarea.
 
 ---
 
-# Flujo de SOPs
+## Flujo de SOPs
 
 Cuando existe un procedimiento aplicable:
 
@@ -579,7 +579,7 @@ El SOP define cómo ejecutar la tarea.
 
 ---
 
-# Flujo de Client Context
+## Flujo de Client Context
 
 Cuando una solicitud pertenece a un cliente:
 
@@ -603,7 +603,7 @@ Solo debe recuperarse información del cliente correspondiente.
 
 ---
 
-# Aislamiento entre Clientes
+## Aislamiento entre Clientes
 
 Debe impedirse:
 
@@ -620,7 +620,7 @@ Solo puede reutilizarse globalmente cuando haya sido correctamente promovida a u
 
 ---
 
-# Flujo de Research
+## Flujo de Research
 
 Research puede entrar cuando:
 
@@ -647,7 +647,7 @@ Research no se convierte automáticamente en Knowledge.
 
 ---
 
-# Flujo de Assets
+## Flujo de Assets
 
 Assets pueden recuperarse cuando una tarea necesita recursos existentes.
 
@@ -665,7 +665,7 @@ No deben cargarse Assets completos cuando no son necesarios.
 
 ---
 
-# Flujo de Templates
+## Flujo de Templates
 
 Templates pueden utilizarse cuando el output requiere una estructura conocida.
 
@@ -685,7 +685,7 @@ No sustituye Knowledge, Framework ni SOP.
 
 ---
 
-# Flujo de Decisions
+## Flujo de Decisions
 
 Una decisión previa puede entrar al flujo cuando afecta la solicitud actual.
 
@@ -700,7 +700,7 @@ No debe cargarse historial completo de decisiones si solo una es relevante.
 
 ---
 
-# Flujo de Integrations
+## Flujo de Integrations
 
 Una Integration permite intercambio de información con una herramienta externa.
 
@@ -724,7 +724,7 @@ El flujo debe respetar:
 
 ---
 
-# Lectura desde Integrations
+## Lectura desde Integrations
 
 Cuando Trinity AI necesita información externa:
 
@@ -751,7 +751,7 @@ Debe evitarse importar más información de la necesaria.
 
 ---
 
-# Escritura mediante Integrations
+## Escritura mediante Integrations
 
 Antes de enviar información hacia un servicio externo:
 
@@ -777,7 +777,7 @@ External Service
 
 ---
 
-# Credenciales
+## Credenciales
 
 Las credenciales no deben circular dentro de Context Packages normales.
 
@@ -793,7 +793,7 @@ Deben administrarse mediante mecanismos seguros externos.
 
 ---
 
-# Flujo de Automations
+## Flujo de Automations
 
 Una Automation puede recibir información y producir resultados.
 
@@ -826,7 +826,7 @@ La Automation debe recibir únicamente los datos necesarios para ejecutar su pro
 
 ---
 
-# Flujo de Aprobación
+## Flujo de Aprobación
 
 Cuando una acción necesita aprobación:
 
@@ -849,7 +849,7 @@ La aprobación debe transferirse con alcance explícito.
 
 ---
 
-# Approval Data
+## Approval Data
 
 Cuando exista aprobación debe quedar claro:
 
@@ -865,7 +865,7 @@ cuando el nivel de riesgo o trazabilidad lo requiera.
 
 ---
 
-# Validation Flow
+## Validation Flow
 
 Los resultados pueden pasar por validación.
 
@@ -893,7 +893,7 @@ La validación debe ser proporcional.
 
 ---
 
-# Correction Flow
+## Correction Flow
 
 Cuando se detecta un problema:
 
@@ -917,7 +917,7 @@ No debe reiniciarse todo el flujo por defecto.
 
 ---
 
-# Error Flow
+## Error Flow
 
 Cuando ocurre un error:
 
@@ -945,7 +945,7 @@ Los errores no deben ocultarse.
 
 ---
 
-# Dependency Flow
+## Dependency Flow
 
 Cuando una tarea necesita otra salida:
 
@@ -969,7 +969,7 @@ La dependencia debe conservar únicamente el resultado necesario.
 
 ---
 
-# Output
+## Output
 
 El output representa la información que sale del proceso operativo.
 
@@ -987,7 +987,7 @@ Puede ser:
 
 ---
 
-# Output al Usuario
+## Output al Usuario
 
 Antes de entregar información debe verificarse:
 
@@ -1001,7 +1001,7 @@ Antes de entregar información debe verificarse:
 
 ---
 
-# Output Interno
+## Output Interno
 
 No todos los outputs deben llegar directamente al usuario.
 
@@ -1017,7 +1017,7 @@ Un output puede alimentar:
 
 ---
 
-# Persistencia
+## Persistencia
 
 Que información circule por Trinity AI no significa que deba almacenarse permanentemente.
 
@@ -1031,7 +1031,7 @@ La decisión de persistencia pertenece a Memory Architecture y Governance.
 
 ---
 
-# Candidate Flow
+## Candidate Flow
 
 Un aprendizaje potencial puede salir de una ejecución como Candidate.
 
@@ -1052,7 +1052,7 @@ Candidate no debe volver automáticamente al sistema como fuente oficial.
 
 ---
 
-# Research → Candidate
+## Research → Candidate
 
 ```text
 Research
@@ -1069,7 +1069,7 @@ Review
 
 ---
 
-# Client Learning → Candidate
+## Client Learning → Candidate
 
 ```text
 Client Work
@@ -1088,7 +1088,7 @@ La información específica del cliente permanece aislada mientras no sea correc
 
 ---
 
-# Trazabilidad
+## Trazabilidad
 
 Cuando el impacto lo requiera puede registrarse:
 
@@ -1106,7 +1106,7 @@ No todo flujo necesita trazabilidad completa.
 
 ---
 
-# Mínimo Acceso
+## Mínimo Acceso
 
 Cada componente debe recibir únicamente los datos necesarios.
 
@@ -1120,7 +1120,7 @@ Safe Data Flow
 
 ---
 
-# Información Sensible
+## Información Sensible
 
 La información sensible debe circular únicamente cuando:
 
@@ -1132,7 +1132,7 @@ La información sensible debe circular únicamente cuando:
 
 ---
 
-# Redacción y Minimización
+## Redacción y Minimización
 
 Cuando un componente no necesite información sensible completa puede utilizarse:
 
@@ -1146,7 +1146,7 @@ Debe preferirse la forma menos sensible que permita ejecutar correctamente la ta
 
 ---
 
-# Flujo entre Sesiones
+## Flujo entre Sesiones
 
 Cuando una solicitud continúa en otra sesión:
 
@@ -1164,7 +1164,7 @@ No debe dependerse exclusivamente del historial completo de conversación.
 
 ---
 
-# Recuperación entre Sesiones
+## Recuperación entre Sesiones
 
 Debe recuperarse únicamente:
 
@@ -1176,7 +1176,7 @@ Debe recuperarse únicamente:
 
 ---
 
-# Data Flow y Memory Architecture
+## Data Flow y Memory Architecture
 
 Data Flow define:
 
@@ -1200,7 +1200,7 @@ Esto evita dependencias circulares.
 
 ---
 
-# Data Flow y Request Lifecycle
+## Data Flow y Request Lifecycle
 
 Request Lifecycle define el estado de una solicitud.
 
@@ -1220,7 +1220,7 @@ Data Flow puede referenciar Request Lifecycle conceptualmente sin convertirlo en
 
 ---
 
-# Data Flow y Agent Interaction
+## Data Flow y Agent Interaction
 
 Agent Interaction define cómo colaboran los Agents.
 
@@ -1236,7 +1236,7 @@ Data Flow
 
 ---
 
-# Data Flow y Orchestrator
+## Data Flow y Orchestrator
 
 El Orchestrator puede decidir:
 
@@ -1253,7 +1253,7 @@ Esto permite que Orchestrator dependa de Data Flow sin crear un ciclo.
 
 ---
 
-# Data Flow y System Architecture
+## Data Flow y System Architecture
 
 System Architecture define dónde existen los componentes.
 
@@ -1269,7 +1269,7 @@ Data Flow
 
 ---
 
-# Data Flow y CORE
+## Data Flow y CORE
 
 CORE inicia la interpretación operativa de una solicitud.
 
@@ -1277,7 +1277,7 @@ Data Flow utiliza esa interpretación para determinar qué información necesita
 
 ---
 
-# Data Flow y AI Behavior
+## Data Flow y AI Behavior
 
 AI Behavior establece principios como:
 
@@ -1291,7 +1291,7 @@ Data Flow implementa esos principios en circulación de información.
 
 ---
 
-# Data Flow y Thinking Framework
+## Data Flow y Thinking Framework
 
 Thinking Framework ayuda a determinar:
 
@@ -1303,7 +1303,7 @@ Data Flow permite recuperar y transferir esa información.
 
 ---
 
-# Data Flow y Decision Framework
+## Data Flow y Decision Framework
 
 Decision Framework puede determinar:
 
@@ -1315,7 +1315,7 @@ Data Flow transporta la información necesaria para esa decisión y su ejecució
 
 ---
 
-# Escalabilidad
+## Escalabilidad
 
 Agregar nuevos:
 
@@ -1342,7 +1342,7 @@ Context Requirements
 
 ---
 
-# Antipatrones
+## Antipatrones
 
 Trinity AI no debe:
 
@@ -1363,7 +1363,7 @@ Trinity AI no debe:
 
 ---
 
-# Criterios de Éxito
+## Criterios de Éxito
 
 Data Flow funciona correctamente cuando:
 
@@ -1381,7 +1381,7 @@ Data Flow funciona correctamente cuando:
 
 ---
 
-# Checklist de Data Flow
+## Checklist de Data Flow
 
 Antes de transferir información debe evaluarse:
 
@@ -1419,7 +1419,7 @@ Memory / Governance
 
 ---
 
-# Regla de Oro
+## Regla de Oro
 
 La eficiencia de Trinity AI no depende de mover más información.
 

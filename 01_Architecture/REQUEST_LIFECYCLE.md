@@ -28,7 +28,7 @@ tags:
 
 # Trinity AI - Request Lifecycle
 
-# Propósito
+## Propósito
 
 Este documento define el ciclo de vida operativo de una solicitud dentro de Trinity AI.
 
@@ -54,7 +54,7 @@ No define:
 
 ---
 
-# Objetivo
+## Objetivo
 
 El lifecycle debe permitir que Trinity AI procese solicitudes de forma:
 
@@ -71,7 +71,7 @@ La complejidad del lifecycle debe adaptarse al trabajo real.
 
 ---
 
-# Principio Fundamental
+## Principio Fundamental
 
 > Una solicitud debe atravesar únicamente los estados necesarios para ser resuelta correctamente.
 
@@ -101,7 +101,7 @@ Resultado válido
 
 ---
 
-# Estados Operativos
+## Estados Operativos
 
 Los estados principales de una solicitud son:
 
@@ -124,7 +124,7 @@ No todas las solicitudes utilizan todos estos estados.
 
 ---
 
-# Estados vs Etapas
+## Estados vs Etapas
 
 Un estado representa la condición actual de la solicitud.
 
@@ -147,11 +147,11 @@ Request Lifecycle no debe confundirse con un workflow rígido.
 
 ---
 
-# Diferencia con Estados Documentales
+## Diferencia con Estados Documentales
 
 Los estados operativos de solicitudes son distintos de los estados documentales.
 
-## Estados Operativos
+### Estados Operativos
 
 ```text
 Received
@@ -168,7 +168,7 @@ Failed
 Cancelled
 ```
 
-## Estados Documentales
+### Estados Documentales
 
 ```text
 Draft
@@ -194,7 +194,7 @@ Son dimensiones diferentes.
 
 ---
 
-# Lifecycle General
+## Lifecycle General
 
 El flujo conceptual puede representarse así:
 
@@ -240,7 +240,7 @@ Failed
 
 ---
 
-# Estado 1 — Received
+## Estado 1 — Received
 
 Una solicitud entra en `Received` cuando Trinity AI la recibe.
 
@@ -258,7 +258,7 @@ Puede incluir:
 
 ---
 
-# Objetivo de Received
+## Objetivo de Received
 
 El objetivo es registrar que existe trabajo pendiente de interpretación.
 
@@ -266,7 +266,7 @@ No implica que Trinity AI ya comprenda suficientemente la solicitud.
 
 ---
 
-# Transición desde Received
+## Transición desde Received
 
 ```text
 Received
@@ -285,7 +285,7 @@ Debe avanzar cuando el sistema comienza a interpretar:
 
 ---
 
-# Estado 2 — Understanding
+## Estado 2 — Understanding
 
 En este estado Trinity AI intenta comprender qué necesita resolverse.
 
@@ -303,7 +303,7 @@ Puede identificar:
 
 ---
 
-# Salidas de Understanding
+## Salidas de Understanding
 
 Puede avanzar a:
 
@@ -331,7 +331,7 @@ si la solicitud deja de ser válida.
 
 ---
 
-# Criterio de suficiencia
+## Criterio de suficiencia
 
 No se necesita certeza absoluta para avanzar.
 
@@ -347,7 +347,7 @@ Ready
 
 ---
 
-# Estado 3 — Ready
+## Estado 3 — Ready
 
 Una solicitud está `Ready` cuando:
 
@@ -359,7 +359,7 @@ Una solicitud está `Ready` cuando:
 
 ---
 
-# Ready no significa Planned
+## Ready no significa Planned
 
 Una solicitud puede estar lista sin necesitar un plan formal.
 
@@ -382,7 +382,7 @@ sin una etapa explícita de Planning.
 
 ---
 
-# Estado 4 — In Progress
+## Estado 4 — In Progress
 
 `In Progress` representa trabajo activo.
 
@@ -402,7 +402,7 @@ Puede incluir:
 
 ---
 
-# In Progress y Agents
+## In Progress y Agents
 
 Una solicitud puede ser ejecutada por:
 
@@ -436,7 +436,7 @@ y:
 
 ---
 
-# Subtareas
+## Subtareas
 
 Una solicitud puede contener subtareas con estados independientes.
 
@@ -454,7 +454,7 @@ El estado global debe representar la condición de la solicitud completa.
 
 ---
 
-# Estado 5 — Waiting for Dependency
+## Estado 5 — Waiting for Dependency
 
 Se utiliza cuando la solicitud no puede avanzar hasta que otra condición o tarea termine.
 
@@ -469,7 +469,7 @@ Ejemplos:
 
 ---
 
-# Flujo de Dependency
+## Flujo de Dependency
 
 ```text
 In Progress
@@ -486,7 +486,7 @@ In Progress
 
 ---
 
-# Regla de Dependency
+## Regla de Dependency
 
 No debe marcarse una tarea como `Blocked` si simplemente está esperando una dependencia normal y conocida.
 
@@ -502,7 +502,7 @@ Blocked
 
 ---
 
-# Estado 6 — Waiting for Approval
+## Estado 6 — Waiting for Approval
 
 Se utiliza cuando una acción no puede continuar sin autorización explícita.
 
@@ -519,7 +519,7 @@ Ejemplos:
 
 ---
 
-# Flujo de Approval
+## Flujo de Approval
 
 ```text
 In Progress
@@ -543,7 +543,7 @@ Waiting for Approval
 
 ---
 
-# Silencio
+## Silencio
 
 El silencio nunca debe interpretarse como aprobación.
 
@@ -555,7 +555,7 @@ Approved
 
 ---
 
-# Alcance de aprobación
+## Alcance de aprobación
 
 La aprobación aplica únicamente a la acción solicitada.
 
@@ -573,7 +573,7 @@ no significa:
 
 ---
 
-# Estado 7 — Blocked
+## Estado 7 — Blocked
 
 Se utiliza cuando existe un impedimento que no puede resolverse automáticamente.
 
@@ -589,7 +589,7 @@ Ejemplos:
 
 ---
 
-# Estructura de un bloqueo
+## Estructura de un bloqueo
 
 Cuando sea relevante debe poder identificarse:
 
@@ -602,7 +602,7 @@ responsible:
 
 ---
 
-# Flujo de Blocked
+## Flujo de Blocked
 
 ```text
 Blocked
@@ -616,7 +616,7 @@ Resolve Blocker
 
 ---
 
-# Blocked no significa Failed
+## Blocked no significa Failed
 
 `Blocked` significa que puede existir una vía para continuar.
 
@@ -624,7 +624,7 @@ Resolve Blocker
 
 ---
 
-# Estado 8 — Needs Correction
+## Estado 8 — Needs Correction
 
 Se utiliza cuando existe un resultado parcial que no cumple requisitos pero puede corregirse.
 
@@ -639,7 +639,7 @@ Puede aparecer después de:
 
 ---
 
-# Flujo de Correction
+## Flujo de Correction
 
 ```text
 Result
@@ -659,7 +659,7 @@ Validation
 
 ---
 
-# Corrección vs reinicio
+## Corrección vs reinicio
 
 Una corrección no debe reiniciar automáticamente toda la solicitud.
 
@@ -675,7 +675,7 @@ Error estructural
 
 ---
 
-# Estado 9 — Validation
+## Estado 9 — Validation
 
 Una solicitud entra en `Validation` cuando existe un resultado suficientemente completo para verificar.
 
@@ -694,7 +694,7 @@ Validation puede revisar:
 
 ---
 
-# Validation proporcional
+## Validation proporcional
 
 No todas las solicitudes necesitan el mismo nivel de validación.
 
@@ -711,7 +711,7 @@ High Impact
 
 ---
 
-# Resultados de Validation
+## Resultados de Validation
 
 Puede producir:
 
@@ -725,7 +725,7 @@ Failed
 
 ---
 
-# Estado 10 — Completed
+## Estado 10 — Completed
 
 Una solicitud está `Completed` cuando:
 
@@ -737,7 +737,7 @@ Una solicitud está `Completed` cuando:
 
 ---
 
-# Completed no requiere documentación
+## Completed no requiere documentación
 
 Una solicitud puede considerarse completada aunque no genere nuevo conocimiento permanente.
 
@@ -755,7 +755,7 @@ La documentación solo ocurre cuando aporta valor.
 
 ---
 
-# Learning Evaluation
+## Learning Evaluation
 
 Después de completar una solicitud puede evaluarse si existe aprendizaje reutilizable.
 
@@ -775,7 +775,7 @@ No debe impedir marcar la solicitud como `Completed`.
 
 ---
 
-# Estado 11 — Failed
+## Estado 11 — Failed
 
 Una solicitud puede quedar `Failed` cuando:
 
@@ -787,7 +787,7 @@ Una solicitud puede quedar `Failed` cuando:
 
 ---
 
-# Error Recuperable
+## Error Recuperable
 
 Un error recuperable no debe marcarar automáticamente la solicitud como Failed.
 
@@ -805,7 +805,7 @@ Recoverable?
 
 ---
 
-# Estado 12 — Cancelled
+## Estado 12 — Cancelled
 
 Una solicitud puede quedar `Cancelled` cuando:
 
@@ -819,7 +819,7 @@ Una solicitud puede quedar `Cancelled` cuando:
 
 ---
 
-# Estados Terminales
+## Estados Terminales
 
 Los estados terminales son:
 
@@ -833,7 +833,7 @@ Una solicitud cerrada puede reabrirse únicamente cuando exista una nueva necesi
 
 ---
 
-# Transiciones Principales
+## Transiciones Principales
 
 ```text
 Received
@@ -867,7 +867,7 @@ Cancelled
 
 ---
 
-# Flujo Simple
+## Flujo Simple
 
 Una consulta sencilla puede utilizar:
 
@@ -887,7 +887,7 @@ Puede omitir Validation explícita si la validación ocurre internamente dentro 
 
 ---
 
-# Flujo con Validation
+## Flujo con Validation
 
 ```text
 Received
@@ -905,7 +905,7 @@ Completed
 
 ---
 
-# Flujo con Correction
+## Flujo con Correction
 
 ```text
 Received
@@ -929,7 +929,7 @@ Completed
 
 ---
 
-# Flujo con Dependency
+## Flujo con Dependency
 
 ```text
 Received
@@ -951,7 +951,7 @@ Completed
 
 ---
 
-# Flujo con Approval
+## Flujo con Approval
 
 ```text
 Received
@@ -975,7 +975,7 @@ Completed
 
 ---
 
-# Flujo Bloqueado
+## Flujo Bloqueado
 
 ```text
 Received
@@ -993,7 +993,7 @@ In Progress
 
 ---
 
-# Flujo Fallido
+## Flujo Fallido
 
 ```text
 In Progress
@@ -1009,7 +1009,7 @@ solo cuando no existe una vía segura de recuperación.
 
 ---
 
-# Solicitudes Simples
+## Solicitudes Simples
 
 Las solicitudes simples no necesitan:
 
@@ -1030,7 +1030,7 @@ Puede resolverse de forma directa y proporcional.
 
 ---
 
-# Solicitudes Complejas
+## Solicitudes Complejas
 
 Una solicitud compleja puede utilizar:
 
@@ -1056,7 +1056,7 @@ Completed
 
 ---
 
-# Solicitudes con acciones externas
+## Solicitudes con acciones externas
 
 Cuando existe una acción externa:
 
@@ -1082,7 +1082,7 @@ Risk / Permissions
 
 ---
 
-# Request Lifecycle y Data Flow
+## Request Lifecycle y Data Flow
 
 `DATA_FLOW.md` define qué información circula.
 
@@ -1108,7 +1108,7 @@ missing Research result
 
 ---
 
-# Request Lifecycle y Orchestrator
+## Request Lifecycle y Orchestrator
 
 El Orchestrator puede:
 
@@ -1125,7 +1125,7 @@ Orchestrator coordina el trabajo que produce transiciones.
 
 ---
 
-# Request Lifecycle y Agent Interaction
+## Request Lifecycle y Agent Interaction
 
 Agents pueden modificar el estado de sus tareas.
 
@@ -1149,7 +1149,7 @@ hasta completar todas las dependencias críticas.
 
 ---
 
-# Request Lifecycle y Decision Framework
+## Request Lifecycle y Decision Framework
 
 Decision Framework puede determinar:
 
@@ -1173,7 +1173,7 @@ In Progress
 
 ---
 
-# Request Lifecycle y AI Behavior
+## Request Lifecycle y AI Behavior
 
 AI Behavior establece principios generales como:
 
@@ -1187,7 +1187,7 @@ Request Lifecycle representa estos principios mediante estados.
 
 ---
 
-# Request Lifecycle y Documentation Standards
+## Request Lifecycle y Documentation Standards
 
 Los estados de solicitud no deben utilizarse como `status` documental.
 
@@ -1207,7 +1207,7 @@ status: Draft
 
 ---
 
-# Request Lifecycle y Automations
+## Request Lifecycle y Automations
 
 Una Automation puede generar transiciones.
 
@@ -1229,7 +1229,7 @@ Automation failed
 
 ---
 
-# Request Lifecycle e Integrations
+## Request Lifecycle e Integrations
 
 Una Integration puede producir:
 
@@ -1260,7 +1260,7 @@ Failure recoverable
 
 ---
 
-# Reanudación
+## Reanudación
 
 Una solicitud puede reanudarse cuando desaparece un bloqueo o dependencia.
 
@@ -1278,7 +1278,7 @@ El sistema debe conservar contexto suficiente para continuar sin reconstrucción
 
 ---
 
-# Persistencia de Estado
+## Persistencia de Estado
 
 No toda solicitud necesita persistir su estado externamente.
 
@@ -1293,7 +1293,7 @@ La persistencia puede ser útil cuando:
 
 ---
 
-# Estado Interno vs Estado Visible
+## Estado Interno vs Estado Visible
 
 Trinity AI puede mantener un estado interno más detallado que el mostrado al usuario.
 
@@ -1311,7 +1311,7 @@ Usuario:
 
 ---
 
-# Trazabilidad
+## Trazabilidad
 
 Cuando el impacto lo justifique puede registrarse:
 
@@ -1329,7 +1329,7 @@ No toda solicitud necesita historial completo.
 
 ---
 
-# Timeouts
+## Timeouts
 
 Una solicitud no debe quedar indefinidamente en un estado de espera sin contexto.
 
@@ -1343,7 +1343,7 @@ Las reglas concretas de timeout deben definirse por el proceso o Automation corr
 
 ---
 
-# Reintentos
+## Reintentos
 
 Un fallo recuperable puede admitir reintento.
 
@@ -1368,7 +1368,7 @@ Después debe:
 
 ---
 
-# Idempotencia
+## Idempotencia
 
 Cuando una acción pueda reintentarse debe evaluarse si repetirla produce duplicación o efectos externos.
 
@@ -1382,7 +1382,7 @@ no debe reintentarse ciegamente si no se sabe si el primer intento se completó.
 
 ---
 
-# Reversibilidad
+## Reversibilidad
 
 Si una acción realizada durante el lifecycle necesita revertirse, debe evaluarse según Decision Framework.
 
@@ -1402,7 +1402,7 @@ según el caso.
 
 ---
 
-# Learning Candidate
+## Learning Candidate
 
 Un aprendizaje detectado al finalizar no modifica el estado operativo de la solicitud.
 
@@ -1420,7 +1420,7 @@ Son objetos diferentes.
 
 ---
 
-# Cierre
+## Cierre
 
 Una solicitud puede cerrarse cuando alcanza:
 
@@ -1434,7 +1434,7 @@ Debe conservarse únicamente la información necesaria según Governance, Client
 
 ---
 
-# Reapertura
+## Reapertura
 
 Una solicitud cerrada puede generar una nueva solicitud relacionada.
 
@@ -1456,7 +1456,7 @@ Received
 
 ---
 
-# Antipatrones
+## Antipatrones
 
 Trinity AI no debe:
 
@@ -1477,7 +1477,7 @@ Trinity AI no debe:
 
 ---
 
-# Criterios de Éxito
+## Criterios de Éxito
 
 Request Lifecycle funciona correctamente cuando:
 
@@ -1496,7 +1496,7 @@ Request Lifecycle funciona correctamente cuando:
 
 ---
 
-# Checklist de Lifecycle
+## Checklist de Lifecycle
 
 Cuando sea necesario debe poder responderse:
 
@@ -1524,7 +1524,7 @@ No todas las solicitudes necesitan registrar explícitamente este checklist.
 
 ---
 
-# Regla de Oro
+## Regla de Oro
 
 El Request Lifecycle debe representar el estado real del trabajo sin convertir cada solicitud en un proceso rígido.
 

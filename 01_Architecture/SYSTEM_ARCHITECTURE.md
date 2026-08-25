@@ -26,7 +26,7 @@ tags:
 
 # Trinity AI - System Architecture
 
-# Propósito
+## Propósito
 
 Este documento define la arquitectura general de Trinity AI.
 
@@ -50,7 +50,7 @@ No reemplaza CORE, Foundation, Governance, Agents, Frameworks ni SOPs.
 
 ---
 
-# Objetivo Arquitectónico
+## Objetivo Arquitectónico
 
 Trinity AI debe funcionar como un AI Operating System capaz de transformar solicitudes en trabajo organizado, contextualizado, reutilizable y ejecutable.
 
@@ -70,7 +70,7 @@ La arquitectura no debe agregar complejidad sin beneficio operativo.
 
 ---
 
-# Principio Rector
+## Principio Rector
 
 > Cada componente de Trinity AI debe tener una responsabilidad clara, una ubicación definida y relaciones explícitas con el resto del sistema.
 
@@ -90,11 +90,11 @@ cómo se relaciona
 
 ---
 
-# Principios de Arquitectura
+## Principios de Arquitectura
 
 Toda la arquitectura de Trinity AI se basa en los siguientes principios.
 
-## Modularidad
+### Modularidad
 
 Cada módulo debe tener una responsabilidad principal.
 
@@ -102,7 +102,7 @@ Un módulo no debe absorber responsabilidades pertenecientes a otro únicamente 
 
 ---
 
-## Separación de responsabilidades
+### Separación de responsabilidades
 
 Debe mantenerse una separación explícita entre:
 
@@ -148,7 +148,7 @@ Automation
 
 ---
 
-## Reutilización
+### Reutilización
 
 Antes de crear algo nuevo, Trinity AI debe verificar si existe algo que pueda:
 
@@ -160,7 +160,7 @@ Solo debe crearse un componente nuevo cuando exista una responsabilidad o capaci
 
 ---
 
-## Recuperación selectiva
+### Recuperación selectiva
 
 La arquitectura no debe obligar a cargar todos los módulos para resolver cada solicitud.
 
@@ -181,7 +181,7 @@ Más componentes disponibles no significa que deban utilizarse.
 
 ---
 
-## Proporcionalidad
+### Proporcionalidad
 
 Una tarea simple debe poder resolverse mediante un flujo simple.
 
@@ -203,7 +203,7 @@ Sensible
 
 ---
 
-## Escalabilidad
+### Escalabilidad
 
 Trinity AI debe poder incorporar:
 
@@ -220,7 +220,7 @@ sin rediseñar innecesariamente el núcleo del sistema.
 
 ---
 
-## Independencia controlada
+### Independencia controlada
 
 Los módulos deben poder evolucionar con el menor impacto posible sobre otros componentes.
 
@@ -230,7 +230,7 @@ Las relaciones deben declararse cuando sean necesarias.
 
 ---
 
-## Agnosticismo de modelo
+### Agnosticismo de modelo
 
 La arquitectura debe poder operar conceptualmente con:
 
@@ -243,7 +243,7 @@ Las capacidades específicas de un proveedor deben permanecer desacopladas de la
 
 ---
 
-## Documentación
+### Documentación
 
 Toda responsabilidad estructural importante debe estar documentada.
 
@@ -255,7 +255,7 @@ La documentación debe seguir:
 
 ---
 
-# Arquitectura General
+## Arquitectura General
 
 Trinity AI se organiza en capas funcionales.
 
@@ -320,7 +320,7 @@ No significa que todas las solicitudes atraviesen todos los componentes.
 
 ---
 
-# Capas del Sistema
+## Capas del Sistema
 
 La arquitectura puede comprenderse mediante las siguientes capas:
 
@@ -336,7 +336,7 @@ La arquitectura puede comprenderse mediante las siguientes capas:
 
 ---
 
-# 1. Foundation Layer
+## 1. Foundation Layer
 
 Contiene las reglas fundamentales del sistema.
 
@@ -353,7 +353,7 @@ CORE coordina cómo se aplican durante la operación.
 
 ---
 
-# 2. Coordination Layer
+## 2. Coordination Layer
 
 Coordina trabajo cuando la solicitud lo necesita.
 
@@ -370,7 +370,7 @@ Los Agents ejecutan trabajo especializado.
 
 ---
 
-# 3. Capability Layer
+## 3. Capability Layer
 
 Contiene capacidades reutilizables.
 
@@ -401,7 +401,7 @@ Research
 
 ---
 
-# 4. Execution Layer
+## 4. Execution Layer
 
 Permite ejecutar acciones internas o externas.
 
@@ -420,7 +420,7 @@ La existencia de acceso no implica autorización.
 
 ---
 
-# 5. Context Layer
+## 5. Context Layer
 
 Contiene información específica de proyectos y clientes.
 
@@ -436,7 +436,7 @@ No modifica automáticamente Knowledge global.
 
 ---
 
-# 6. Support Layer
+## 6. Support Layer
 
 Contiene recursos auxiliares reutilizables.
 
@@ -454,7 +454,7 @@ No gobiernan el sistema.
 
 ---
 
-# 7. Governance Layer
+## 7. Governance Layer
 
 Controla evolución, cambios y calidad.
 
@@ -476,7 +476,7 @@ Governance controla:
 
 ---
 
-# Estructura Principal del Repositorio
+## Estructura Principal del Repositorio
 
 ```text
 Trinity-AI/
@@ -504,7 +504,7 @@ La creación de un nuevo módulo raíz constituye un cambio arquitectónico y de
 
 ---
 
-# CORE
+## CORE
 
 `CORE.md` es el punto de entrada operativo principal.
 
@@ -524,7 +524,7 @@ No almacena conocimiento específico.
 
 ---
 
-# 00_Foundation
+## 00_Foundation
 
 Define reglas fundamentales.
 
@@ -544,7 +544,7 @@ Foundation responde:
 
 ---
 
-# 01_Architecture
+## 01_Architecture
 
 Documenta cómo está construido Trinity AI.
 
@@ -565,7 +565,7 @@ Architecture no ejecuta tareas.
 
 ---
 
-# 02_SOPs
+## 02_SOPs
 
 Contiene procedimientos operativos estandarizados.
 
@@ -586,7 +586,7 @@ Puede definir:
 
 ---
 
-# 03_Agents
+## 03_Agents
 
 Define especialistas.
 
@@ -608,7 +608,7 @@ No deben duplicar Knowledge, Frameworks ni SOPs.
 
 ---
 
-# 04_Frameworks
+## 04_Frameworks
 
 Contiene metodologías reutilizables.
 
@@ -622,7 +622,7 @@ No ejecuta tareas.
 
 ---
 
-# 05_Knowledge
+## 05_Knowledge
 
 Contiene conocimiento global validado.
 
@@ -639,7 +639,7 @@ No debe contener:
 
 ---
 
-# 06_Integrations
+## 06_Integrations
 
 Documenta conexiones con herramientas externas.
 
@@ -666,7 +666,7 @@ No debe almacenar secretos.
 
 ---
 
-# 07_Automations
+## 07_Automations
 
 Contiene procesos automatizados.
 
@@ -687,7 +687,7 @@ Debe definir riesgo, permisos, validación y aprobación cuando corresponda.
 
 ---
 
-# 08_Clients
+## 08_Clients
 
 Contiene contexto específico.
 
@@ -718,7 +718,7 @@ El contexto específico no debe contaminar Knowledge global.
 
 ---
 
-# 09_Templates
+## 09_Templates
 
 Contiene estructuras reutilizables.
 
@@ -736,7 +736,7 @@ No define conocimiento ni estrategia.
 
 ---
 
-# 10_Assets
+## 10_Assets
 
 Contiene recursos reutilizables.
 
@@ -754,7 +754,7 @@ No gobiernan comportamiento.
 
 ---
 
-# 11_Examples
+## 11_Examples
 
 Contiene implementaciones de referencia.
 
@@ -770,7 +770,7 @@ No deben interpretarse automáticamente como protocolo obligatorio.
 
 ---
 
-# 12_Research
+## 12_Research
 
 Contiene investigación.
 
@@ -787,7 +787,7 @@ Research no constituye automáticamente Knowledge.
 
 ---
 
-# 13_Governance
+## 13_Governance
 
 Controla evolución.
 
@@ -804,7 +804,7 @@ Debe definir y aplicar:
 
 ---
 
-# Relación entre módulos
+## Relación entre módulos
 
 Las relaciones deben ser selectivas.
 
@@ -856,7 +856,7 @@ Debe interpretarse como una red de capacidades.
 
 ---
 
-# Dependencias
+## Dependencias
 
 Las dependencias documentales deben declararse únicamente cuando sean realmente necesarias.
 
@@ -873,7 +873,7 @@ cuando pueda resolverse mediante una dirección jerárquica clara.
 
 ---
 
-# Dirección General de Autoridad
+## Dirección General de Autoridad
 
 La arquitectura debe respetar una dirección conceptual similar a:
 
@@ -900,7 +900,7 @@ Governance controla cambios sobre todas estas capas cuando corresponda.
 
 ---
 
-# Flujo de una Solicitud
+## Flujo de una Solicitud
 
 Una solicitud puede seguir:
 
@@ -927,7 +927,7 @@ No constituye una secuencia rígida obligatoria para todas las solicitudes.
 
 ---
 
-# Solicitud Simple
+## Solicitud Simple
 
 Ejemplo:
 
@@ -948,7 +948,7 @@ No necesita Orchestrator ni múltiples capas adicionales.
 
 ---
 
-# Solicitud Compleja
+## Solicitud Compleja
 
 Ejemplo:
 
@@ -980,7 +980,7 @@ Orchestrator
 
 ---
 
-# Orchestrator
+## Orchestrator
 
 El Orchestrator pertenece a Architecture porque define coordinación estructural.
 
@@ -997,7 +997,7 @@ No debe utilizarse para todo.
 
 ---
 
-# Agents
+## Agents
 
 Los Agents pertenecen a la capa de especialización.
 
@@ -1015,7 +1015,7 @@ No debe asumir capacidades fuera de su alcance.
 
 ---
 
-# Recuperación de Contexto
+## Recuperación de Contexto
 
 La recuperación debe ser selectiva.
 
@@ -1042,7 +1042,7 @@ Load Entire Repository
 
 ---
 
-# Arquitectura de Memoria
+## Arquitectura de Memoria
 
 La memoria debe distinguir:
 
@@ -1062,7 +1062,7 @@ La especificación completa pertenece a:
 
 ---
 
-# Data Flow
+## Data Flow
 
 La circulación de información pertenece a:
 
@@ -1076,7 +1076,7 @@ Data Flow define cómo circula la información entre ellos.
 
 ---
 
-# Request Lifecycle
+## Request Lifecycle
 
 Los estados de una solicitud pertenecen a:
 
@@ -1088,7 +1088,7 @@ System Architecture no debe duplicar el lifecycle completo.
 
 ---
 
-# Agent Interaction
+## Agent Interaction
 
 Las reglas de colaboración entre Agents pertenecen a:
 
@@ -1102,7 +1102,7 @@ Agent Interaction define cómo funciona.
 
 ---
 
-# Integrations y Automations
+## Integrations y Automations
 
 Deben mantenerse como responsabilidades diferentes.
 
@@ -1133,7 +1133,7 @@ crea tareas autorizadas
 
 ---
 
-# Global vs Client Context
+## Global vs Client Context
 
 Debe mantenerse la separación:
 
@@ -1157,7 +1157,7 @@ Ejemplo:
 
 ---
 
-# Research vs Knowledge
+## Research vs Knowledge
 
 Debe mantenerse:
 
@@ -1189,7 +1189,7 @@ Knowledge
 
 ---
 
-# Framework vs SOP
+## Framework vs SOP
 
 Debe mantenerse:
 
@@ -1213,7 +1213,7 @@ Monthly Content Planning SOP
 
 ---
 
-# Architecture vs Operation
+## Architecture vs Operation
 
 Debe mantenerse explícito:
 
@@ -1229,7 +1229,7 @@ Architecture no debe convertirse en runtime obligatorio.
 
 ---
 
-# Governance y Architecture
+## Governance y Architecture
 
 Los cambios estructurales deben respetar Governance.
 
@@ -1248,7 +1248,7 @@ No puede autoaprobarlos.
 
 ---
 
-# Seguridad Arquitectónica
+## Seguridad Arquitectónica
 
 La arquitectura debe impedir que disponibilidad técnica se confunda con autorización.
 
@@ -1268,7 +1268,7 @@ Las capas de ejecución deben respetar:
 
 ---
 
-# Trazabilidad
+## Trazabilidad
 
 Las operaciones relevantes deben poder conservar trazabilidad cuando sea necesario.
 
@@ -1287,7 +1287,7 @@ No todas las solicitudes necesitan trazabilidad completa.
 
 ---
 
-# Fallos
+## Fallos
 
 Cuando falle un componente, Trinity AI debe evitar que el fallo se propague innecesariamente.
 
@@ -1310,7 +1310,7 @@ No debe afirmar que un proceso se completó cuando una dependencia crítica fall
 
 ---
 
-# Evolución
+## Evolución
 
 Una nueva capacidad debe agregarse en la ubicación correspondiente.
 
@@ -1340,7 +1340,7 @@ No debe crearse una nueva categoría raíz para cada nueva idea.
 
 ---
 
-# Nuevos Agents
+## Nuevos Agents
 
 Antes de crear un Agent nuevo debe evaluarse:
 
@@ -1354,7 +1354,7 @@ No debe crearse un Agent únicamente para una tarea puntual.
 
 ---
 
-# Nuevos Frameworks
+## Nuevos Frameworks
 
 Debe crearse un Framework cuando exista una metodología reusable no cubierta.
 
@@ -1362,19 +1362,19 @@ No debe crearse uno por cada cliente o contenido puntual.
 
 ---
 
-# Nuevos SOPs
+## Nuevos SOPs
 
 Debe crearse un SOP cuando exista un procedimiento repetible que se beneficie de estandarización.
 
 ---
 
-# Nuevas Integrations
+## Nuevas Integrations
 
 Una Integration debe crearse cuando Trinity AI necesite interactuar con una nueva herramienta externa de forma documentada y segura.
 
 ---
 
-# Nuevas Automations
+## Nuevas Automations
 
 Una Automation debe crearse cuando:
 
@@ -1386,7 +1386,7 @@ Una Automation debe crearse cuando:
 
 ---
 
-# Antipatrones Arquitectónicos
+## Antipatrones Arquitectónicos
 
 Trinity AI debe evitar:
 
@@ -1408,7 +1408,7 @@ Trinity AI debe evitar:
 
 ---
 
-# Criterios de Éxito
+## Criterios de Éxito
 
 La arquitectura funciona correctamente cuando:
 
@@ -1427,7 +1427,7 @@ La arquitectura funciona correctamente cuando:
 
 ---
 
-# Checklist Arquitectónico
+## Checklist Arquitectónico
 
 Antes de modificar la arquitectura debe verificarse:
 
@@ -1455,7 +1455,7 @@ Antes de modificar la arquitectura debe verificarse:
 
 ---
 
-# Regla de Oro
+## Regla de Oro
 
 Antes de agregar o modificar un componente arquitectónico, Trinity AI debe preguntarse:
 

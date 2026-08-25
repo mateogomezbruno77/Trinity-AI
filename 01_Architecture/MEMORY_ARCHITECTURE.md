@@ -28,7 +28,7 @@ tags:
 
 # Trinity AI - Memory Architecture
 
-# Propósito
+## Propósito
 
 Memory Architecture define cómo Trinity AI conserva, clasifica, recupera, valida y reutiliza información a lo largo del tiempo.
 
@@ -58,7 +58,7 @@ Debe conservar lo correcto y recuperar únicamente lo necesario.
 
 ---
 
-# Objetivo
+## Objetivo
 
 La arquitectura de memoria debe permitir que Trinity AI responda:
 
@@ -75,7 +75,7 @@ La arquitectura de memoria debe permitir que Trinity AI responda:
 
 ---
 
-# Principio Fundamental
+## Principio Fundamental
 
 > Capturar información no significa convertirla en memoria permanente.
 
@@ -109,7 +109,7 @@ No toda información debe atravesar todo el flujo.
 
 ---
 
-# Memoria como sistema de fuentes
+## Memoria como sistema de fuentes
 
 La memoria de Trinity AI no debe entenderse como una única base de datos conceptual.
 
@@ -137,7 +137,7 @@ Cada fuente tiene diferente:
 
 ---
 
-# Tipos de Memoria
+## Tipos de Memoria
 
 Trinity AI distingue principalmente:
 
@@ -155,7 +155,7 @@ Candidate Memory
 
 ---
 
-# Core Memory
+## Core Memory
 
 Contiene reglas y estructura fundamentales del sistema.
 
@@ -176,7 +176,7 @@ Solo deben recuperarse los componentes relevantes.
 
 ---
 
-# Global Knowledge
+## Global Knowledge
 
 Contiene conocimiento global validado y reutilizable.
 
@@ -203,7 +203,7 @@ Responde:
 
 ---
 
-# Framework Memory
+## Framework Memory
 
 Contiene metodologías reutilizables.
 
@@ -223,7 +223,7 @@ No son procedimientos.
 
 ---
 
-# SOP Memory
+## SOP Memory
 
 Contiene procedimientos operativos reutilizables.
 
@@ -241,7 +241,7 @@ SOPs representan memoria procedimental.
 
 ---
 
-# Client Context
+## Client Context
 
 Contiene información específica de clientes y proyectos.
 
@@ -275,7 +275,7 @@ Client B Context
 
 ---
 
-# Research Memory
+## Research Memory
 
 Contiene investigación, evidencia y referencias.
 
@@ -299,7 +299,7 @@ Research no constituye automáticamente Knowledge.
 
 ---
 
-# Decision Memory
+## Decision Memory
 
 Conserva decisiones relevantes cuando existe valor futuro o necesidad de trazabilidad.
 
@@ -320,7 +320,7 @@ No todas las decisiones requieren almacenamiento permanente.
 
 ---
 
-# Session Context
+## Session Context
 
 Contiene información temporal utilizada durante la interacción actual.
 
@@ -337,7 +337,7 @@ Session Context no constituye memoria permanente.
 
 ---
 
-# Candidate Memory
+## Candidate Memory
 
 Contiene aprendizajes potencialmente reutilizables pendientes de revisión.
 
@@ -358,7 +358,7 @@ No constituye una fuente oficial.
 
 ---
 
-# Diferencia entre memoria y documentación
+## Diferencia entre memoria y documentación
 
 No toda memoria tiene que convertirse inmediatamente en un documento nuevo.
 
@@ -373,7 +373,7 @@ hasta que exista suficiente valor para documentarla formalmente.
 
 ---
 
-# Persistencia
+## Persistencia
 
 Los diferentes tipos de memoria poseen diferente nivel de persistencia.
 
@@ -399,7 +399,7 @@ Candidate
 
 ---
 
-# Autoridad
+## Autoridad
 
 La persistencia no determina autoridad.
 
@@ -421,7 +421,7 @@ Approved Source
 
 ---
 
-# Recuperación Selectiva
+## Recuperación Selectiva
 
 Trinity AI no debe consultar toda la memoria antes de cada respuesta.
 
@@ -445,7 +445,7 @@ Recuperar mínimo contexto suficiente
 
 ---
 
-# Principio de Relevancia
+## Principio de Relevancia
 
 Antes de recuperar información debe preguntarse:
 
@@ -455,7 +455,7 @@ Si no, probablemente no debe cargarse.
 
 ---
 
-# Flujo de Recuperación
+## Flujo de Recuperación
 
 ```text
 Request
@@ -482,7 +482,7 @@ Use
 
 ---
 
-# Fuentes potenciales
+## Fuentes potenciales
 
 Según la tarea pueden recuperarse:
 
@@ -506,7 +506,7 @@ No existe una obligación de consultar todas.
 
 ---
 
-# Prioridad de fuentes
+## Prioridad de fuentes
 
 Cuando múltiples fuentes sean relevantes debe evaluarse:
 
@@ -526,7 +526,7 @@ La prioridad no debe basarse únicamente en recencia.
 
 ---
 
-# Autoridad documental
+## Autoridad documental
 
 Los documentos pueden tener estados:
 
@@ -544,7 +544,7 @@ Durante desarrollo pueden utilizarse `Draft` y `Review` como referencia controla
 
 ---
 
-# Especificidad
+## Especificidad
 
 Una fuente específica puede complementar una fuente global.
 
@@ -564,7 +564,7 @@ No modifica automáticamente la regla global.
 
 ---
 
-# Vigencia
+## Vigencia
 
 No toda memoria envejece igual.
 
@@ -589,7 +589,7 @@ Cuando la vigencia pueda cambiar la decisión, debe verificarse.
 
 ---
 
-# Recuperación por Cliente
+## Recuperación por Cliente
 
 Cuando una solicitud pertenece a un cliente debe identificarse primero qué cliente está involucrado.
 
@@ -610,7 +610,7 @@ Debe evitarse mezclar información entre clientes.
 
 ---
 
-# Aislamiento entre clientes
+## Aislamiento entre clientes
 
 Debe impedirse:
 
@@ -628,7 +628,7 @@ salvo que esa información se haya convertido correctamente en Knowledge global.
 
 ---
 
-# Recuperación de decisiones
+## Recuperación de decisiones
 
 Las decisiones anteriores deben recuperarse cuando puedan afectar:
 
@@ -644,7 +644,7 @@ No debe cargarse historial completo si no es necesario.
 
 ---
 
-# Prevención de Amnesia
+## Prevención de Amnesia
 
 Antes de pedir información nuevamente, Trinity AI debe comprobar si ya existe.
 
@@ -673,7 +673,7 @@ Reuse   Ask / Research
 
 ---
 
-# Información contradictoria
+## Información contradictoria
 
 Si encuentra información incompatible debe:
 
@@ -688,7 +688,7 @@ No debe seleccionar silenciosamente la información más conveniente.
 
 ---
 
-# Incertidumbre
+## Incertidumbre
 
 Trinity AI debe distinguir:
 
@@ -701,13 +701,13 @@ Candidate
 
 ---
 
-# Known
+## Known
 
 Información suficientemente respaldada por una fuente disponible.
 
 ---
 
-# Inferred
+## Inferred
 
 Conclusión razonable derivada de fuentes conocidas.
 
@@ -715,7 +715,7 @@ No debe presentarse como hecho confirmado cuando la diferencia sea relevante.
 
 ---
 
-# Unknown
+## Unknown
 
 Información que Trinity AI no posee.
 
@@ -723,13 +723,13 @@ No debe transformarse silenciosamente en Known mediante suposición.
 
 ---
 
-# Candidate
+## Candidate
 
 Información potencialmente reutilizable todavía no aprobada como memoria permanente.
 
 ---
 
-# Capture
+## Capture
 
 Trinity AI puede detectar nueva información durante:
 
@@ -745,7 +745,7 @@ Detectar información no obliga a almacenarla.
 
 ---
 
-# Evaluación de Valor Futuro
+## Evaluación de Valor Futuro
 
 Antes de persistir debe evaluarse:
 
@@ -771,7 +771,7 @@ Valor futuro puede significar:
 
 ---
 
-# Clasificación de Nueva Información
+## Clasificación de Nueva Información
 
 La información puede clasificarse como:
 
@@ -791,7 +791,7 @@ Debe elegirse según responsabilidad.
 
 ---
 
-# Nueva información global
+## Nueva información global
 
 Cuando exista conocimiento potencialmente reutilizable para múltiples proyectos debe tratarse como Candidate antes de convertirse en Knowledge oficial.
 
@@ -816,7 +816,7 @@ Approval
 
 ---
 
-# Research → Knowledge
+## Research → Knowledge
 
 Research debe permanecer separado de Knowledge.
 
@@ -843,7 +843,7 @@ Encontrar información no significa convertirla automáticamente en verdad perma
 
 ---
 
-# Client → Global
+## Client → Global
 
 Los aprendizajes obtenidos trabajando con un cliente permanecen inicialmente dentro de Client Context.
 
@@ -872,7 +872,7 @@ La promoción nunca debe ser automática.
 
 ---
 
-# Session → Permanent
+## Session → Permanent
 
 Información de sesión puede convertirse en memoria persistente únicamente cuando exista valor.
 
@@ -896,7 +896,7 @@ Las conversaciones no deben guardarse automáticamente como memoria oficial.
 
 ---
 
-# Candidate Lifecycle
+## Candidate Lifecycle
 
 ```text
 Candidate
@@ -919,7 +919,7 @@ La promoción debe respetar Governance.
 
 ---
 
-# Rejected Candidate
+## Rejected Candidate
 
 Un Candidate rechazado no debe seguir utilizándose como conocimiento oficial.
 
@@ -931,7 +931,7 @@ Puede:
 
 ---
 
-# Memoria permanente
+## Memoria permanente
 
 Una fuente puede considerarse memoria permanente cuando:
 
@@ -944,7 +944,7 @@ Una fuente puede considerarse memoria permanente cuando:
 
 ---
 
-# Actualización de memoria
+## Actualización de memoria
 
 Una fuente existente puede necesitar actualización.
 
@@ -976,7 +976,7 @@ New Version
 
 ---
 
-# Deprecación
+## Deprecación
 
 Cuando una fuente deja de ser recomendada puede marcarse:
 
@@ -988,7 +988,7 @@ Debe mantenerse referencia al reemplazo cuando exista.
 
 ---
 
-# Archived
+## Archived
 
 Una fuente puede archivarse cuando ya no tiene uso operativo pero conserva valor histórico.
 
@@ -996,7 +996,7 @@ No debe recuperarse por defecto para nuevas decisiones.
 
 ---
 
-# Versiones
+## Versiones
 
 El historial de versiones debe mantenerse principalmente mediante Git y metadata documental.
 
@@ -1010,7 +1010,7 @@ knowledge_final.md
 
 ---
 
-# Duplicación
+## Duplicación
 
 Antes de almacenar debe buscarse si ya existe una fuente equivalente.
 
@@ -1030,7 +1030,7 @@ Update   Evaluate Creation
 
 ---
 
-# Fuente única de verdad
+## Fuente única de verdad
 
 Cada responsabilidad debería poseer una fuente principal.
 
@@ -1040,7 +1040,7 @@ Debe evitarse mantener la misma regla en múltiples archivos independientes.
 
 ---
 
-# Duplicación aceptable
+## Duplicación aceptable
 
 Puede existir repetición breve para contexto local.
 
@@ -1048,7 +1048,7 @@ Pero debe quedar claro cuál es la fuente oficial.
 
 ---
 
-# Decision Memory
+## Decision Memory
 
 Una decisión debe persistirse cuando:
 
@@ -1063,7 +1063,7 @@ No toda decisión trivial necesita memoria.
 
 ---
 
-# Estructura de Decision Memory
+## Estructura de Decision Memory
 
 Cuando corresponda puede incluir:
 
@@ -1081,7 +1081,7 @@ replaces:
 
 ---
 
-# Client Decision
+## Client Decision
 
 Las decisiones específicas de clientes deben vivir dentro del Client Context correspondiente.
 
@@ -1089,13 +1089,13 @@ No deben convertirse automáticamente en reglas globales.
 
 ---
 
-# Global Decision
+## Global Decision
 
 Las decisiones arquitectónicas o globales pueden registrarse mediante mecanismos definidos por Governance.
 
 ---
 
-# Memoria de errores
+## Memoria de errores
 
 Los errores no deben convertirse automáticamente en Knowledge.
 
@@ -1112,7 +1112,7 @@ Debe pasar por Candidate.
 
 ---
 
-# Memoria de resultados
+## Memoria de resultados
 
 Los outputs rutinarios no necesitan almacenamiento permanente.
 
@@ -1126,7 +1126,7 @@ Puede ser útil conservar resultados cuando:
 
 ---
 
-# Assets
+## Assets
 
 Assets son recursos persistentes pero no deben confundirse con Knowledge.
 
@@ -1141,7 +1141,7 @@ Su metadata puede ayudar a recuperación.
 
 ---
 
-# Templates
+## Templates
 
 Templates son estructuras persistentes reutilizables.
 
@@ -1151,7 +1151,7 @@ Deben recuperarse cuando el formato sea relevante.
 
 ---
 
-# Examples
+## Examples
 
 Examples son implementaciones de referencia.
 
@@ -1165,7 +1165,7 @@ Official Rule
 
 ---
 
-# Memory Retrieval y Agents
+## Memory Retrieval y Agents
 
 Un Agent debe recuperar únicamente memoria relevante para su tarea.
 
@@ -1178,7 +1178,7 @@ No debe recibir automáticamente:
 
 ---
 
-# Memory Retrieval y Orchestrator
+## Memory Retrieval y Orchestrator
 
 El Orchestrator puede identificar qué contexto necesita cada Agent.
 
@@ -1188,7 +1188,7 @@ No debe cargar toda la memoria para después distribuirla.
 
 ---
 
-# Memory Retrieval y Data Flow
+## Memory Retrieval y Data Flow
 
 `DATA_FLOW.md` define cómo circula la información.
 
@@ -1209,7 +1209,7 @@ Data Flow
 
 ---
 
-# Memory y Request Lifecycle
+## Memory y Request Lifecycle
 
 `REQUEST_LIFECYCLE.md` define estado de solicitudes.
 
@@ -1219,7 +1219,7 @@ Una solicitud `Completed` no implica automáticamente persistencia de todo su co
 
 ---
 
-# Memory y Agent Interaction
+## Memory y Agent Interaction
 
 Los handoffs entre Agents utilizan contexto temporal.
 
@@ -1227,7 +1227,7 @@ Ese contexto no se convierte automáticamente en memoria permanente.
 
 ---
 
-# Seguridad
+## Seguridad
 
 La memoria debe seguir principio de mínimo acceso.
 
@@ -1235,7 +1235,7 @@ No toda información almacenada debe ser accesible a todos los componentes.
 
 ---
 
-# Credenciales
+## Credenciales
 
 Nunca deben almacenarse como memoria documental normal:
 
@@ -1249,7 +1249,7 @@ Deben utilizar mecanismos seguros externos.
 
 ---
 
-# Datos sensibles
+## Datos sensibles
 
 Los datos sensibles deben almacenarse únicamente cuando:
 
@@ -1260,7 +1260,7 @@ Los datos sensibles deben almacenarse únicamente cuando:
 
 ---
 
-# Aislamiento
+## Aislamiento
 
 La arquitectura debe impedir contaminación entre:
 
@@ -1271,7 +1271,7 @@ La arquitectura debe impedir contaminación entre:
 
 ---
 
-# Trazabilidad
+## Trazabilidad
 
 Las fuentes importantes pueden conservar:
 
@@ -1289,7 +1289,7 @@ La trazabilidad debe ser proporcional.
 
 ---
 
-# Indexación
+## Indexación
 
 A medida que Trinity AI crezca, la recuperación puede apoyarse en índices.
 
@@ -1310,7 +1310,7 @@ No se convierte en segunda fuente de verdad.
 
 ---
 
-# Búsqueda
+## Búsqueda
 
 La búsqueda debe favorecer:
 
@@ -1328,7 +1328,7 @@ No solo coincidencia textual.
 
 ---
 
-# Recuperación semántica
+## Recuperación semántica
 
 Puede utilizarse recuperación semántica cuando mejore discovery.
 
@@ -1336,7 +1336,7 @@ Debe verificarse la fuente original antes de utilizar información crítica.
 
 ---
 
-# Cache
+## Cache
 
 Puede utilizarse cache temporal para reducir lecturas repetitivas.
 
@@ -1346,7 +1346,7 @@ Debe respetar vigencia.
 
 ---
 
-# Invalidación de Cache
+## Invalidación de Cache
 
 Cuando cambie una fuente crítica debe evitarse continuar usando una versión antigua almacenada temporalmente.
 
@@ -1354,7 +1354,7 @@ La política concreta dependerá de la implementación.
 
 ---
 
-# Memory Candidates automáticos
+## Memory Candidates automáticos
 
 Automations pueden detectar Candidates.
 
@@ -1372,7 +1372,7 @@ Review
 
 ---
 
-# Integrations y memoria
+## Integrations y memoria
 
 Una Integration puede servir para almacenar o recuperar información.
 
@@ -1386,7 +1386,7 @@ La herramienta donde vive información no determina automáticamente qué tipo d
 
 ---
 
-# Source of Truth vs Storage Tool
+## Source of Truth vs Storage Tool
 
 Debe diferenciarse:
 
@@ -1404,7 +1404,7 @@ La responsabilidad conceptual debe permanecer estable.
 
 ---
 
-# Migración
+## Migración
 
 Si una fuente cambia de herramienta de almacenamiento, Trinity AI debe preservar:
 
@@ -1418,7 +1418,7 @@ La migración de storage no debe cambiar significado.
 
 ---
 
-# Lifecycle de Memoria
+## Lifecycle de Memoria
 
 Puede representarse:
 
@@ -1447,7 +1447,7 @@ Deprecate / Archive
 
 ---
 
-# Memory Health
+## Memory Health
 
 La memoria puede degradarse por:
 
@@ -1462,7 +1462,7 @@ La memoria puede degradarse por:
 
 ---
 
-# Auditoría de Memoria
+## Auditoría de Memoria
 
 Una auditoría puede revisar:
 
@@ -1479,7 +1479,7 @@ Orphaned Documents
 
 ---
 
-# Limpieza
+## Limpieza
 
 La limpieza de memoria debe eliminar o reclasificar únicamente cuando exista evidencia suficiente.
 
@@ -1487,7 +1487,7 @@ No debe eliminarse información útil solo para reducir volumen.
 
 ---
 
-# Escalabilidad
+## Escalabilidad
 
 La arquitectura debe poder incorporar:
 
@@ -1505,7 +1505,7 @@ sin rediseñar el modelo conceptual de memoria.
 
 ---
 
-# Antipatrones
+## Antipatrones
 
 Trinity AI no debe:
 
@@ -1527,7 +1527,7 @@ Trinity AI no debe:
 
 ---
 
-# Criterios de Éxito
+## Criterios de Éxito
 
 Memory Architecture funciona correctamente cuando:
 
@@ -1545,7 +1545,7 @@ Memory Architecture funciona correctamente cuando:
 
 ---
 
-# Checklist de Memoria
+## Checklist de Memoria
 
 Antes de almacenar nueva información debe evaluarse:
 
@@ -1587,7 +1587,7 @@ Recuperar mínimo contexto suficiente
 
 ---
 
-# Regla de Oro
+## Regla de Oro
 
 Trinity AI no debe recordar más.
 

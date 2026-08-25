@@ -29,7 +29,7 @@ tags:
 
 # Trinity AI - Orchestrator
 
-# Propósito
+## Propósito
 
 El Orchestrator es el componente responsable de coordinar cómo Trinity AI procesa solicitudes que requieren una o más capacidades especializadas.
 
@@ -43,7 +43,7 @@ No reemplaza a los Agents especialistas.
 
 ---
 
-# Responsabilidad Principal
+## Responsabilidad Principal
 
 El Orchestrator debe transformar una solicitud comprendida y clasificada en una estructura de trabajo ejecutable.
 
@@ -63,7 +63,7 @@ Puede:
 
 ---
 
-# Cuándo debe intervenir
+## Cuándo debe intervenir
 
 El Orchestrator debe intervenir cuando una solicitud:
 
@@ -79,7 +79,7 @@ El Orchestrator debe intervenir cuando una solicitud:
 
 ---
 
-# Cuándo NO debe intervenir
+## Cuándo NO debe intervenir
 
 El Orchestrator no debe agregar complejidad a tareas simples.
 
@@ -104,7 +104,7 @@ La regla es:
 
 ---
 
-# Flujo General
+## Flujo General
 
 ```text
 Solicitud
@@ -149,7 +149,7 @@ Clasificación
 
 ---
 
-# Paso 1 — Comprender la solicitud
+## Paso 1 — Comprender la solicitud
 
 Antes de asignar trabajo, el Orchestrator debe identificar:
 
@@ -166,7 +166,7 @@ No debe delegar una solicitud que todavía no comprende suficientemente.
 
 ---
 
-# Paso 2 — Clasificar
+## Paso 2 — Clasificar
 
 La solicitud puede clasificarse como:
 
@@ -193,7 +193,7 @@ No obliga automáticamente a utilizar un Agent específico.
 
 ---
 
-# Paso 3 — Evaluar complejidad
+## Paso 3 — Evaluar complejidad
 
 El Orchestrator debe determinar si la solicitud es:
 
@@ -203,15 +203,15 @@ Moderada
 Compleja
 ```
 
-## Simple
+### Simple
 
 Un único Agent puede resolverla.
 
-## Moderada
+### Moderada
 
 Puede requerir un Agent principal y capacidades adicionales.
 
-## Compleja
+### Compleja
 
 Puede requerir:
 
@@ -227,7 +227,7 @@ Una tarea no debe clasificarse como compleja únicamente porque utilice varias f
 
 ---
 
-# Paso 4 — Descomponer
+## Paso 4 — Descomponer
 
 Las solicitudes complejas deben dividirse en tareas independientes cuando esto mejore la ejecución.
 
@@ -253,7 +253,7 @@ No debe fragmentar artificialmente tareas que un único Agent puede resolver cor
 
 ---
 
-# Paso 5 — Seleccionar Agents
+## Paso 5 — Seleccionar Agents
 
 El Orchestrator debe seleccionar Agents según:
 
@@ -273,7 +273,7 @@ Debe seleccionarse el mínimo conjunto suficiente.
 
 ---
 
-# Paso 6 — Preparar Context Package
+## Paso 6 — Preparar Context Package
 
 Cada Agent debe recibir únicamente el contexto necesario.
 
@@ -305,7 +305,7 @@ El Context Package debe respetar las políticas definidas por Memory Architectur
 
 ---
 
-# Paso 7 — Seleccionar capacidades
+## Paso 7 — Seleccionar capacidades
 
 El Orchestrator puede identificar capacidades potencialmente relevantes.
 
@@ -335,11 +335,11 @@ El Agent ejecuta trabajo especializado.
 
 ---
 
-# Paso 8 — Definir tipo de ejecución
+## Paso 8 — Definir tipo de ejecución
 
 El Orchestrator debe seleccionar el patrón de ejecución más simple que preserve las dependencias correctas.
 
-## Secuencial
+### Secuencial
 
 Cuando una tarea depende del resultado de otra.
 
@@ -356,7 +356,7 @@ Planning
 Production
 ```
 
-## Paralela
+### Paralela
 
 Cuando varias tareas pueden ejecutarse independientemente.
 
@@ -366,7 +366,7 @@ Solicitud ───┼── Competitor Research
              └── Audience Research
 ```
 
-## Mixta
+### Mixta
 
 Cuando existen tareas paralelas y dependencias posteriores.
 
@@ -391,7 +391,7 @@ La ejecución paralela debe utilizarse únicamente cuando no introduzca dependen
 
 ---
 
-# Paso 9 — Gestionar Handoffs
+## Paso 9 — Gestionar Handoffs
 
 Cuando una tarea pasa entre Agents, el Orchestrator debe asegurar que se transfieran únicamente los elementos relevantes:
 
@@ -410,7 +410,7 @@ Un handoff debe permitir continuar el proceso sin cargar nuevamente información
 
 ---
 
-# Paso 10 — Gestionar bloqueos
+## Paso 10 — Gestionar bloqueos
 
 El Orchestrator debe detectar:
 
@@ -442,7 +442,7 @@ No debe continuar silenciosamente cuando el bloqueo pueda comprometer el resulta
 
 ---
 
-# Paso 11 — Resolver conflictos
+## Paso 11 — Resolver conflictos
 
 Si Agents producen resultados incompatibles, el Orchestrator debe:
 
@@ -460,7 +460,7 @@ Cuando no pueda resolverlas con suficiente confianza, debe escalar.
 
 ---
 
-# Paso 12 — Integrar resultados
+## Paso 12 — Integrar resultados
 
 Cuando múltiples Agents participan, el Orchestrator debe convertir sus outputs en un resultado coherente.
 
@@ -479,7 +479,7 @@ Significa convertir resultados parciales en una solución utilizable.
 
 ---
 
-# Paso 13 — Validar
+## Paso 13 — Validar
 
 Antes de finalizar, el Orchestrator debe verificar proporcionalmente:
 
@@ -498,7 +498,7 @@ La profundidad de validación debe ser proporcional al impacto y riesgo.
 
 ---
 
-# Aprobación Humana
+## Aprobación Humana
 
 Si una tarea requiere aprobación, el Orchestrator debe detener el flujo en:
 
@@ -536,7 +536,7 @@ La aprobación se aplica únicamente al alcance explícitamente aprobado.
 
 ---
 
-# Prevención de Sobreorquestación
+## Prevención de Sobreorquestación
 
 El Orchestrator debe evitar:
 
@@ -554,7 +554,7 @@ Regla:
 
 ---
 
-# Prevención de Ciclos
+## Prevención de Ciclos
 
 No debe permitirse delegación circular sin progreso.
 
@@ -583,7 +583,7 @@ Si existe un ciclo:
 
 ---
 
-# Orchestrator y memoria
+## Orchestrator y memoria
 
 El Orchestrator puede solicitar recuperación de contexto relevante.
 
@@ -618,7 +618,7 @@ La recuperación debe respetar `MEMORY_ARCHITECTURE.md`.
 
 ---
 
-# Orchestrator y nuevos aprendizajes
+## Orchestrator y nuevos aprendizajes
 
 El Orchestrator puede detectar aprendizajes potencialmente reutilizables.
 
@@ -640,7 +640,7 @@ La promoción a fuente oficial pertenece al proceso definido por Governance.
 
 ---
 
-# Orchestrator y Agents
+## Orchestrator y Agents
 
 La relación correcta es:
 
@@ -665,7 +665,7 @@ Un Agent puede resolver directamente una tarea cuando no exista necesidad real d
 
 ---
 
-# Orchestrator y Thinking Framework
+## Orchestrator y Thinking Framework
 
 `00_Foundation/15_Thinking_Framework.md` estructura cómo Trinity AI analiza una solicitud.
 
@@ -694,7 +694,7 @@ Orchestrator estructura coordinación.
 
 ---
 
-# Orchestrator y Decision Framework
+## Orchestrator y Decision Framework
 
 `00_Foundation/16_Decision_Framework.md` define cómo seleccionar entre alternativas.
 
@@ -710,7 +710,7 @@ El Orchestrator no debe duplicar la lógica completa del Decision Framework.
 
 ---
 
-# Orchestrator y CORE
+## Orchestrator y CORE
 
 CORE define cómo opera Trinity AI.
 
@@ -728,7 +728,7 @@ Puede detectar una necesidad de cambio y derivarla al proceso correspondiente.
 
 ---
 
-# Orchestrator y Governance
+## Orchestrator y Governance
 
 Governance controla, según corresponda:
 
@@ -745,7 +745,7 @@ No puede aprobar unilateralmente acciones que requieran Governance o aprobación
 
 ---
 
-# Orchestrator e Integrations
+## Orchestrator e Integrations
 
 El Orchestrator puede coordinar el uso de una Integration cuando sea necesaria.
 
@@ -763,7 +763,7 @@ La existencia de una Integration no constituye autorización automática para ut
 
 ---
 
-# Orchestrator y Automations
+## Orchestrator y Automations
 
 El Orchestrator puede coordinar una Automation cuando:
 
@@ -778,7 +778,7 @@ El Orchestrator no debe activar una Automation únicamente porque exista.
 
 ---
 
-# Output del Orchestrator
+## Output del Orchestrator
 
 Cuando coordine una solicitud compleja, puede mantener internamente una estructura similar a:
 
@@ -805,7 +805,7 @@ Debe utilizarla únicamente cuando aporte orden, trazabilidad o control.
 
 ---
 
-# Criterios de Éxito
+## Criterios de Éxito
 
 El Orchestrator funciona correctamente cuando:
 
@@ -823,7 +823,7 @@ El Orchestrator funciona correctamente cuando:
 
 ---
 
-# Reglas
+## Reglas
 
 El Orchestrator debe:
 
@@ -856,7 +856,7 @@ El Orchestrator no debe:
 
 ---
 
-# Antipatrones
+## Antipatrones
 
 El Orchestrator debe evitar:
 
@@ -876,7 +876,7 @@ El Orchestrator debe evitar:
 
 ---
 
-# Checklist de Orquestación
+## Checklist de Orquestación
 
 Cuando una solicitud requiera coordinación, el Orchestrator puede comprobar:
 
@@ -916,7 +916,7 @@ Este checklist debe aplicarse proporcionalmente.
 
 ---
 
-# Regla de Oro
+## Regla de Oro
 
 El Orchestrator existe para convertir complejidad en coordinación.
 

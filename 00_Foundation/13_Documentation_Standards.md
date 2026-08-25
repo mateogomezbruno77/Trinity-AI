@@ -22,7 +22,7 @@ tags:
 
 # 13 - Documentation Standards
 
-# Propósito
+## Propósito
 
 Este documento define los estándares oficiales para crear, estructurar, nombrar, clasificar, mantener, revisar y evolucionar la documentación de Trinity AI.
 
@@ -42,7 +42,7 @@ No define:
 
 ---
 
-# Objetivo
+## Objetivo
 
 La documentación de Trinity AI debe ser:
 
@@ -61,7 +61,7 @@ Cada documento debe tener una responsabilidad clara.
 
 ---
 
-# Principio Rector
+## Principio Rector
 
 > Una pieza de documentación debe existir únicamente cuando tenga una responsabilidad clara y aporte valor futuro al sistema.
 
@@ -73,7 +73,7 @@ Nunca debe convertirse en burocracia innecesaria.
 
 ---
 
-# Principios de Documentación
+## Principios de Documentación
 
 Toda documentación debe respetar los siguientes principios:
 
@@ -90,7 +90,7 @@ Toda documentación debe respetar los siguientes principios:
 
 ---
 
-# Documentación como sistema
+## Documentación como sistema
 
 La documentación de Trinity AI no debe entenderse como archivos aislados.
 
@@ -129,7 +129,7 @@ Cada documento debe saber:
 
 ---
 
-# Estructura oficial del repositorio
+## Estructura oficial del repositorio
 
 La estructura principal de Trinity AI es:
 
@@ -164,9 +164,9 @@ Primero debe evaluarse si pertenece a un módulo actual.
 
 ---
 
-# Responsabilidades por módulo
+## Responsabilidades por módulo
 
-## CORE
+### CORE
 
 Contiene la referencia operativa principal del sistema.
 
@@ -174,7 +174,7 @@ No debe convertirse en repositorio general de conocimiento.
 
 ---
 
-## 00_Foundation
+### 00_Foundation
 
 Contiene reglas fundamentales y protocolos globales.
 
@@ -189,7 +189,7 @@ Ejemplos:
 
 ---
 
-## 01_Architecture
+### 01_Architecture
 
 Documenta la estructura del sistema y relaciones entre componentes.
 
@@ -197,7 +197,7 @@ No debe contener conocimiento de negocio.
 
 ---
 
-## 02_SOPs
+### 02_SOPs
 
 Contiene procedimientos operativos repetibles.
 
@@ -207,7 +207,7 @@ Responde:
 
 ---
 
-## 03_Agents
+### 03_Agents
 
 Contiene definiciones de especialistas.
 
@@ -217,7 +217,7 @@ Responde:
 
 ---
 
-## 04_Frameworks
+### 04_Frameworks
 
 Contiene metodologías reutilizables.
 
@@ -227,7 +227,7 @@ Responde:
 
 ---
 
-## 05_Knowledge
+### 05_Knowledge
 
 Contiene conocimiento global validado.
 
@@ -237,55 +237,55 @@ Responde:
 
 ---
 
-## 06_Integrations
+### 06_Integrations
 
 Documenta cómo Trinity AI interactúa con herramientas externas.
 
 ---
 
-## 07_Automations
+### 07_Automations
 
 Documenta procesos automatizados autorizados.
 
 ---
 
-## 08_Clients
+### 08_Clients
 
 Contiene contexto específico de clientes y proyectos.
 
 ---
 
-## 09_Templates
+### 09_Templates
 
 Contiene estructuras reutilizables para crear nuevos documentos o entregables.
 
 ---
 
-## 10_Assets
+### 10_Assets
 
 Contiene recursos y materiales reutilizables.
 
 ---
 
-## 11_Examples
+### 11_Examples
 
 Contiene implementaciones de referencia.
 
 ---
 
-## 12_Research
+### 12_Research
 
 Contiene investigación, evidencia, benchmarking y análisis.
 
 ---
 
-## 13_Governance
+### 13_Governance
 
 Controla evolución, aprobación, versionado, cambios y calidad del sistema.
 
 ---
 
-# Regla de ubicación
+## Regla de ubicación
 
 Antes de crear un documento debe determinarse:
 
@@ -306,7 +306,7 @@ La ubicación no debe decidirse únicamente por conveniencia.
 
 ---
 
-# Separación entre tipos de información
+## Separación entre tipos de información
 
 Trinity AI debe mantener explícitamente separadas las siguientes categorías.
 
@@ -349,7 +349,7 @@ Una misma información no debe copiarse en múltiples categorías.
 
 ---
 
-# Fuente única de verdad
+## Fuente única de verdad
 
 Cuando exista información oficial, debe existir una fuente principal responsable.
 
@@ -383,7 +383,7 @@ Archivo C
 
 ---
 
-# Duplicación
+## Duplicación
 
 La duplicación documental aumenta:
 
@@ -400,7 +400,7 @@ Si existe, debe referenciarse.
 
 ---
 
-# Repetición intencional
+## Repetición intencional
 
 Puede repetirse una regla breve cuando sea necesaria para comprensión local.
 
@@ -421,7 +421,7 @@ copiar dentro del Agent todo el sistema de clasificación de riesgo y mantenerlo
 
 ---
 
-# Tipos de documentos
+## Tipos de documentos
 
 Trinity AI puede contener, entre otros:
 
@@ -444,7 +444,7 @@ Cada tipo debe mantenerse dentro del módulo correspondiente.
 
 ---
 
-# Front Matter
+## Front Matter
 
 Los documentos estructurales y operativos deben utilizar metadata cuando corresponda.
 
@@ -472,7 +472,7 @@ tags:
 
 ---
 
-# Regla del Front Matter
+## Regla del Front Matter
 
 El Front Matter debe comenzar en la primera línea del archivo.
 
@@ -510,7 +510,7 @@ Esta regla permite que herramientas automáticas puedan interpretar correctament
 
 ---
 
-# ID documental
+## ID documental
 
 Cada documento estructural debe poseer un identificador estable cuando corresponda.
 
@@ -536,7 +536,7 @@ El ID no debe modificarse simplemente porque cambie el nombre visible del archiv
 
 ---
 
-# IDs de módulos
+## IDs de módulos
 
 Convenciones recomendadas:
 
@@ -562,7 +562,7 @@ Estas convenciones deben mantenerse consistentes.
 
 ---
 
-# Title
+## Title
 
 `title` debe describir claramente el contenido.
 
@@ -580,7 +580,7 @@ Debe preferir nombres específicos.
 
 ---
 
-# Module
+## Module
 
 `module` identifica el módulo responsable del documento.
 
@@ -600,7 +600,7 @@ module: SOPs
 
 ---
 
-# Version
+## Version
 
 Los documentos versionados deben utilizar:
 
@@ -616,9 +616,9 @@ Ejemplo:
 
 ---
 
-# Versionado semántico
+## Versionado semántico
 
-## PATCH
+### PATCH
 
 Correcciones menores que no cambian comportamiento o significado principal.
 
@@ -637,7 +637,7 @@ Puede incluir:
 
 ---
 
-## MINOR
+### MINOR
 
 Cambios compatibles que agregan o mejoran capacidad sin romper la lógica anterior.
 
@@ -656,7 +656,7 @@ Puede incluir:
 
 ---
 
-## MAJOR
+### MAJOR
 
 Cambios que modifican significativamente comportamiento, responsabilidades o compatibilidad.
 
@@ -675,7 +675,7 @@ Puede incluir:
 
 ---
 
-# Estado documental
+## Estado documental
 
 Todo documento gobernado debe poseer un estado explícito.
 
@@ -691,7 +691,7 @@ Archived
 
 ---
 
-# Draft
+## Draft
 
 Significa:
 
@@ -702,7 +702,7 @@ Significa:
 
 ---
 
-# Review
+## Review
 
 Significa:
 
@@ -713,7 +713,7 @@ Significa:
 
 ---
 
-# Approved
+## Approved
 
 Significa:
 
@@ -726,7 +726,7 @@ En producción, la documentación operativa debe priorizar `Approved`.
 
 ---
 
-# Deprecated
+## Deprecated
 
 Significa:
 
@@ -736,7 +736,7 @@ Significa:
 
 ---
 
-# Archived
+## Archived
 
 Significa:
 
@@ -748,7 +748,7 @@ No debe utilizarse para nuevas decisiones.
 
 ---
 
-# Ciclo de vida documental
+## Ciclo de vida documental
 
 El ciclo recomendado es:
 
@@ -773,7 +773,7 @@ No todos los documentos necesitan llegar a `Approved`.
 
 ---
 
-# Creación
+## Creación
 
 Un documento nuevo debe crearse únicamente cuando:
 
@@ -785,7 +785,7 @@ Un documento nuevo debe crearse únicamente cuando:
 
 ---
 
-# Revisión
+## Revisión
 
 Antes de pasar a `Review` debe comprobarse:
 
@@ -801,7 +801,7 @@ Antes de pasar a `Review` debe comprobarse:
 
 ---
 
-# Aprobación
+## Aprobación
 
 Antes de pasar a `Approved` debe comprobarse:
 
@@ -815,7 +815,7 @@ Antes de pasar a `Approved` debe comprobarse:
 
 ---
 
-# Actualización
+## Actualización
 
 Cuando un documento `Approved` necesite cambiar, debe evitarse modificar silenciosamente su comportamiento.
 
@@ -839,7 +839,7 @@ Approval
 
 ---
 
-# Dependencias
+## Dependencias
 
 `dependencies` debe contener únicamente documentos que sean necesarios para interpretar o aplicar correctamente el documento actual.
 
@@ -855,7 +855,7 @@ dependencies:
 
 ---
 
-# Referencia vs dependencia
+## Referencia vs dependencia
 
 Debe distinguirse:
 
@@ -873,7 +873,7 @@ Esto es fundamental para evitar dependencias circulares.
 
 ---
 
-# Dependencias circulares
+## Dependencias circulares
 
 Debe evitarse:
 
@@ -901,7 +901,7 @@ Un documento superior puede referenciar conceptualmente uno inferior sin declara
 
 ---
 
-# Dirección de dependencias
+## Dirección de dependencias
 
 Las dependencias deben seguir una dirección lógica.
 
@@ -923,7 +923,7 @@ Debe evitarse que una capa inferior gobierne una capa superior.
 
 ---
 
-# Referencias internas
+## Referencias internas
 
 Las referencias deben utilizar rutas suficientemente claras.
 
@@ -943,7 +943,7 @@ Debe favorecerse consistencia en todo el repositorio.
 
 ---
 
-# Enlaces rotos
+## Enlaces rotos
 
 Durante auditorías deben verificarse:
 
@@ -957,7 +957,7 @@ Una referencia rota debe corregirse.
 
 ---
 
-# Nombres de archivos
+## Nombres de archivos
 
 Los nombres deben ser:
 
@@ -990,7 +990,7 @@ El versionado pertenece al Front Matter y al historial de Git.
 
 ---
 
-# Convenciones de nombres
+## Convenciones de nombres
 
 Dentro de módulos numerados puede utilizarse:
 
@@ -1008,7 +1008,7 @@ La convención debe mantenerse consistente dentro de cada categoría.
 
 ---
 
-# Encabezados
+## Encabezados
 
 Debe existir un único título principal `#` por documento.
 
@@ -1024,7 +1024,7 @@ Debe evitarse utilizar niveles de encabezado únicamente por estilo visual.
 
 ---
 
-# Separadores
+## Separadores
 
 Puede utilizarse:
 
@@ -1038,7 +1038,7 @@ No debe abusarse de separadores cuando los encabezados ya aporten estructura suf
 
 ---
 
-# Listas
+## Listas
 
 Las listas deben utilizarse cuando mejoren:
 
@@ -1051,7 +1051,7 @@ No debe convertirse todo el documento en listas si la explicación requiere cont
 
 ---
 
-# Diagramas textuales
+## Diagramas textuales
 
 Los diagramas `text` pueden utilizarse para representar:
 
@@ -1077,7 +1077,7 @@ Deben utilizarse para simplificar conceptos, no para decorar.
 
 ---
 
-# Bloques de código
+## Bloques de código
 
 Los bloques deben especificar lenguaje cuando sea posible.
 
@@ -1087,3 +1087,4 @@ Ejemplos:
 ```yaml
 status: Draft
 ```
+````

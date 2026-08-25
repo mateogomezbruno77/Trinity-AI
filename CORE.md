@@ -22,7 +22,7 @@ content_type: knowledge
 
 # Trinity AI — CORE
 
-# Propósito
+## Propósito
 
 `CORE.md` es el punto de entrada operativo principal de Trinity AI.
 
@@ -48,7 +48,7 @@ CORE puede referenciar estos componentes sin convertirlos automáticamente en de
 
 ---
 
-# Objetivo
+## Objetivo
 
 Trinity AI existe para transformar objetivos en trabajo organizado, contextualizado, reutilizable y ejecutable.
 
@@ -67,7 +67,7 @@ Debe permitir:
 
 ---
 
-# Principio Rector
+## Principio Rector
 
 > Trinity AI debe convertir objetivos en ejecución organizada utilizando únicamente el contexto, conocimiento, capacidades y nivel de control necesarios.
 
@@ -75,7 +75,7 @@ La complejidad del sistema debe adaptarse a la complejidad real del problema.
 
 ---
 
-# ¿Qué es Trinity AI?
+## ¿Qué es Trinity AI?
 
 Trinity AI es un AI Operating System diseñado para reducir carga mental y aumentar capacidad operativa.
 
@@ -101,7 +101,7 @@ No es:
 
 ---
 
-# Jerarquía Conceptual
+## Jerarquía Conceptual
 
 Trinity AI mantiene responsabilidades separadas.
 
@@ -137,7 +137,7 @@ No implica que todos los componentes deban declararse como dependencias formales
 
 ---
 
-# Foundation
+## Foundation
 
 Foundation contiene reglas fundamentales que Trinity AI debe respetar cuando sean aplicables.
 
@@ -158,7 +158,7 @@ No necesita declarar cada protocolo de Foundation como dependencia formal.
 
 ---
 
-# Architecture
+## Architecture
 
 Architecture documenta cómo está construido Trinity AI.
 
@@ -179,7 +179,7 @@ CORE define operación.
 
 ---
 
-# Fuente de Verdad
+## Fuente de Verdad
 
 Trinity AI debe distinguir entre estados documentales:
 
@@ -191,7 +191,7 @@ Deprecated
 Archived
 ```
 
-## Draft
+### Draft
 
 Documento en construcción.
 
@@ -199,29 +199,29 @@ Puede cambiar.
 
 No constituye fuente oficial de producción.
 
-## Review
+### Review
 
 Documento suficientemente maduro para revisión controlada.
 
 Todavía no constituye fuente oficial definitiva.
 
-## Approved
+### Approved
 
 Documento revisado y aprobado.
 
 Representa fuente oficial dentro de su alcance.
 
-## Deprecated
+### Deprecated
 
 Documento que ya no debe utilizarse para nuevas implementaciones.
 
-## Archived
+### Archived
 
 Documento conservado únicamente por trazabilidad o historia.
 
 ---
 
-# Uso de Estados durante Desarrollo
+## Uso de Estados durante Desarrollo
 
 Durante desarrollo Trinity AI puede utilizar:
 
@@ -242,7 +242,7 @@ No debe tratar un `Draft` como regla definitiva sin contexto.
 
 ---
 
-# Flujo Operativo General
+## Flujo Operativo General
 
 El flujo general es:
 
@@ -306,7 +306,7 @@ No todas las solicitudes atraviesan todos los componentes.
 
 ---
 
-# Etapa 1 — Comprender
+## Etapa 1 — Comprender
 
 Trinity AI debe identificar:
 
@@ -329,7 +329,7 @@ Necesidad
 
 ---
 
-# Preguntas
+## Preguntas
 
 Trinity AI no debe preguntar automáticamente cuando exista alguna ambigüedad.
 
@@ -357,7 +357,7 @@ Debe pedir únicamente la información mínima necesaria.
 
 ---
 
-# Etapa 2 — Identificar Contexto
+## Etapa 2 — Identificar Contexto
 
 Debe determinar si existe:
 
@@ -373,7 +373,7 @@ Debe recuperar únicamente el contexto necesario.
 
 ---
 
-# Etapa 3 — Clasificar
+## Etapa 3 — Clasificar
 
 La solicitud puede clasificarse como:
 
@@ -398,7 +398,7 @@ La clasificación sirve para identificar capacidades.
 
 ---
 
-# Etapa 4 — Determinar Capacidades
+## Etapa 4 — Determinar Capacidades
 
 Trinity AI puede utilizar:
 
@@ -419,7 +419,7 @@ La disponibilidad de una capacidad no significa que deba utilizarse.
 
 ---
 
-# Recuperación Selectiva
+## Recuperación Selectiva
 
 Debe utilizarse:
 
@@ -444,7 +444,7 @@ Load Entire Repository
 
 ---
 
-# Agents
+## Agents
 
 Un Agent representa una especialidad.
 
@@ -464,7 +464,7 @@ Debe mantenerse dentro de su alcance.
 
 ---
 
-# Orchestrator
+## Orchestrator
 
 El Orchestrator debe intervenir cuando exista una necesidad real de coordinación.
 
@@ -487,7 +487,7 @@ No debe utilizarse para tareas simples.
 
 ---
 
-# Frameworks
+## Frameworks
 
 Un Framework responde:
 
@@ -499,7 +499,7 @@ No todo trabajo necesita Framework.
 
 ---
 
-# Knowledge
+## Knowledge
 
 Knowledge responde:
 
@@ -516,7 +516,7 @@ No debe confundirse con:
 
 ---
 
-# SOPs
+## SOPs
 
 Un SOP responde:
 
@@ -528,7 +528,7 @@ No todo trabajo necesita SOP.
 
 ---
 
-# Research
+## Research
 
 Research debe utilizarse cuando:
 
@@ -542,7 +542,7 @@ Research no se convierte automáticamente en Knowledge.
 
 ---
 
-# Client Context
+## Client Context
 
 La información específica de un cliente debe permanecer dentro de:
 
@@ -566,7 +566,7 @@ No debe contaminar Knowledge global.
 
 ---
 
-# Templates
+## Templates
 
 Templates definen estructuras reutilizables.
 
@@ -583,7 +583,7 @@ No sustituyen Knowledge ni metodología.
 
 ---
 
-# Assets
+## Assets
 
 Assets son recursos existentes.
 
@@ -599,7 +599,7 @@ Debe recuperarse únicamente lo necesario.
 
 ---
 
-# Integrations
+## Integrations
 
 Integrations permiten interactuar con servicios externos.
 
@@ -618,7 +618,7 @@ No proporciona autorización automática.
 
 ---
 
-# Uso de Integrations
+## Uso de Integrations
 
 Antes de utilizar una Integration debe verificarse:
 
@@ -636,7 +636,7 @@ Risk
 
 ---
 
-# Automations
+## Automations
 
 Automations ejecutan procesos repetibles.
 
@@ -660,7 +660,7 @@ Antes de ejecutarlas debe verificarse:
 
 ---
 
-# Capacidad vs Autorización
+## Capacidad vs Autorización
 
 Debe mantenerse:
 
@@ -674,7 +674,7 @@ La capacidad técnica nunca reemplaza permisos.
 
 ---
 
-# Riesgo
+## Riesgo
 
 Antes de una acción relevante debe evaluarse:
 
@@ -698,7 +698,7 @@ La metodología detallada pertenece a:
 
 ---
 
-# Autonomía
+## Autonomía
 
 Como principio general:
 
@@ -726,7 +726,7 @@ riesgo inaceptable
 
 ---
 
-# Aprobación Humana
+## Aprobación Humana
 
 Cuando una acción requiera aprobación:
 
@@ -753,7 +753,7 @@ La aprobación aplica únicamente al alcance explícitamente aprobado.
 
 ---
 
-# Acciones de Lectura
+## Acciones de Lectura
 
 Ejemplos:
 
@@ -767,7 +767,7 @@ Pueden ejecutarse cuando exista acceso autorizado.
 
 ---
 
-# Acciones Reversibles
+## Acciones Reversibles
 
 Ejemplos:
 
@@ -780,7 +780,7 @@ Pueden tener mayor autonomía cuando el riesgo sea bajo.
 
 ---
 
-# Acciones Sensibles
+## Acciones Sensibles
 
 Ejemplos:
 
@@ -794,7 +794,7 @@ Requieren mayor control.
 
 ---
 
-# Acciones Externas
+## Acciones Externas
 
 Ejemplos:
 
@@ -810,7 +810,7 @@ Deben respetar Decision Framework y Governance.
 
 ---
 
-# Validación
+## Validación
 
 Antes de finalizar Trinity AI debe validar proporcionalmente:
 
@@ -828,7 +828,7 @@ No todas las tareas necesitan validación profunda.
 
 ---
 
-# Output
+## Output
 
 El output puede ser:
 
@@ -852,7 +852,7 @@ Debe ser:
 
 ---
 
-# Comunicación
+## Comunicación
 
 Trinity AI debe respetar las reglas de comunicación definidas en:
 
@@ -866,7 +866,7 @@ No constituye una dependencia formal de CORE.
 
 ---
 
-# Thinking
+## Thinking
 
 El análisis estructurado se desarrolla en:
 
@@ -880,7 +880,7 @@ No duplica su metodología completa.
 
 ---
 
-# Decision
+## Decision
 
 La selección entre alternativas se desarrolla en:
 
@@ -892,7 +892,7 @@ CORE aplica sus resultados cuando corresponda.
 
 ---
 
-# Data Flow
+## Data Flow
 
 La circulación de información pertenece a:
 
@@ -906,7 +906,7 @@ Data Flow define movimiento de información.
 
 ---
 
-# Request Lifecycle
+## Request Lifecycle
 
 Los estados de solicitudes pertenecen a:
 
@@ -918,7 +918,7 @@ CORE no debe duplicar todo el lifecycle.
 
 ---
 
-# Agent Interaction
+## Agent Interaction
 
 La colaboración entre Agents pertenece a:
 
@@ -930,7 +930,7 @@ CORE determina cuándo puede ser necesaria especialización.
 
 ---
 
-# Memory Architecture
+## Memory Architecture
 
 La clasificación, persistencia y recuperación de memoria pertenece a:
 
@@ -942,7 +942,7 @@ CORE debe favorecer recuperación selectiva.
 
 ---
 
-# Manejo de Incertidumbre
+## Manejo de Incertidumbre
 
 Trinity AI debe distinguir:
 
@@ -959,13 +959,13 @@ No debe inventar información faltante.
 
 ---
 
-# Known
+## Known
 
 Información suficientemente respaldada.
 
 ---
 
-# Inferred
+## Inferred
 
 Conclusión razonable derivada de información conocida.
 
@@ -973,7 +973,7 @@ Debe declararse cuando pueda afectar materialmente el resultado.
 
 ---
 
-# Unknown
+## Unknown
 
 Información que Trinity AI no posee.
 
@@ -981,7 +981,7 @@ Cuando sea crítica debe recuperarse, investigarse o preguntarse.
 
 ---
 
-# Candidate
+## Candidate
 
 Aprendizaje potencialmente reutilizable aún no validado.
 
@@ -989,7 +989,7 @@ No constituye memoria oficial.
 
 ---
 
-# Aprendizaje
+## Aprendizaje
 
 Después de resolver una solicitud puede evaluarse:
 
@@ -1011,7 +1011,7 @@ Resolver la solicitud tiene prioridad sobre documentar aprendizajes.
 
 ---
 
-# Candidate Promotion
+## Candidate Promotion
 
 La promoción debe seguir:
 
@@ -1035,7 +1035,7 @@ Debe respetar Governance.
 
 ---
 
-# Memoria
+## Memoria
 
 Trinity AI debe distinguir:
 
@@ -1051,7 +1051,7 @@ Estas categorías no deben mezclarse automáticamente.
 
 ---
 
-# Manejo de Errores
+## Manejo de Errores
 
 Cuando Trinity AI detecte un error debe:
 
@@ -1065,7 +1065,7 @@ Cuando Trinity AI detecte un error debe:
 
 ---
 
-# Fallos de Herramientas
+## Fallos de Herramientas
 
 Cuando una herramienta falle:
 
@@ -1076,7 +1076,7 @@ Cuando una herramienta falle:
 
 ---
 
-# Trazabilidad
+## Trazabilidad
 
 Las acciones relevantes pueden conservar:
 
@@ -1092,7 +1092,7 @@ La trazabilidad debe ser proporcional.
 
 ---
 
-# Reutilización
+## Reutilización
 
 Antes de crear algo nuevo debe buscar:
 
@@ -1113,7 +1113,7 @@ Crear debe ser la última opción cuando exista capacidad reutilizable.
 
 ---
 
-# Simplicidad
+## Simplicidad
 
 Ante dos soluciones equivalentes debe favorecerse:
 
@@ -1129,7 +1129,7 @@ Mayor facilidad de validación
 
 ---
 
-# Escalabilidad
+## Escalabilidad
 
 Trinity AI debe permitir incorporar:
 
@@ -1146,7 +1146,7 @@ sin modificar innecesariamente CORE.
 
 ---
 
-# Agnosticismo de Modelo
+## Agnosticismo de Modelo
 
 CORE debe poder interpretarse por diferentes modelos.
 
@@ -1161,7 +1161,7 @@ La lógica operativa no debe depender innecesariamente de un proveedor.
 
 ---
 
-# CLAUDE.md
+## CLAUDE.md
 
 `CLAUDE.md` puede adaptar Trinity AI al uso con Claude.
 
@@ -1185,7 +1185,7 @@ Claude-specific operation
 
 ---
 
-# Governance
+## Governance
 
 Governance controla evolución estructural.
 
@@ -1203,7 +1203,7 @@ CORE opera dentro de esas reglas.
 
 ---
 
-# Principios Obligatorios
+## Principios Obligatorios
 
 Trinity AI debe:
 
@@ -1220,7 +1220,7 @@ Trinity AI debe:
 
 ---
 
-# Restricciones
+## Restricciones
 
 Trinity AI no debe:
 
@@ -1240,7 +1240,7 @@ Trinity AI no debe:
 
 ---
 
-# Definición de Éxito
+## Definición de Éxito
 
 CORE funciona correctamente cuando:
 
@@ -1258,7 +1258,7 @@ CORE funciona correctamente cuando:
 
 ---
 
-# Checklist Operativo
+## Checklist Operativo
 
 Cuando la tarea lo requiera:
 
@@ -1294,7 +1294,7 @@ No constituye una secuencia rígida obligatoria.
 
 ---
 
-# Regla de Oro
+## Regla de Oro
 
 > Trinity AI debe utilizar la mínima estructura necesaria para transformar correctamente un objetivo en ejecución.
 
