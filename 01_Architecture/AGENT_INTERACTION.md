@@ -1,20 +1,19 @@
-# Trinity AI - Agent Interaction
-
 ---
 id: TRI-ARCH-004
 title: Agent Interaction
-version: 1.1.0
+module: Architecture
+version: 1.2.0
 status: Draft
 owner: Trinity AI
-module: Architecture
-category: Core
 created:
-last_updated:
+last_updated: 2026-08-25
 reviewed_by:
 approved_by:
 next_review:
 dependencies:
   - CORE.md
+  - 01_Architecture/SYSTEM_ARCHITECTURE.md
+  - 01_Architecture/DATA_FLOW.md
   - 00_Foundation/11_Communication_Guidelines.md
   - 00_Foundation/14_AI_Behavior.md
   - 00_Foundation/15_Thinking_Framework.md
@@ -22,69 +21,76 @@ dependencies:
 tags:
   - architecture
   - agents
-  - orchestration
   - collaboration
+  - handoff
+  - delegation
+  - coordination
 ---
+
+# Trinity AI - Agent Interaction
 
 # Propósito
 
 Este documento define cómo interactúan, colaboran, delegan y transfieren trabajo los Agents dentro de Trinity AI.
 
-Su objetivo es garantizar que cada tarea tenga un responsable claro, que el contexto se conserve y que múltiples Agents puedan colaborar sin duplicar trabajo ni generar contradicciones.
+Su objetivo es garantizar que:
+
+- cada tarea tenga un responsable claro;
+- el contexto necesario se conserve;
+- los Agents trabajen dentro de su especialidad;
+- los handoffs sean estructurados;
+- no exista duplicación innecesaria;
+- los conflictos sean visibles;
+- las dependencias se respeten;
+- múltiples Agents puedan colaborar sin convertirse en sistemas aislados.
+
+Agent Interaction define reglas de colaboración.
+
+No define cómo funciona todo el Orchestrator.
+
+No define el comportamiento general de Trinity AI.
+
+No define procedimientos específicos de negocio.
+
+---
+
+# Objetivo
+
+La interacción entre Agents debe permitir:
+
+```text
+Especialización
+      +
+Responsabilidad clara
+      +
+Contexto suficiente
+      +
+Handoffs limpios
+      +
+Coordinación proporcional
+      =
+Colaboración eficiente
+```
+
+La colaboración debe reducir trabajo.
+
+No agregar capas innecesarias.
 
 ---
 
 # Principio Fundamental
 
+> Un Agent debe realizar únicamente el trabajo para el cual tiene responsabilidad y entregar un resultado que permita continuar sin reconstruir contexto innecesariamente.
+
 Los Agents existen para dividir responsabilidades.
 
 No para multiplicar complejidad.
 
-```text
-Una tarea
-   │
-   ▼
-Responsable claro
-   │
-   ▼
-Contexto suficiente
-   │
-   ▼
-Capacidades necesarias
-   │
-   ▼
-Resultado estructurado
-```
-
 ---
 
-# Orchestrator
+# Principio de Especialización
 
-El Orchestrator coordina el trabajo cuando una solicitud requiere distribución o colaboración.
-
-Puede:
-
-- interpretar el objetivo;
-- clasificar la solicitud;
-- dividir tareas;
-- seleccionar Agents;
-- definir responsables;
-- establecer dependencias;
-- preparar contexto;
-- coordinar secuencias;
-- integrar resultados;
-- detectar bloqueos;
-- escalar cuando corresponda.
-
-El Orchestrator no debe realizar trabajo especializado cuando exista un Agent claramente responsable.
-
-Tampoco debe intervenir en solicitudes simples cuando su participación no aporte valor.
-
----
-
-# Agents especialistas
-
-Cada Agent representa una especialidad.
+Cada Agent representa una capacidad especializada.
 
 Ejemplos:
 
@@ -98,7 +104,164 @@ Ejemplos:
 - Documentation Agent;
 - Integration Agent.
 
-Cada Agent debe trabajar únicamente dentro de su alcance definido.
+Un Agent no debe absorber responsabilidades pertenecientes a otro cuando exista una especialización clara.
+
+---
+
+# Principio de Mínimo Número de Agents
+
+Más Agents no significa automáticamente mayor calidad.
+
+Debe utilizarse:
+
+```text
+Mínimo número de Agents
+        +
+Especialidades correctas
+        =
+Mejor coordinación
+```
+
+Debe evitarse:
+
+```text
+Tarea simple
+    │
+    ▼
+5 Agents
+    │
+    ▼
+6 handoffs
+    │
+    ▼
+Más complejidad que valor
+```
+
+---
+
+# Principio de Responsable Claro
+
+Toda tarea debe tener un responsable principal.
+
+Debe evitarse:
+
+```text
+Tarea
+  │
+  ├── Agent A parcialmente
+  ├── Agent B parcialmente
+  └── nadie responsable del resultado final
+```
+
+Debe favorecerse:
+
+```text
+Tarea
+  │
+  ▼
+Responsible Agent
+  │
+  ▼
+Resultado
+```
+
+Cuando varios Agents colaboren, debe quedar claro quién responde por cada etapa.
+
+---
+
+# Arquitectura General de Interacción
+
+```text
+Solicitud
+   │
+   ▼
+CORE
+   │
+   ▼
+¿Requiere especialización?
+   │
+   ├── No
+   │    │
+   │    ▼
+   │ Respuesta directa
+   │
+   └── Sí
+        │
+        ▼
+     Agent
+        │
+        ▼
+¿Requiere colaboración?
+   │
+   ├── No
+   │    │
+   │    ▼
+   │ Resultado
+   │
+   └── Sí
+        │
+        ▼
+   Coordinación
+        │
+   ┌────┼────┐
+   ▼    ▼    ▼
+Agent A B    C
+   │    │    │
+   └────┼────┘
+        ▼
+   Integración
+        │
+        ▼
+    Validation
+        │
+        ▼
+     Resultado
+```
+
+El Orchestrator puede coordinar este proceso cuando la complejidad lo requiera.
+
+No todas las solicitudes necesitan Orchestrator.
+
+---
+
+# Relación con Orchestrator
+
+`01_Architecture/ORCHESTRATOR.md` define cómo Trinity AI coordina solicitudes complejas.
+
+Agent Interaction define cómo los Agents colaboran una vez que existe interacción entre especialistas.
+
+La relación conceptual es:
+
+```text
+Orchestrator
+│
+└── coordina responsables y dependencias
+
+Agent Interaction
+│
+└── define reglas de colaboración entre Agents
+```
+
+Este documento puede referenciar conceptualmente al Orchestrator sin declararlo como dependencia formal.
+
+Esto evita dependencias circulares innecesarias.
+
+---
+
+# Agents Especialistas
+
+Cada Agent debe poseer como mínimo:
+
+- propósito;
+- alcance;
+- responsabilidades;
+- límites;
+- inputs;
+- outputs;
+- capacidades disponibles;
+- permisos;
+- criterios de validación;
+- criterios de escalamiento.
 
 Un Agent puede utilizar selectivamente:
 
@@ -120,66 +283,41 @@ No todas las capacidades deben utilizarse en todas las tareas.
 
 ---
 
-# Validator
+# Responsabilidad del Agent
 
-La validación puede ser realizada por:
+El Agent responsable debe:
 
-- el Agent responsable;
-- otro Agent especializado;
-- el Orchestrator;
-- una validación humana;
-- un mecanismo automático autorizado.
-
-La validación debe ser proporcional al impacto y complejidad de la tarea.
-
-Debe verificar, cuando corresponda:
-
-- cumplimiento del objetivo;
-- calidad;
-- consistencia;
-- contexto;
-- restricciones;
-- permisos;
-- riesgo;
-- ausencia de contradicciones;
-- completitud del entregable.
+- comprender la tarea;
+- verificar que esté dentro de su alcance;
+- identificar contexto necesario;
+- utilizar capacidades relevantes;
+- ejecutar trabajo especializado;
+- declarar incertidumbre;
+- respetar permisos;
+- validar su resultado;
+- entregar un output utilizable.
 
 ---
 
-# Arquitectura General de Interacción
+# Lo que un Agent no debe hacer
 
-```text
-Usuario
-   │
-   ▼
-CORE
-   │
-   ▼
-Orchestrator
-   │
-   ├── Agent A
-   ├── Agent B
-   └── Agent C
-        │
-        ▼
-Integración de resultados
-        │
-        ▼
-Validation
-        │
-        ▼
-Resultado
-```
+Un Agent no debe:
 
-Este flujo no es obligatorio para todas las solicitudes.
-
-Una tarea simple puede resolverse con un único Agent.
+- asumir responsabilidades ajenas sin necesidad;
+- duplicar Knowledge;
+- copiar Frameworks dentro de su definición;
+- reconstruir trabajo ya completado;
+- delegar únicamente para reducir su propio trabajo;
+- utilizar Integrations fuera de permisos;
+- activar Automations solo porque existan;
+- inventar contexto;
+- convertir aprendizajes automáticamente en memoria permanente.
 
 ---
 
-# Clasificación de tareas
+# Clasificación de Tareas
 
-Antes de delegar, el Orchestrator debe determinar qué tipo de trabajo existe.
+Antes de asignar trabajo puede clasificarse la tarea según especialidad.
 
 Ejemplos:
 
@@ -189,6 +327,7 @@ Strategy
 Planning
 Production
 Copywriting
+Creative
 Analysis
 Documentation
 Integration
@@ -196,139 +335,66 @@ Automation
 Validation
 ```
 
-Una solicitud puede contener múltiples tareas.
+Una solicitud puede contener múltiples tipos de trabajo.
+
+La clasificación ayuda a seleccionar responsabilidad.
+
+No obliga a crear un Agent diferente para cada categoría.
 
 ---
 
-# Descomposición
+# Complejidad de Colaboración
 
-Las solicitudes complejas deben dividirse en unidades de trabajo claras.
+La colaboración puede clasificarse como:
 
-Cada unidad debe definir:
+```text
+Single Agent
+Multi-Agent Sequential
+Multi-Agent Parallel
+Multi-Agent Mixed
+```
 
-- objetivo;
-- responsable;
-- entradas;
-- contexto necesario;
-- resultado esperado;
-- dependencias;
-- restricciones;
-- criterio de finalización.
+---
+
+# Single Agent
+
+Debe utilizarse cuando una sola especialidad puede resolver correctamente la tarea.
+
+```text
+Solicitud
+   │
+   ▼
+Agent
+   │
+   ▼
+Validation
+   │
+   ▼
+Resultado
+```
+
+Debe ser la opción preferida cuando sea suficiente.
+
+---
+
+# Multi-Agent Sequential
+
+Debe utilizarse cuando una tarea depende del output anterior.
+
+```text
+Agent A
+   │
+   ▼
+Output A
+   │
+   ▼
+Agent B
+   │
+   ▼
+Output B
+```
 
 Ejemplo:
-
-```text
-Solicitud:
-Planificar contenido mensual.
-
-Tareas:
-
-1. Research
-2. Estrategia
-3. Calendario
-4. Fichas de producción
-5. Registro en Notion
-```
-
----
-
-# Context Package
-
-Cuando una tarea se delega, el Agent debe recibir únicamente el contexto necesario.
-
-El Context Package puede contener:
-
-```yaml
-request_id:
-client:
-project:
-objective:
-task:
-expected_output:
-constraints:
-relevant_context:
-approved_sources:
-dependencies:
-permissions:
-risk_level:
-next_step:
-```
-
-No todos los campos son obligatorios en todas las tareas.
-
-El objetivo es evitar tanto falta de contexto como sobrecarga innecesaria.
-
----
-
-# Input Contract
-
-Antes de ejecutar una tarea, el Agent debe verificar:
-
-- que comprende el objetivo;
-- que su responsabilidad está clara;
-- que dispone del contexto necesario;
-- que posee los permisos requeridos;
-- que el resultado esperado está definido;
-- que no está duplicando trabajo.
-
-Si falta información crítica, debe:
-
-```text
-detectar faltante
-      │
-      ▼
-evaluar si puede continuar
-      │
-      ├── Sí → declarar supuesto si corresponde
-      └── No → escalar al Orchestrator
-```
-
----
-
-# Output Contract
-
-Todo Agent debe devolver un resultado comprensible y reutilizable.
-
-Cuando corresponda, debe incluir:
-
-```yaml
-status:
-summary:
-deliverable:
-sources_used:
-assumptions:
-decisions:
-risks:
-open_questions:
-recommended_next_step:
-```
-
-La salida debe permitir que otro Agent continúe sin reconstruir todo el contexto.
-
----
-
-# Handoff
-
-Cuando una tarea pasa de un Agent a otro, deben transferirse únicamente los elementos relevantes.
-
-El handoff puede incluir:
-
-- resultado;
-- decisiones;
-- fuentes utilizadas;
-- restricciones;
-- supuestos;
-- riesgos;
-- pendientes;
-- siguiente objetivo.
-
-El Agent siguiente no debe necesitar repetir trabajo ya completado.
-
----
-
-# Flujo Secuencial
-
-Se utiliza cuando una tarea depende del resultado anterior.
 
 ```text
 Research Agent
@@ -338,35 +404,39 @@ Strategy Agent
       │
       ▼
 Content Planner
-      │
-      ▼
-Content Producer
 ```
-
-Cada Agent comienza cuando dispone del input necesario.
 
 ---
 
-# Flujo Paralelo
+# Multi-Agent Parallel
 
-Se utiliza cuando varias tareas pueden realizarse independientemente.
+Debe utilizarse cuando varias tareas pueden ejecutarse independientemente.
 
 ```text
-             ┌── Trend Research
-Solicitud ───┼── Competitor Research
-             └── Audience Research
+             ┌── Agent A
+             │
+Solicitud ───┼── Agent B
+             │
+             └── Agent C
                     │
                     ▼
-              Integración
+               Integration
 ```
 
-El Orchestrator combina los resultados antes de continuar cuando sea necesario.
+La paralelización debe aportar una mejora real.
+
+No debe utilizarse si crea:
+
+- resultados incompatibles;
+- dependencias ocultas;
+- duplicación;
+- pérdida de contexto.
 
 ---
 
-# Flujo Mixto
+# Multi-Agent Mixed
 
-Las solicitudes complejas pueden combinar trabajo paralelo y secuencial.
+Puede combinar ejecución paralela y secuencial.
 
 ```text
           ┌── Research A
@@ -387,57 +457,438 @@ Inicio ───┼── Research B
 
 ---
 
-# Delegación
+# Descomposición
 
-Un Agent puede solicitar trabajo especializado a otro Agent únicamente cuando:
+Las solicitudes complejas pueden dividirse en unidades de trabajo.
 
-- la tarea exceda su alcance;
-- exista una especialidad claramente mejor;
-- la delegación reduzca complejidad o mejore calidad.
+Cada unidad puede definir:
 
-La delegación no debe convertirse en una cadena infinita.
+```yaml
+task_id:
+objective:
+responsible_agent:
+input:
+expected_output:
+dependencies:
+constraints:
+permissions:
+risk_level:
+```
+
+La descomposición debe aportar claridad.
+
+No debe fragmentar artificialmente trabajo simple.
 
 ---
 
-# Prevención de ciclos
+# Regla de Descomposición
 
-El Orchestrator debe detectar:
+Antes de dividir una tarea debe preguntarse:
 
-- tareas que se delegan repetidamente;
-- ausencia de responsable;
-- dependencias circulares;
-- Agents que se devuelven trabajo entre sí.
-
-Si existe un ciclo:
+> ¿Separar esta tarea mejora especialización, coordinación o calidad?
 
 ```text
-detectar ciclo
-    │
-    ▼
-detener delegación
-    │
-    ▼
-asignar responsable final
-    │
-    ▼
-resolver o escalar
+Sí
+→ dividir
+
+No
+→ mantener unificada
 ```
+
+---
+
+# Context Package
+
+Cuando una tarea se asigna a un Agent, debe recibir únicamente el contexto necesario.
+
+Puede contener:
+
+```yaml
+request_id:
+client:
+project:
+objective:
+task:
+expected_output:
+constraints:
+relevant_context:
+sources:
+dependencies:
+permissions:
+risk_level:
+next_step:
+```
+
+No todos los campos son obligatorios.
+
+---
+
+# Principios del Context Package
+
+Debe ser:
+
+- suficiente;
+- relevante;
+- claro;
+- mínimo;
+- actualizado;
+- seguro.
+
+Debe evitar:
+
+- contexto de otros clientes;
+- documentación irrelevante;
+- secretos;
+- duplicación;
+- archivos completos cuando solo se necesita una parte.
+
+---
+
+# Input Contract
+
+Antes de ejecutar una tarea, el Agent debe verificar:
+
+- que comprende el objetivo;
+- que su responsabilidad está clara;
+- que la tarea está dentro de su alcance;
+- que posee contexto suficiente;
+- que existen permisos necesarios;
+- que comprende el output esperado;
+- que las dependencias requeridas están disponibles;
+- que no está duplicando trabajo existente.
+
+---
+
+# Input Incompleto
+
+Cuando falte información debe evaluar:
+
+```text
+Información faltante
+        │
+        ▼
+¿Es crítica?
+    │        │
+   No       Sí
+    │        │
+    ▼        ▼
+Continuar  ¿Puede recuperarse?
+              │        │
+             Sí       No
+              │        │
+              ▼        ▼
+          Recuperar  Escalar
+```
+
+No debe preguntar automáticamente si puede recuperar la información por otra vía autorizada.
+
+---
+
+# Supuestos
+
+Un Agent puede utilizar un supuesto cuando:
+
+- sea razonable;
+- el impacto sea bajo;
+- el riesgo sea limitado;
+- no sustituya información crítica.
+
+Debe declararlo cuando pueda afectar materialmente el resultado.
+
+---
+
+# Output Contract
+
+Todo Agent debe producir un resultado comprensible y reutilizable.
+
+Cuando corresponda puede contener:
+
+```yaml
+status:
+summary:
+deliverable:
+sources_used:
+assumptions:
+decisions:
+risks:
+open_questions:
+recommended_next_step:
+```
+
+No todos los campos deben aparecer siempre.
+
+---
+
+# Requisitos del Output
+
+El output debe permitir:
+
+- validación;
+- integración;
+- ejecución;
+- handoff;
+- entrega.
+
+Debe evitar:
+
+- ambigüedad;
+- duplicación;
+- información irrelevante;
+- razonamiento interno innecesario.
+
+---
+
+# Handoff
+
+Un handoff ocurre cuando el resultado de un Agent se convierte en input de otro.
+
+Debe transferirse únicamente lo necesario.
+
+Puede incluir:
+
+```yaml
+task:
+result:
+sources:
+decisions:
+constraints:
+assumptions:
+risks:
+pending:
+next_objective:
+```
+
+---
+
+# Regla de Handoff
+
+El siguiente Agent no debe tener que reconstruir todo lo que ya se hizo.
+
+Debe poder responder:
+
+```text
+¿Qué se hizo?
+¿Qué se decidió?
+¿Qué evidencia se utilizó?
+¿Qué falta?
+¿Qué debo hacer ahora?
+```
+
+---
+
+# Handoff Correcto
+
+```text
+Agent A
+   │
+   ▼
+Output estructurado
+   │
+   ▼
+Context Package reducido
+   │
+   ▼
+Agent B
+```
+
+---
+
+# Handoff Incorrecto
+
+```text
+Agent A
+   │
+   ▼
+Conversación completa
+   │
+   ▼
+Agent B intenta reconstruir contexto
+```
+
+Debe evitarse trasladar el historial completo cuando no sea necesario.
+
+---
+
+# Delegación
+
+Un Agent puede identificar que una parte del trabajo necesita otra especialidad.
+
+Debe delegarse cuando:
+
+- la tarea exceda su alcance;
+- exista un especialista claramente mejor;
+- exista una dependencia legítima;
+- la delegación mejore calidad o eficiencia.
+
+---
+
+# Delegación Directa
+
+Cuando la arquitectura permita delegación directa entre Agents, esta debe permanecer dentro del alcance definido.
+
+Si la delegación modifica:
+
+- responsables;
+- dependencias;
+- permisos;
+- riesgo;
+- orden de ejecución;
+
+debe informarse al Orchestrator cuando corresponda.
+
+---
+
+# Escalamiento al Orchestrator
+
+Un Agent debe devolver control al Orchestrator cuando:
+
+- la tarea exceda su alcance;
+- aparezca una nueva dependencia importante;
+- se necesite otro Agent;
+- exista conflicto;
+- exista bloqueo;
+- cambie materialmente el riesgo;
+- sea necesario reorganizar el workflow.
+
+---
+
+# Prevención de Delegación Infinita
+
+No debe ocurrir:
+
+```text
+Agent A
+  ↓
+Agent B
+  ↓
+Agent C
+  ↓
+Agent A
+```
+
+Cuando aparezca un ciclo debe:
+
+1. detenerse;
+2. identificar la causa;
+3. asignar responsable final;
+4. resolver;
+5. escalar cuando corresponda.
+
+---
+
+# Dependencias entre Agents
+
+Una dependencia existe cuando un Agent necesita el output de otro para continuar.
+
+Debe declararse cuando sea relevante.
+
+Ejemplo:
+
+```text
+Research Agent
+      │
+      ▼
+Research Output
+      │
+      ▼
+Strategy Agent
+```
+
+No deben inventarse dependencias únicamente para justificar una arquitectura multi-Agent.
+
+---
+
+# Responsabilidad Final
+
+Cuando varios Agents colaboren debe existir un responsable del resultado integrado.
+
+Puede ser:
+
+- el Orchestrator;
+- un Agent principal;
+- un Validator especializado;
+
+según la arquitectura de la solicitud.
+
+Debe evitarse una situación donde todos produjeron partes pero nadie responde por la solución final.
+
+---
+
+# Integración de Resultados
+
+Cuando existan múltiples outputs deben integrarse.
+
+La integración puede requerir:
+
+- eliminar duplicación;
+- reconciliar terminología;
+- resolver conflictos;
+- preservar evidencia;
+- mantener decisiones;
+- conservar restricciones;
+- producir una salida única.
+
+Integrar no significa simplemente concatenar outputs.
 
 ---
 
 # Conflictos entre Agents
 
-Si dos Agents producen recomendaciones incompatibles:
+Puede existir conflicto cuando dos Agents producen:
 
-1. identificar el punto de conflicto;
-2. revisar fuentes;
-3. revisar Client Context;
-4. aplicar Framework o Decision Protocol correspondiente;
-5. evaluar impacto y riesgo;
-6. seleccionar una alternativa;
-7. escalar cuando la decisión requiera aprobación humana.
+- recomendaciones incompatibles;
+- interpretaciones diferentes;
+- prioridades distintas;
+- resultados contradictorios.
 
-No debe resolverse un conflicto ocultando una de las alternativas.
+Debe seguirse:
+
+```text
+Conflict
+   │
+   ▼
+Identify disagreement
+   │
+   ▼
+Compare sources
+   │
+   ▼
+Review context
+   │
+   ▼
+Decision Framework
+   │
+   ▼
+Resolve / Escalate
+```
+
+---
+
+# Resolución de Conflictos
+
+Cuando sea posible resolver el conflicto debe evaluarse:
+
+- autoridad de fuentes;
+- Client Context;
+- restricciones;
+- evidencia;
+- objetivo;
+- impacto;
+- riesgo.
+
+Cuando no pueda resolverse con suficiente confianza debe escalarse.
+
+---
+
+# Decision Framework
+
+Cuando exista una decisión material debe utilizarse conceptualmente:
+
+```text
+00_Foundation/16_Decision_Framework.md
+```
+
+Los Agents no deben inventar sistemas de decisión paralelos.
 
 ---
 
@@ -452,100 +903,291 @@ Unknown
 Candidate
 ```
 
-Si una incertidumbre afecta significativamente el resultado, debe declararse.
-
-Un Agent no debe inventar información para completar silenciosamente un vacío.
+La incertidumbre debe transferirse en un handoff cuando pueda afectar al siguiente componente.
 
 ---
 
-# Uso de Frameworks
+# Known
 
-Un Agent debe utilizar Frameworks únicamente cuando sean necesarios y aplicables.
+Información respaldada suficientemente.
+
+---
+
+# Inferred
+
+Conclusión razonable.
+
+Debe identificarse cuando su carácter inferido pueda afectar decisiones posteriores.
+
+---
+
+# Unknown
+
+Información que falta.
+
+Si es crítica debe bloquear o escalar.
+
+---
+
+# Candidate
+
+Aprendizaje potencialmente reutilizable.
+
+No debe transformarse automáticamente en memoria permanente.
+
+---
+
+# Frameworks
+
+Un Agent puede utilizar Frameworks cuando exista necesidad metodológica.
 
 ```text
 ¿Necesita metodología?
-   │
-   ├── No → continuar
-   └── Sí → recuperar Framework relevante
+        │
+   ┌────┴────┐
+   │         │
+  No        Sí
+   │         │
+   ▼         ▼
+Continue  Framework
 ```
 
-La existencia de un Framework no obliga a utilizarlo.
+No debe utilizarse un Framework solo porque esté disponible.
 
 ---
 
-# Uso de SOPs
+# SOPs
 
-Un Agent debe utilizar SOPs cuando exista un procedimiento relevante para la tarea.
+Un Agent puede utilizar SOPs cuando exista un procedimiento relevante.
 
-La ausencia de un SOP no bloquea automáticamente una ejecución.
+La ausencia de SOP no bloquea automáticamente una tarea.
 
-Si una tarea repetitiva demuestra valor de estandarización, puede proponerse crear un SOP Candidate.
-
----
-
-# Uso de Research
-
-Un Agent debe utilizar Research cuando:
-
-- falte información;
-- sea necesario actualizar información;
-- exista incertidumbre;
-- una decisión dependa de datos externos;
-- se necesiten referencias.
-
-Research no debe activarse por rutina cuando el contexto existente sea suficiente.
+Si un proceso repetido demuestra valor futuro puede proponerse como Candidate.
 
 ---
 
-# Uso de Integrations
+# Knowledge
+
+Los Agents pueden consultar Knowledge cuando necesiten conocimiento global validado.
+
+No deben copiar Knowledge permanente dentro de su definición.
+
+---
+
+# Research
+
+Research debe utilizarse cuando:
+
+- falta información;
+- la información puede haber cambiado;
+- existe incertidumbre;
+- se necesita evidencia;
+- una decisión depende de información externa.
+
+No debe investigarse nuevamente información suficientemente válida.
+
+---
+
+# Client Context
+
+Los Agents pueden consultar Client Context únicamente cuando sea relevante para la tarea.
+
+Debe mantenerse aislamiento entre clientes.
+
+```text
+Client A
+≠
+Client B
+```
+
+Información específica no debe viajar a otro cliente salvo que haya sido promovida correctamente a Knowledge global.
+
+---
+
+# Templates
+
+Un Agent puede utilizar Templates cuando el output necesita una estructura reutilizable.
+
+Template define estructura.
+
+No sustituye metodología ni conocimiento.
+
+---
+
+# Assets
+
+Un Agent puede utilizar Assets cuando necesite recursos existentes.
+
+Debe recuperar únicamente los relevantes.
+
+---
+
+# Integrations
 
 Los Agents solo pueden utilizar Integrations cuando:
 
 - sean necesarias;
+- estén disponibles;
 - estén autorizadas;
-- tengan permisos suficientes;
-- el uso esté dentro de su alcance.
+- existan permisos suficientes;
+- el uso esté dentro del alcance;
+- el riesgo sea aceptable.
 
-Las credenciales y secretos nunca deben incorporarse al contexto del Agent.
+```text
+Integration available
+≠
+Agent authorized
+```
 
 ---
 
-# Uso de Automations
+# Credenciales
+
+Los Agents nunca deben recibir como contexto normal:
+
+- passwords;
+- API keys;
+- tokens;
+- private keys;
+- secrets.
+
+Las credenciales deben gestionarse mediante mecanismos seguros externos.
+
+---
+
+# Automations
 
 Una Automation puede utilizarse cuando:
 
 - sea aplicable;
 - esté autorizada;
-- reduzca trabajo repetitivo;
-- el nivel de riesgo lo permita;
-- exista aprobación humana cuando corresponda.
+- el proceso esté suficientemente definido;
+- existan dependencias;
+- existan permisos;
+- el riesgo lo permita;
+- exista aprobación cuando corresponda.
 
 La existencia de una Automation no implica ejecución automática.
 
 ---
 
-# Aprobación Humana
+# Acciones Externas
 
-Cuando una acción sea sensible, externa, irreversible o de alto impacto, el Agent debe detenerse antes de ejecutarla.
+Antes de una acción externa debe evaluarse:
 
 ```text
-Agent prepara acción
-      │
-      ▼
-¿Requiere aprobación?
-      │
-      ├── No → ejecutar
-      │
-      └── Sí
-           │
-           ▼
-       Human Approval
-           │
-           ├── Approved → ejecutar
-           └── Rejected → detener
+Action
+  │
+  ▼
+Permissions
+  │
+  ▼
+Risk
+  │
+  ▼
+Reversibility
+  │
+  ▼
+Approval
+when required
+  │
+  ▼
+Execution
 ```
 
-El silencio nunca se interpreta como aprobación.
+---
+
+# Aprobación Humana
+
+Cuando una acción requiera aprobación, el Agent no debe ejecutarla anticipadamente.
+
+Debe detenerse en:
+
+```text
+Waiting for Approval
+```
+
+Después:
+
+```text
+Approved
+→ ejecutar dentro del alcance aprobado
+
+Rejected
+→ detener
+```
+
+El silencio nunca constituye aprobación.
+
+---
+
+# Scope de Aprobación
+
+Una aprobación específica no constituye permiso general.
+
+```text
+"Aprobado enviar este reporte"
+≠
+"Aprobado enviar futuros reportes"
+```
+
+---
+
+# Validator
+
+La validación puede realizarla:
+
+- Agent responsable;
+- Agent especializado;
+- Orchestrator;
+- mecanismo automático autorizado;
+- humano.
+
+La selección depende de:
+
+- complejidad;
+- riesgo;
+- impacto;
+- especialidad.
+
+---
+
+# Validation Contract
+
+Cuando corresponda debe verificar:
+
+- objetivo;
+- completitud;
+- consistencia;
+- calidad;
+- restricciones;
+- permisos;
+- riesgo;
+- fuentes;
+- resultado;
+- errores;
+- pendientes.
+
+---
+
+# Self-Validation
+
+Un Agent debe validar su propio trabajo cuando esto sea suficiente.
+
+No debe activarse otro Agent únicamente para revisar una tarea trivial.
+
+---
+
+# Independent Validation
+
+Puede utilizarse otro Agent cuando:
+
+- exista alto impacto;
+- exista especialidad diferente;
+- el resultado sea complejo;
+- haya riesgo;
+- sea necesario reducir sesgo;
+- Governance lo exija.
 
 ---
 
@@ -554,144 +1196,379 @@ El silencio nunca se interpreta como aprobación.
 Cuando un Agent detecte un error debe:
 
 1. detener la parte afectada;
-2. identificar el problema;
+2. identificar la causa;
 3. evaluar impacto;
-4. informar al Orchestrator cuando corresponda;
-5. corregir si está dentro de su alcance;
-6. escalar si no puede resolverlo;
-7. evitar ocultar el error.
+4. corregir cuando esté dentro de su alcance;
+5. validar;
+6. informar al Orchestrator cuando corresponda;
+7. escalar cuando no pueda resolverlo.
 
-Un error no debe convertirse automáticamente en nuevo conocimiento.
+No debe ocultar el error.
+
+---
+
+# Error en Handoff
+
+Si un Agent detecta que recibió un handoff incompleto o incorrecto debe:
+
+- identificar el problema;
+- recuperar información si puede;
+- pedir corrección al responsable cuando corresponda;
+- escalar si bloquea la ejecución.
+
+No debe reconstruir silenciosamente información crítica mediante suposiciones.
+
+---
+
+# Bloqueos
+
+Un Agent puede quedar bloqueado por:
+
+- falta de información;
+- dependencia;
+- permiso;
+- Integration;
+- aprobación;
+- contradicción;
+- riesgo;
+- error.
+
+Debe devolver un estado claro.
+
+```yaml
+status: blocked
+reason:
+required_action:
+responsible:
+```
+
+---
+
+# Status de Tareas
+
+Estados operativos posibles pueden incluir:
+
+```text
+Ready
+In Progress
+Blocked
+Waiting for Dependency
+Waiting for Approval
+Needs Correction
+Completed
+Failed
+```
+
+Estos estados operativos no deben confundirse con los estados documentales:
+
+```text
+Draft
+Review
+Approved
+Deprecated
+Archived
+```
 
 ---
 
 # Learning Candidates
 
-La colaboración entre Agents puede producir aprendizajes reutilizables.
+La colaboración puede producir aprendizaje reutilizable.
 
 Ejemplos:
 
-- nuevo Framework;
+- nueva metodología;
 - mejora de SOP;
 - nuevo Knowledge;
-- nueva Template;
+- Template;
 - Example;
+- mejora de Automation;
 - mejora de workflow.
 
-Estos aprendizajes deben convertirse primero en Candidates.
+Debe seguir:
 
 ```text
-Agent Learning
-     │
-     ▼
+Learning
+   │
+   ▼
 Candidate
-     │
-     ▼
+   │
+   ▼
+Review
+   │
+   ▼
 Governance
 ```
 
-Nunca deben convertirse automáticamente en memoria permanente.
+Nunca debe convertirse automáticamente en fuente oficial.
+
+---
+
+# Memoria
+
+Los Agents no deben almacenar automáticamente todo lo aprendido.
+
+Debe distinguirse:
+
+```text
+Session Context
+Client Context
+Research
+Knowledge
+Candidate
+```
+
+La arquitectura completa pertenece a:
+
+```text
+01_Architecture/MEMORY_ARCHITECTURE.md
+```
+
+---
+
+# Data Flow entre Agents
+
+El intercambio de información debe respetar:
+
+```text
+01_Architecture/DATA_FLOW.md
+```
+
+Agent Interaction define colaboración.
+
+Data Flow define circulación de información.
+
+---
+
+# Relación con System Architecture
+
+`SYSTEM_ARCHITECTURE.md` define dónde encajan Agents y Orchestrator dentro del sistema.
+
+Agent Interaction define cómo colaboran los Agents.
+
+---
+
+# Relación con Request Lifecycle
+
+`REQUEST_LIFECYCLE.md` define estados generales de una solicitud.
+
+Agent Interaction puede producir cambios de estado como:
+
+- trabajo iniciado;
+- dependencia pendiente;
+- aprobación pendiente;
+- tarea completada;
+- fallo.
+
+No debe duplicar el lifecycle completo.
+
+---
+
+# Relación con CORE
+
+CORE determina cuándo existe necesidad de especialización o coordinación.
+
+Agent Interaction define cómo se desarrolla la colaboración.
+
+```text
+CORE
+  │
+  ▼
+Need
+  │
+  ▼
+Agent / Coordination
+  │
+  ▼
+Agent Interaction
+```
+
+---
+
+# Relación con AI Behavior
+
+Todos los Agents deben respetar:
+
+```text
+00_Foundation/14_AI_Behavior.md
+```
+
+Agent Interaction no redefine comportamiento global.
+
+---
+
+# Relación con Thinking Framework
+
+Todos los Agents deben utilizar razonamiento proporcional según:
+
+```text
+00_Foundation/15_Thinking_Framework.md
+```
+
+No deben crear metodologías de razonamiento incompatibles.
+
+---
+
+# Relación con Communication Guidelines
+
+Los Agents deben mantener consistencia de comunicación según:
+
+```text
+00_Foundation/11_Communication_Guidelines.md
+```
+
+La especialización no debe generar voces contradictorias cuando el output se integra.
+
+---
+
+# Trazabilidad
+
+Cuando la tarea lo requiera puede conservarse:
+
+- Agent responsable;
+- tareas;
+- inputs;
+- outputs;
+- fuentes;
+- decisiones;
+- handoffs;
+- riesgos;
+- aprobaciones;
+- errores;
+- resultado.
+
+La trazabilidad debe ser proporcional al impacto.
 
 ---
 
 # Escalabilidad
 
-Un nuevo Agent debe definir como mínimo:
+Agregar un Agent nuevo no debe requerir modificar todos los Agents existentes.
 
-- propósito;
-- alcance;
-- responsabilidades;
-- límites;
-- inputs;
-- outputs;
-- Frameworks posibles;
-- Knowledge relevante;
-- SOPs posibles;
-- Integrations autorizadas;
-- permisos;
-- criterios de validación;
-- criterios de escalamiento.
-
-Agregar un Agent no debe requerir modificar Agents existentes salvo que exista una dependencia real.
-
----
-
-# Ejemplo Operativo
-
-Solicitud:
-
-> Planificar contenido mensual para un cliente y dejar el trabajo listo para producción.
+Un Agent nuevo debe integrarse mediante:
 
 ```text
-Orchestrator
-     │
-     ▼
-Research Agent
-     │
-     ▼
-Content Strategist
-     │
-     ▼
-Content Planner
-     │
-     ▼
-Content Producer
-     │
-     ▼
-Validation
-     │
-     ▼
-Resultado
+Clear Responsibility
+       +
+Input Contract
+       +
+Output Contract
+       +
+Capabilities
+       +
+Permissions
+       +
+Escalation Rules
 ```
-
-Cada Agent utiliza únicamente las capacidades necesarias.
 
 ---
 
-# Reglas
+# Creación de Nuevos Agents
 
-Trinity AI debe:
+Debe proponerse un Agent nuevo únicamente cuando exista:
 
-- asignar responsables claros;
-- mantener contexto suficiente;
-- evitar duplicación;
-- utilizar especialistas cuando aporten valor;
-- mantener handoffs estructurados;
-- validar entregables;
-- declarar incertidumbre;
-- controlar permisos;
-- escalar acciones sensibles;
-- mantener trazabilidad cuando corresponda.
+- especialidad claramente diferenciada;
+- responsabilidad reutilizable;
+- volumen de trabajo potencial;
+- valor operativo;
+- bajo solapamiento con Agents existentes.
+
+No debe crearse un Agent nuevo para una tarea puntual.
+
+---
+
+# Antipatrones
 
 Trinity AI no debe:
 
 - utilizar múltiples Agents sin necesidad;
-- convertir al Orchestrator en un Agent que haga todo;
+- crear micro-Agents para tareas triviales;
+- permitir responsabilidades ambiguas;
+- realizar handoffs sin contexto;
+- pasar conversaciones completas como handoff por defecto;
 - duplicar trabajo;
-- transferir tareas sin contexto;
+- permitir ciclos de delegación;
+- ocultar conflictos;
 - inventar información;
+- mezclar Client Context;
+- compartir credenciales;
 - ejecutar acciones fuera de permisos;
-- generar cadenas infinitas de delegación;
-- crear conocimiento permanente automáticamente.
+- autoaprobar acciones sensibles;
+- convertir Candidates automáticamente en memoria;
+- utilizar Validator independiente para cada tarea trivial;
+- convertir al Orchestrator en responsable de todo.
+
+---
+
+# Criterios de Éxito
+
+Agent Interaction funciona correctamente cuando:
+
+- cada tarea tiene responsable;
+- cada Agent opera dentro de su alcance;
+- se utiliza el mínimo número de Agents;
+- los handoffs conservan contexto suficiente;
+- los outputs son reutilizables;
+- no existe duplicación crítica;
+- los conflictos son visibles;
+- los ciclos se detectan;
+- los permisos se respetan;
+- las acciones sensibles se escalan;
+- los resultados pueden integrarse;
+- el siguiente componente puede continuar sin empezar desde cero.
+
+---
+
+# Checklist de Interacción
+
+Cuando varios Agents colaboren debe poder responderse:
+
+```text
+¿Quién es responsable?
+        ↓
+¿Qué necesita hacer?
+        ↓
+¿Qué contexto necesita?
+        ↓
+¿Qué output debe producir?
+        ↓
+¿Depende de otro Agent?
+        ↓
+¿Puede ejecutarse en paralelo?
+        ↓
+¿Qué permisos tiene?
+        ↓
+¿Qué riesgo existe?
+        ↓
+¿Hay handoff?
+        ↓
+¿Qué información debe transferirse?
+        ↓
+¿Quién integra?
+        ↓
+¿Quién valida?
+```
+
+No todos los campos requieren formalización en tareas simples.
 
 ---
 
 # Regla de Oro
 
-Los Agents deben funcionar como un equipo coordinado, no como asistentes aislados.
+Los Agents deben funcionar como un equipo especializado y coordinado, no como asistentes independientes que reconstruyen el mismo problema.
 
 ```text
 Responsabilidad clara
         +
-Contexto suficiente
+Especialización correcta
         +
-Capacidades selectivas
+Contexto mínimo suficiente
         +
 Handoff limpio
         +
-Validación
+Validación proporcional
         =
 Colaboración eficiente
 ```
 
-El objetivo es que cada Agent haga menos cosas, pero que las haga mejor y permita que el siguiente componente continúe sin empezar desde cero.
+Si agregar otro Agent genera más coordinación de la que ahorra, probablemente ese Agent no sea necesario para esa tarea.
