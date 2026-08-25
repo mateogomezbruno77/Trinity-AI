@@ -1,7 +1,6 @@
 # 01_Architecture
 
 ---
-
 id: TRI-ARCH-README-001
 title: Architecture Module
 module: Architecture
@@ -14,15 +13,13 @@ reviewed_by:
 approved_by:
 next_review:
 dependencies:
-
-* CORE.md
-* 00_Foundation
-* 13_Governance
-  tags:
-* architecture
-* orchestration
-* system-design
-
+  - CORE.md
+  - 00_Foundation
+  - 13_Governance
+tags:
+  - architecture
+  - orchestration
+  - system-design
 ---
 
 # Propósito
@@ -33,12 +30,12 @@ Actúa como el plano técnico del AI Operating System.
 
 Documenta:
 
-* arquitectura general;
-* flujo de información;
-* ciclo de vida de solicitudes;
-* interacción entre Agents;
-* arquitectura de memoria;
-* funcionamiento del Orchestrator.
+- arquitectura general;
+- flujo de información;
+- ciclo de vida de solicitudes;
+- interacción entre Agents;
+- arquitectura de memoria;
+- funcionamiento del Orchestrator.
 
 Architecture describe cómo se relacionan los componentes.
 
@@ -72,12 +69,12 @@ Define la arquitectura general de Trinity AI.
 
 Documenta:
 
-* capas;
-* módulos;
-* responsabilidades;
-* relaciones;
-* principios arquitectónicos;
-* escalabilidad.
+- capas;
+- módulos;
+- responsabilidades;
+- relaciones;
+- principios arquitectónicos;
+- escalabilidad.
 
 ---
 
@@ -87,14 +84,14 @@ Define cómo circula la información dentro del sistema.
 
 Establece:
 
-* entrada;
-* clasificación;
-* recuperación selectiva;
-* capacidades;
-* ejecución;
-* validación;
-* salida;
-* aprendizaje potencial.
+- entrada;
+- clasificación;
+- recuperación selectiva;
+- capacidades;
+- ejecución;
+- validación;
+- salida;
+- aprendizaje potencial.
 
 ---
 
@@ -128,17 +125,17 @@ Define cómo colaboran los Agents.
 
 Documenta:
 
-* responsabilidades;
-* delegación;
-* Context Packages;
-* Input Contracts;
-* Output Contracts;
-* handoffs;
-* ejecución paralela;
-* ejecución secuencial;
-* conflictos;
-* validación;
-* escalamiento.
+- responsabilidades;
+- delegación;
+- Context Packages;
+- Input Contracts;
+- Output Contracts;
+- handoffs;
+- ejecución paralela;
+- ejecución secuencial;
+- conflictos;
+- validación;
+- escalamiento.
 
 ---
 
@@ -148,14 +145,14 @@ Define cómo Trinity AI conserva y recupera información.
 
 Documenta:
 
-* tipos de memoria;
-* recuperación selectiva;
-* autoridad;
-* vigencia;
-* Candidates;
-* promoción de conocimiento;
-* prevención de duplicación;
-* trazabilidad.
+- tipos de memoria;
+- recuperación selectiva;
+- autoridad;
+- vigencia;
+- Candidates;
+- promoción de conocimiento;
+- prevención de duplicación;
+- trazabilidad.
 
 ---
 
@@ -165,13 +162,13 @@ Define el componente de coordinación de Trinity AI.
 
 El Orchestrator determina:
 
-* qué trabajo debe realizarse;
-* qué Agents deben intervenir;
-* qué contexto necesitan;
-* qué dependencias existen;
-* qué tareas pueden ejecutarse en paralelo;
-* cómo deben integrarse los resultados;
-* cuándo debe escalarse una decisión.
+- qué trabajo debe realizarse;
+- qué Agents deben intervenir;
+- qué contexto necesitan;
+- qué dependencias existen;
+- qué tareas pueden ejecutarse en paralelo;
+- cómo deben integrarse los resultados;
+- cuándo debe escalarse una decisión.
 
 El Orchestrator pertenece a la capa de coordinación.
 
@@ -239,11 +236,11 @@ Architecture diseña el sistema dentro de esas reglas.
 
 Los cambios relevantes sobre Architecture deben respetar:
 
-* versionado;
-* revisión;
-* aprobación;
-* trazabilidad;
-* análisis de impacto.
+- versionado;
+- revisión;
+- aprobación;
+- trazabilidad;
+- análisis de impacto.
 
 Architecture no puede autoaprobar cambios estructurales.
 
@@ -362,23 +359,23 @@ Architecture es utilizada como referencia por:
 
 Architecture debe:
 
-* mantener responsabilidades claras;
-* evitar duplicación;
-* favorecer recuperación selectiva;
-* mantener separación entre capas;
-* permitir escalabilidad;
-* mantenerse agnóstica respecto del modelo de IA;
-* documentar cambios estructurales relevantes.
+- mantener responsabilidades claras;
+- evitar duplicación;
+- favorecer recuperación selectiva;
+- mantener separación entre capas;
+- permitir escalabilidad;
+- mantenerse agnóstica respecto del modelo de IA;
+- documentar cambios estructurales relevantes.
 
 Architecture no debe:
 
-* almacenar conocimiento de clientes;
-* almacenar conocimiento general de negocio;
-* reemplazar SOPs;
-* reemplazar Frameworks;
-* ejecutar Automations;
-* contener credenciales;
-* convertirse en una secuencia rígida obligatoria.
+- almacenar conocimiento de clientes;
+- almacenar conocimiento general de negocio;
+- reemplazar SOPs;
+- reemplazar Frameworks;
+- ejecutar Automations;
+- contener credenciales;
+- convertirse en una secuencia rígida obligatoria.
 
 ---
 
