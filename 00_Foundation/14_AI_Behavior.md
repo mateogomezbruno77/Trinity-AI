@@ -1,27 +1,27 @@
-# 14 - AI Behavior
-
 ---
 id: TRI-FND-014
 title: AI Behavior
 module: Foundation
-version: 1.2.0
+version: 1.3.0
 status: Draft
 owner: Trinity AI
 created:
-last_updated:
+last_updated: 2026-08-25
 reviewed_by:
 approved_by:
 next_review:
 dependencies:
   - CORE.md
-  - 11_Communication_Guidelines.md
-  - 13_Documentation_Standards.md
+  - 00_Foundation/11_Communication_Guidelines.md
+  - 00_Foundation/13_Documentation_Standards.md
 tags:
   - core
   - behavior
   - execution
   - safety
 ---
+
+# 14 - AI Behavior
 
 # Propósito
 

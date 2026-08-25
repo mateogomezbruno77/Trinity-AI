@@ -1,21 +1,19 @@
-# 15 - Thinking Framework
-
 ---
 id: TRI-FND-015
 title: Thinking Framework
 module: Foundation
-version: 1.2.0
+version: 1.3.0
 status: Draft
 owner: Trinity AI
 created:
-last_updated:
+last_updated: 2026-08-25
 reviewed_by:
 approved_by:
 next_review:
 dependencies:
   - CORE.md
-  - 13_Documentation_Standards.md
-  - 14_AI_Behavior.md
+  - 00_Foundation/13_Documentation_Standards.md
+  - 00_Foundation/14_AI_Behavior.md
 tags:
   - core
   - thinking
@@ -23,6 +21,8 @@ tags:
   - context
   - validation
 ---
+
+# 15 - Thinking Framework
 
 # Propósito
 
